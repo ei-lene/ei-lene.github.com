@@ -27,19 +27,19 @@ And so it would seem, to misquote George Orwell, that some equalities are more e
 <em>== returns true if both sides of the operator have the same value, regardless of datatype.</em>
 
 Thus:<br>
-<img src="http://ei-lene.github.com/images/2013_08/ValueEquality1.png">
+<img src="http://ei-lene.github.com/images/2013_02_08/ValueEquality1.png">
 
 However, the Ruby == operator is not quite as forgiving its Javascript counterpart. It does not convert strings to integers, nor does it recognise upper and lower case versions of the same letter as being of the same value.
 
 Therefore:<br>
-<img src="http://ei-lene.github.com/images/2013_08/ValueEquality2.png">
+<img src="http://ei-lene.github.com/images/2013_02_08/ValueEquality2.png">
 
 <a name="eql"><strong>.eql?</strong></a><br>
 <strong>Value and Type Equality</strong><br>
 <em>.eql? has stricter equality criteria than ==. It tests for equality of value as well as data type.</em>
 
 Hence:<br>
-<img src="http://ei-lene.github.com/images/2013_08/ValueTypeEquality.png">
+<img src="http://ei-lene.github.com/images/2013_02_08/ValueTypeEquality.png">
 
 <a name="equal"><strong>.equal?</strong></a><br>
 <strong>Strict (True or Object) Equality</strong><br>
@@ -50,7 +50,7 @@ As a newbie Rubyist at <a href="http://flatironschool.com/">the Flatiron School<
 The moral of the story was that we should only use symbols (and never strings) as keys in hashes, since they are 'cheaper' than strings in terms of memory and performance (in fact, in researching this, I have discovered that object IDs would be another interesting post for another day, but I digress...)
  
 <a href="http://french.about.com/od/vocabulary/a/revenonsanosmoutons.htm">Revenons à nos moutons</a>\*\* - it would seem that this equality test would be passed in fairly limited cases - primarily when symbols or integers are tested against themselves***:<br>
-<img src="http://ei-lene.github.com/images/2013_08/ObjectEquality.png">
+<img src="http://ei-lene.github.com/images/2013_02_08/ObjectEquality.png">
 
 
 <a name="==="><strong>===</strong></a><br>
@@ -62,16 +62,16 @@ Okay, so I've completely made up the equality names in the parenthesis for this.
 
 I thought that <a href="http://techbot.me/2011/05/ruby-basics-equality-operators-ruby/">Techbot</a> and <a href="http://www.tutorialspoint.com/ruby/ruby_operators.htm
 ">TutorialsPoint</a> gave the best illustrations of the Case Equality usage of ===, which I will illustrate briefly below:<br>
-<img src="http://ei-lene.github.com/blog/2013/02/08/all-equalities-are-equal/SubsetCaseEquality1.png">
+<img src="http://ei-lene.github.com/images/2013_02_08/SubsetCaseEquality1.png">
 
 While I agree with the above usage (it clearly works!), I see things more simplistically. To me, the === operator seems to test if the item on right hand side of the operator is a subset of the left hand side of the operator.
 
 For example: <br>
-<img src="http://ei-lene.github.com/images/2013_08/SubsetCaseEquality2.png">
+<img src="http://ei-lene.github.com/images/2013_02_08/SubsetCaseEquality2.png">
 
 
 The === operator doesn't seem to test for subset in the cases of strings, arrays and hashes, but it works with Regex:<br>
-<img src="http://ei-lene.github.com/images/2013_08/SubsetCaseEquality3.png">
+<img src="http://ei-lene.github.com/images/2013_02_08/SubsetCaseEquality3.png">
 
 Anyway, because I think === is testing if one element (object?) is a subset of another, I don't think that it can be considered an equality test at all, hence my nickname of "False Equality" for it.
 
