@@ -126,19 +126,19 @@ There seems to be four types of equality operators:-<br>
 <em>== returns true if both sides of the operator have the same value, regardless of datatype.</em></p>
 
 <p>Thus:<br>
-<img src="http://ei-lene.github.com/blog/2013/02/08/all-equalities-are-equal/ValueEquality1.png"></p>
+<img src="http://ei-lene.github.com/images/2013_08/ValueEquality1.png"></p>
 
 <p>However, the Ruby == operator is not quite as forgiving its Javascript counterpart. It does not convert strings to integers, nor does it recognise upper and lower case versions of the same letter as being of the same value.</p>
 
 <p>Therefore:<br>
-<img src="http://ei-lene.github.com/blog/2013/02/08/all-equalities-are-equal/ValueEquality2.png"></p>
+<img src="http://ei-lene.github.com/images/2013_08/ValueEquality2.png"></p>
 
 <p><a name="eql"><strong>.eql?</strong></a><br>
 <strong>Value and Type Equality</strong><br>
 <em>.eql? has stricter equality criteria than ==. It tests for equality of value as well as data type.</em></p>
 
 <p>Hence:<br>
-<img src="http://ei-lene.github.com/blog/2013/02/08/all-equalities-are-equal/ValueTypeEquality.png"></p>
+<img src="http://ei-lene.github.com/images/2013_08/ValueTypeEquality.png"></p>
 
 <p><a name="equal"><strong>.equal?</strong></a><br>
 <strong>Strict (True or Object) Equality</strong><br>
@@ -149,7 +149,7 @@ There seems to be four types of equality operators:-<br>
 <p>The moral of the story was that we should only use symbols (and never strings) as keys in hashes, since they are &#8216;cheaper&#8217; than strings in terms of memory and performance (in fact, in researching this, I have discovered that object IDs would be another interesting post for another day, but I digress&#8230;)</p>
 
 <p><a href="http://french.about.com/od/vocabulary/a/revenonsanosmoutons.htm">Revenons à nos moutons</a>** - it would seem that this equality test would be passed in fairly limited cases - primarily when symbols or integers are tested against themselves***:<br>
-<img src="http://ei-lene.github.com/blog/2013/02/08/all-equalities-are-equal/ObjectEquality.png"></p>
+<img src="http://ei-lene.github.com/images/2013_08/ObjectEquality.png"></p>
 
 <p><a name="==="><strong>===</strong></a><br>
 <strong>Case Equality (or &#8220;Subset equality&#8221; or &#8220;False Equality&#8221;)</strong></p>
@@ -165,10 +165,10 @@ There seems to be four types of equality operators:-<br>
 <p>While I agree with the above usage (it clearly works!), I see things more simplistically. To me, the === operator seems to test if the item on right hand side of the operator is a subset of the left hand side of the operator.</p>
 
 <p>For example: <br>
-<img src="http://ei-lene.github.com/blog/2013/02/08/all-equalities-are-equal/SubsetCaseEquality2.png"></p>
+<img src="http://ei-lene.github.com/images/2013_08/SubsetCaseEquality2.png"></p>
 
 <p>The === operator doesn&#8217;t seem to test for subset in the cases of strings, arrays and hashes, but it works with Regex:<br>
-<img src="http://ei-lene.github.com/blog/2013/02/08/all-equalities-are-equal/SubsetCaseEquality3.png"></p>
+<img src="http://ei-lene.github.com/images/2013_08/SubsetCaseEquality3.png"></p>
 
 <p>Anyway, because I think === is testing if one element (object?) is a subset of another, I don&#8217;t think that it can be considered an equality test at all, hence my nickname of &#8220;False Equality&#8221; for it.</p>
 
