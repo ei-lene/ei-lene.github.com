@@ -4,7 +4,7 @@
   <title><![CDATA[Coder-in-training]]></title>
   <link href="http://ei-lene.github.com/atom.xml" rel="self"/>
   <link href="http://ei-lene.github.com/"/>
-  <updated>2013-02-18T22:19:03-05:00</updated>
+  <updated>2013-02-18T22:25:20-05:00</updated>
   <id>http://ei-lene.github.com/</id>
   <author>
     <name><![CDATA[ei-lene]]></name>
@@ -14,11 +14,165 @@
 
   
   <entry>
-    <title type="html"><![CDATA[hello world]]></title>
-    <link href="http://ei-lene.github.com/blog/2013/02/18/hello-world/"/>
-    <updated>2013-02-18T22:14:00-05:00</updated>
-    <id>http://ei-lene.github.com/blog/2013/02/18/hello-world</id>
-    <content type="html"><![CDATA[<p>&#8220;TEST ONLY&#8221;</p>
+    <title type="html"><![CDATA[Thinking of learning to code?]]></title>
+    <link href="http://ei-lene.github.com/blog/2013/02/12/thinking-of-learning-to-code/"/>
+    <updated>2013-02-12T13:54:00-05:00</updated>
+    <id>http://ei-lene.github.com/blog/2013/02/12/thinking-of-learning-to-code</id>
+    <content type="html"><![CDATA[<h3><em>My perspectives – why I’m learning to code at the Flatiron School</em></h3>
+
+
+<p><img src="http://ei-lene.github.com/images/2013_12/thinker.jpg">
+Thinking of learning to code, and wondering if it’s worth the trouble, or if you should go solo or sign up to a course?</p>
+
+<p>I’ve wrestled with these questions before and this post outlines my thought process and why I’m learning to code at the Flatiron School:<br>
+<a href="#literacy">global imperative – coding is the new literacy</a><br>
+<a href="#empowerment">personal imperative – empowerment rocks, impotence enrages</a><br>
+<a href="#exponential">optional – exponential learning</a></p>
+
+<p><a name="literacy">
+  1)  Coding is the new literacy
+</a></p>
+
+<p>Avi said on the first day of school that coding is the new literacy. That really resonated with me, because it’s true.</p>
+
+<p>In the not too distant past, before the days of universal education, reading and writing were considered optional luxuries. Now, no one even questions the need for literacy.</p>
+
+<p>When personal computers first came out, they were considered novel gadgets for a small slice of society – the geeks and bandwagoners with spare cash. – Why would a regular person need to use a computer?</p>
+
+<p>Now, everyone uses some form of a personal computer, all the time, whether it be a computer, laptop, tablets, or smartphones. For many young children today, iPad are often more familiar than books.</p>
+
+<p>Technology and software already underpin most if today’s operations, and will only become more ubiquitous, not less so. And so, knowing how to code – to interact with software with more control instead of being a powerless end-user – will soon be imperative.</p>
+
+<p>I’m educating myself for the future. Do you want to be left behind?</p>
+
+<p><a name="empowerment">
+  2)  Empowerment vs. impotence
+</a></p>
+
+<p>Coding is empowering.</p>
+
+<p>The Boy and I had an idea for a potential start-up several years ago, but neither of us code. More than two years, multiple developers / programming language changes and a large chunk of our savings later, the prototype is mostly built, but still not to our envisioned specifications.</p>
+
+<p>We felt impotent, because we had no control of our project - timeline, deliverables, destiny. And that has been a frustrating and enraging experience.</p>
+
+<p>I wanted to regain control of my life and my destiny, and the first step is to learn how to create.</p>
+
+<p>That was what really pushed me to learn code seriously instead of doing it part time, on weekends – I wanted to be empowered, and coding is empowering.</p>
+
+<p><a name="exponential">
+  3)  Exponential learning
+</a></p>
+
+<p>When I first told my friends that I was hopping on a plane from London to New York to learn how to code, most of my friends were like: “Why do you need to go to New York? Why can’t you learn to code at home? It’s really easy to learn from a book or the web. The best way to do it is just to code, and you can do that at home, and it’s free.”
+I see where they are coming from, and I think that’s definitely a possibility. A lot of really great programmers have learned their craft by themselves. It requires a lot of time, commitment, discipline, and probably a certain type of personality.</p>
+
+<p>Personally, I’ve tried that, and I’ve realized that it doesn’t really work for me. I’m just not disciplined enough – often get distracted by surfing the web, or doing errands and chores.</p>
+
+<p>Even if you prefer working through your problems alone, rather than working in teams, going to a school can still be a great option, because it can really supercharge your learning.</p>
+
+<p>Having passionate instructors who  imbue you with enthusiasm, and guide you through programming pitfalls for beginners, and instilling best practices, really make a difference.</p>
+
+<p>Although I’m not a natural ‘group’ person because I learn best by doing, and often like to figure things out on my own – I’ve really enjoyed group learning in my first week at Flatiron School.</p>
+
+<p>Getting different perspectives or solutions to problems from classmates has been enlightening. When I’m stuck on something, instead of spending hours on it, I can ask an instructor or a fellow classmate for help. When I get tired or discouraged, there’s always someone else to buoy me up and debug my code with me. – It’s a very different experience from sitting alone at my desk and banging my head on the wall.</p>
+
+<p>So if you feel like you’re going nowhere fast with learning on your own, try pairing up, or learning in a group, or signing up to a school.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[All equalities are equal...]]></title>
+    <link href="http://ei-lene.github.com/blog/2013/02/08/all-equalities-are-equal/"/>
+    <updated>2013-02-08T22:02:00-05:00</updated>
+    <id>http://ei-lene.github.com/blog/2013/02/08/all-equalities-are-equal</id>
+    <content type="html"><![CDATA[<h3><em>&#8230;but some are more equal than others</em></h3>
+
+
+<p>I started on this trail because I&#8217;m a pedant about spelling, and got stuck on <a href="http://rubymonk.com/learning/books/1/chapters/8-control-structures/lessons/43-boolean-expressions-in-ruby">Ruby Monk&#8217;s first Boolean exercise</a>.</p>
+
+<p>Why was the following solution invalid >> name.equal?(&#8220;Bob&#8221;) <br>
+and this solution valid instead? >> name.eql?(&#8220;Bob&#8221;)</p>
+
+<p>This set me off researching Ruby equality operators.<br>
+There seems to be four types of equality operators:-<br>
+<a href="#==">&#8217;==&#8217;</a><br>
+<a href="#eql">&#8216;.eql?&#8217;</a><br>
+<a href="#equal">&#8216;.equal?&#8217;</a><br>
+<a href="#===">&#8217;===&#8217;</a></p>
+
+<p>And so it would seem, to misquote George Orwell, that some equalities are more equal than others.</p>
+
+<p><a name="=="><strong>==</strong></a><br>
+<strong>Simple (or Value) equality.</strong><br>
+<em>== returns true if both sides of the operator have the same value, regardless of datatype.</em></p>
+
+<p>Thus:<br>
+<img src="http://ei-lene.github.com/images/2013_02/ValueEquality1.png"></p>
+
+<p>However, the Ruby == operator is not quite as forgiving its Javascript counterpart. It does not convert strings to integers, nor does it recognise upper and lower case versions of the same letter as being of the same value.</p>
+
+<p>Therefore:<br>
+<img src="http://ei-lene.github.com/images/2013_02/ValueEquality2.png"></p>
+
+<p><a name="eql"><strong>.eql?</strong></a><br>
+<strong>Value and Type Equality</strong><br>
+<em>.eql? has stricter equality criteria than ==. It tests for equality of value as well as data type.</em></p>
+
+<p>Hence:<br>
+<img src="http://ei-lene.github.com/images/2013_02/ValueTypeEquality.png"></p>
+
+<p><a name="equal"><strong>.equal?</strong></a><br>
+<strong>Strict (True or Object) Equality</strong><br>
+<em>.equal? has the strictest test of equality*, and is &#8220;the most equal of them all&#8221;. It tests for equality of object ID.</em></p>
+
+<p>As a newbie Rubyist at <a href="http://flatironschool.com/">the Flatiron School</a>, I have very recently learnt that all strings (even if identical) have their own individual object ID each time they are written (called?), whereas symbols have a unique and immutable object ID, which will remain each time the symbol is called, even if the value has been reassigned.</p>
+
+<p>The moral of the story was that we should only use symbols (and never strings) as keys in hashes, since they are &#8216;cheaper&#8217; than strings in terms of memory and performance (in fact, in researching this, I have discovered that object IDs would be another interesting post for another day, but I digress&#8230;)</p>
+
+<p><a href="http://french.about.com/od/vocabulary/a/revenonsanosmoutons.htm">Revenons à nos moutons</a>** - it would seem that this equality test would be passed in fairly limited cases - primarily when symbols or integers are tested against themselves***:<br>
+<img src="http://ei-lene.github.com/images/2013_02/ObjectEquality.png"></p>
+
+<p><a name="==="><strong>===</strong></a><br>
+<strong>Case Equality (or &#8220;Subset equality&#8221; or &#8220;False Equality&#8221;)</strong></p>
+
+<p>Okay, so I&#8217;ve completely made up the equality names in the parenthesis for this. For that matter, all the equality names for all the other operators are also kind of &#8216;made-up&#8217; by me, but in those cases, I think they are fairly representative of what those equality operators test for.</p>
+
+<p><em>=== is generally known everywhere, including <a href="http://ruby-doc.org/core-1.9.3/Object.html#method-i-3D-3D-3D">in the Ruby documentation</a>, as &#8220;Case equality&#8221;.</em></p>
+
+<p>I thought that <a href="http://techbot.me/2011/05/ruby-basics-equality-operators-ruby/">Techbot</a> and <a href="http://www.tutorialspoint.com/ruby/ruby_operators.htm
+">TutorialsPoint</a> gave the best illustrations of the Case Equality usage of ===, which I will illustrate briefly below:<br>
+<img src="http://ei-lene.github.com/images/2013_02/SubsetCaseEquality1.png"></p>
+
+<p>While I agree with the above usage (it clearly works!), I see things more simplistically. To me, the === operator seems to test if the item on right hand side of the operator is a subset of the left hand side of the operator.</p>
+
+<p>For example: <br>
+<img src="http://ei-lene.github.com/images/2013_02/SubsetCaseEquality2.png"></p>
+
+<p>The === operator doesn&#8217;t seem to test for subset in the cases of strings, arrays and hashes, but it works with Regex:<br>
+<img src="http://ei-lene.github.com/images/2013_02/SubsetCaseEquality3.png"></p>
+
+<p>Anyway, because I think === is testing if one element (object?) is a subset of another, I don&#8217;t think that it can be considered an equality test at all, hence my nickname of &#8220;False Equality&#8221; for it.</p>
+
+<p><a href="http://stackoverflow.com/users/23649/jtbandes">jtbandes</a> says on <a href="stackoverflow.com">StackOverflow</a> that === is incredibly useful for implementations in range, regex and proc (and people seem to compare it to the #== operator), but since all that is WAY over my head, I&#8217;ll just take his word for it, and you can <a href="http://stackoverflow.com/questions/7156955/whats-the-difference-between-equal-eql-and">check it out there</a>.</p>
+
+<p>After all this research, I&#8217;m kind of at peace with Ruby&#8217;s misspelling of .eql?, because I can see that it is necessary to differentiate it from .equal?</p>
+
+<p>But I&#8217;m still annoyed with &#8216;elsif&#8217;… >:(</p>
+
+<p style="font-size: 70%; font-weight: normal">
+Notes:<br>
+* In my rather-uninformed opinion (as I&#8217;m an absolute newbie), I am more than happy to be enlightened if I&#8217;ve made any mistakes in my blog post.<br>
+** A French expression for - to get back to the subject. <a href="http://french.about.com/od/vocabulary/a/revenonsanosmoutons.htm">Check out Laura Lawless&#8217;s guide to French expressions</a>.<br>
+*** I&#8217;m finding Object IDs pretty fascinating as I&#8217;ve called .object_id on multiple permutations of data types as part of the research for this blog post. I might write about this piece of geekery fascination another day. Also happy to be enlightened/ corrected if I&#8217;ve made any mistakes.
+
+<p style="font-size: 70%; font-weight: normal">
+Resources:<br>
+<a href="http://truffles.me.uk/rubys-equality-operator">http://truffles.me.uk/rubys-equality-operator</a><br>
+<a href="http://techbot.me/2011/05/ruby-basics-equality-operators-ruby/">http://techbot.me/2011/05/ruby-basics-equality-operators-ruby/</a><br>
+<a href="http://www.tutorialspoint.com/ruby/ruby_operators.htm">http://www.tutorialspoint.com/ruby/ruby_operators.htm</a><br>
+<a href="http://ruby-doc.org/core-1.9.3/Object.html"> http://ruby-doc.org/core-1.9.3/Object.html</a><br>
+<a href="http://stackoverflow.com/questions/7156955/whats-the-difference-between-equal-eql-and"> http://stackoverflow.com/questions/7156955/whats-the-difference-between-equal-eql-and</a>
+
 ]]></content>
   </entry>
   
