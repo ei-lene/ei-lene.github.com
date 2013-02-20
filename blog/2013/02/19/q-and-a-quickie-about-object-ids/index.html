@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Hello world - Coder-in-training</title>
+  <title>Q&amp;A Quickie - about object ids - Coder-in-training</title>
   <meta name="author" content="ei-lene">
 
   
-  <meta name="description" content="Starting from zero. Avi gave a talk on the History of Code at today, and one of the programmers he quoted was Larry Wall, who once said, tongue-in- &hellip;">
+  <meta name="description" content="I became intrigued about object ids when I was researching into the .equal? operator in my earlier post on Ruby equalities, and also when I was &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://ei-lene.github.com/blog/2013/02/05/hello-world/">
+  <link rel="canonical" href="http://ei-lene.github.com/blog/2013/02/19/q-and-a-quickie-about-object-ids/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -79,7 +79,7 @@
   
   <header>
     
-      <h1 class="entry-title">Hello World</h1>
+      <h1 class="entry-title">Q&amp;A Quickie - About Object Ids</h1>
     
     
       <p class="meta">
@@ -95,7 +95,7 @@
   
 
 
-<time datetime="2013-02-05T17:59:00-05:00" pubdate data-updated="true">Feb 5<span>th</span>, 2013</time>
+<time datetime="2013-02-19T23:49:00-05:00" pubdate data-updated="true">Feb 19<span>th</span>, 2013</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -104,14 +104,86 @@
   </header>
 
 
-<div class="entry-content"><p>Starting from zero.</p>
+<div class="entry-content"><p>I became intrigued about object ids when I was researching into the .equal? operator in <a href="http://ei-lene.github.com/blog/2013/02/08/all-equalities-are-equal/">my earlier post on Ruby equalities</a>, and also when I was wading through <a href="http://rubykoans.com/">Ruby Koans’ </a>about_object.rb.</p>
 
-<p>Avi gave a talk on the History of Code at today, and one of the programmers he quoted was <a href="http://en.wikipedia.org/wiki/Larry_Wall">Larry Wall</a>, who once said, tongue-in-cheek, that:</p>
+<p>And so, here’s my summary on the questions I had, and the answers that my research yielded:<br>
+<a href="#q1">1) what is an object id?</a><br>
+<a href="#q2">2) Why is true.object_id != 1?</a><br>
+<a href="#q3">3) Which objects have fixed object_ids, and what are the practical implications?</a></p>
 
-<blockquote>The three chief virtues of a programmer are: Laziness, Impatience and Hubris.</blockquote>
+<p><strong><a name="q1">1) What is an object id?</a></strong>
+An object id is a unique identifier for an object, much like a fingerprint. All objects have an object id. In Ruby, the method .object_id returns an object’s unique identifier, which is presented by a number or a string of numbers.</p>
 
+<p><strong><a name="q2">2) Why is true.object_id != 1?</a></strong>
+Given that true and false are a fundamental part of most programming languages, I expected the object id for true to be 1, and the object id for false to be 0.</p>
 
-<p>On that basis, I definitely qualify! ;)</p>
+<p>So it surprised me to find that while false.object_id == 0, true.object_id == 2, and nil.object_id == 4. Why do true and nil have such strange object ids?</p>
+
+<p>The reason for that is that the other, perhaps more obvious numbers (like 1 and 2) are taken up by integers due to the pattern for Fixnum (integer) object ids.</p>
+
+<p>In Ruby, the object ids for integers (i) follow the pattern: i * 2 +1
+such that:
+<img src="http://ei-lene.github.com/images/2013_02_19/fixnum1.png">
+as was tested in Ruby Koans’ about_object.rb</p>
+
+<p>This pattern also holds true for negative integers
+<img src="http://ei-lene.github.com/images/2013_02_19/fixnum2.png"></p>
+
+<p><strong><a name="q3">3) Which objects have fixed object_ids, and what are the practical implications?</a></strong>
+As part of my earlier post on Ruby equalities, I tinkered around a lot with .object_id in irb, researching the application of the .equal? operator.</p>
+
+<p>Overall, objects seem to fall into 3 categories:<br>
+<a href="fixed">i)  those with fixed object ids</a><br>
+<a href="#temporary">ii) those with temporarily fixed object ids</a><br>
+<a href="#changing">iii)  those with changing object ids</a></p>
+
+<p><em><a name="fixed">Objects with Fixed object ids:<a></em>
+<em>1) Fixnum</em>
+As mentioned above, integers have fixed object ids.</p>
+
+<p><em>2) Symbols</em>
+Once created, symbols have immutable object ids, which will remain constant, even if the values have been reassigned.</p>
+
+<p>For example:
+<img src="http://ei-lene.github.com/images/2013_02_19/symbols.png">
+In all cases, the object_id of the symbol name is identical</p>
+
+<p><em><a name="temporary">Objects with temporarily fixed object ids:<a></em>
+<em>1) Variables </em>
+Once created, variables will have the same object id each time it is called, unless the variable has been reassigned, in which case, the variable object id will change. While the variable retains its assigned value, its object id is temporarily constant.
+<img src="http://ei-lene.github.com/images/2013_02_19/variables1.png">
+If a variable is assigned to a Fixnum, the variable will take on that Fixnum’s object id. This will also apply in the case where a variable is assigned to a symbol.
+<img src="http://ei-lene.github.com/images/2013_02_19/variables2.png"></p>
+
+<p><em>2) Arrays</em>
+Like variables, arrays have a temporarily fixed object id while the contents of the array have not changed.
+<img src="http://ei-lene.github.com/images/2013_02_19/arrays.png"></p>
+
+<p><em>3) Hashes</em>
+Like variables and arrays, hashes have a temporarily fixed object id while the contents of the array have not changed.
+[code block]</p>
+
+<p><em><a name="changing">Objects with changing object ids:<a></em>
+1) Floats
+Floats have new and different object ids, each time they are called:
+<img src="http://ei-lene.github.com/images/2013_02_19/hashes.png"></p>
+
+<p><em>2) Strings</em>
+Strings have new and different object ids, each <img src="http://ei-lene.github.com/images/2013_02_19/strings.png"></p>
+
+<p><em>3) Instances of an object</em>
+A new object, once created, behave very much like variables – they have the same object id each time they are called, as long as they have not been modified. Each iteration of the object will result in a temporarily fixed object id.
+<img src="http://ei-lene.github.com/images/2013_02_19/objectinstances1.png"></p>
+
+<p>However, each instance of an object, including clones of another object, have their own unique object id.
+<img src="http://ei-lene.github.com/images/2013_02_19/objectinstances2.png"></p>
+
+<p><em>Implications / applications:</em>
+As far as I know, the primary (most common) application of the above object id properties, are in the usage of symbols rather than strings for naming things or representing data.</p>
+
+<p>Given that symbols have an immutable object id once they are created, whereas strings have a different and individual object id each time they are called, symbols take up less space in the computer’s memory. Hence, we should use symbols instead of strings as hash keys, or attributes – because if the hash key or attribute will be called over and over again, using symbols will significantly increase the performance of the program.</p>
+
+<p>I found <a href="http://www.robertsosinski.com/2009/01/11/the-difference-between-ruby-symbols-and-strings/">Robert Sosinki’s tutorial on Symbols vs. Strings </a>particularly illuminating.</p>
 </div>
 
 
@@ -134,12 +206,12 @@
   
 
 
-<time datetime="2013-02-05T17:59:00-05:00" pubdate data-updated="true">Feb 5<span>th</span>, 2013</time>
+<time datetime="2013-02-19T23:49:00-05:00" pubdate data-updated="true">Feb 19<span>th</span>, 2013</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/zero/'>zero</a>
+    <a class='category' href='/blog/categories/ruby/'>ruby</a>
   
 </span>
 
@@ -148,7 +220,7 @@
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://ei-lene.github.com/blog/2013/02/05/hello-world/" data-via="https://twitter.com/eitoile" data-counturl="http://ei-lene.github.com/blog/2013/02/05/hello-world/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://ei-lene.github.com/blog/2013/02/19/q-and-a-quickie-about-object-ids/" data-via="https://twitter.com/eitoile" data-counturl="http://ei-lene.github.com/blog/2013/02/19/q-and-a-quickie-about-object-ids/" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
@@ -161,8 +233,8 @@
     
     <p class="meta">
       
+        <a class="basic-alignment left" href="/blog/2013/02/12/thinking-of-learning-to-code/" title="Previous Post: Thinking of learning to code?">&laquo; Thinking of learning to code?</a>
       
-        <a class="basic-alignment right" href="/blog/2013/02/08/all-equalities-are-equal/" title="Next Post: All equalities are equal...">All equalities are equal... &raquo;</a>
       
     </p>
   </footer>
@@ -267,8 +339,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://ei-lene.github.com/blog/2013/02/05/hello-world/';
-        var disqus_url = 'http://ei-lene.github.com/blog/2013/02/05/hello-world/';
+        var disqus_identifier = 'http://ei-lene.github.com/blog/2013/02/19/q-and-a-quickie-about-object-ids/';
+        var disqus_url = 'http://ei-lene.github.com/blog/2013/02/19/q-and-a-quickie-about-object-ids/';
         var disqus_script = 'embed.js';
       
     (function () {
