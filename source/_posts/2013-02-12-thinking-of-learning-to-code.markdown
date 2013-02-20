@@ -3,13 +3,13 @@ layout: post
 title: "Thinking of learning to code?"
 date: 2013-02-12 13:54
 comments: true
-categories: 
+categories: zero
 ---
 
 <h3><em>My perspectives – why I’m learning to code at the Flatiron School</em></h3>
 
 
-<img src="http://ei-lene.github.com/images/2013_02_12/thinker.jpg">
+<img src="http://ei-lene.github.com/images/2013_02_12/thinker.jpg" align="left">
 Thinking of learning to code, and wondering if it’s worth the trouble, or if you should go solo or sign up to a course?
 
 I’ve wrestled with these questions before and this post outlines my thought process and why I’m learning to code at the Flatiron School:<br>

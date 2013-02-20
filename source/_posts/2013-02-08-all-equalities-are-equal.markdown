@@ -3,7 +3,7 @@ layout: post
 title: "All equalities are equal..."
 date: 2013-02-08 22:02
 comments: true
-categories: 
+categories: ruby
 ---
 
 <h3><em>...but some are more equal than others</em></h3>
