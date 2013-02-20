@@ -5,7 +5,7 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Q&amp;A Quickie - about object ids - Coder-in-training</title>
+  <title>Q&amp;A Quickie - about object ids - Padawan coder</title>
   <meta name="author" content="ei-lene">
 
   
@@ -24,7 +24,7 @@
   <script src="/javascripts/modernizr-2.0.js"></script>
   <script src="/javascripts/ender.js"></script>
   <script src="/javascripts/octopress.js" type="text/javascript"></script>
-  <link href="/atom.xml" rel="alternate" title="Coder-in-training" type="application/atom+xml">
+  <link href="/atom.xml" rel="alternate" title="Padawan coder" type="application/atom+xml">
   <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
 <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
 <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
@@ -47,7 +47,7 @@
 
 <body   >
   <header role="banner"><hgroup>
-  <h1><a href="/">Coder-in-training</a></h1>
+  <h1><a href="/">Padawan coder</a></h1>
   
     <h2>Getting from zero to hero...</h2>
   
@@ -111,25 +111,24 @@
 <a href="#q2">2) Why is true.object_id != 1?</a><br>
 <a href="#q3">3) Which objects have fixed object_ids, and what are the practical implications?</a></p>
 
-<p><strong><a name="q1">1) What is an object id?</a></strong>
+<p><strong><a name="q1">1) What is an object id?</a></strong><br>
 An object id is a unique identifier for an object, much like a fingerprint. All objects have an object id. In Ruby, the method .object_id returns an object’s unique identifier, which is presented by a number or a string of numbers.</p>
 
-<p><strong><a name="q2">2) Why is true.object_id != 1?</a></strong>
+<p><strong><a name="q2">2) Why is true.object_id != 1?</a></strong><br>
 Given that true and false are a fundamental part of most programming languages, I expected the object id for true to be 1, and the object id for false to be 0.</p>
 
 <p>So it surprised me to find that while false.object_id == 0, true.object_id == 2, and nil.object_id == 4. Why do true and nil have such strange object ids?</p>
 
 <p>The reason for that is that the other, perhaps more obvious numbers (like 1 and 2) are taken up by integers due to the pattern for Fixnum (integer) object ids.</p>
 
-<p>In Ruby, the object ids for integers (i) follow the pattern: i * 2 +1
+<p>As was tested in Ruby Koans’ about_object.rb, in Ruby, the object ids for integers (i) follow the pattern: i * 2 +1
 such that:
-<img src="http://ei-lene.github.com/images/2013_02_19/fixnum1.png">
-as was tested in Ruby Koans’ about_object.rb</p>
+<img src="http://ei-lene.github.com/images/2013_02_19/fixnum1.png"></p>
 
-<p>This pattern also holds true for negative integers
+<p>This pattern also holds true for negative integers:
 <img src="http://ei-lene.github.com/images/2013_02_19/fixnum2.png"></p>
 
-<p><strong><a name="q3">3) Which objects have fixed object_ids, and what are the practical implications?</a></strong>
+<p><strong><a name="q3">3) Which objects have fixed object_ids, and what are the practical implications?</a></strong><br>
 As part of my earlier post on Ruby equalities, I tinkered around a lot with .object_id in irb, researching the application of the .equal? operator.</p>
 
 <p>Overall, objects seem to fall into 3 categories:<br>
@@ -137,48 +136,51 @@ As part of my earlier post on Ruby equalities, I tinkered around a lot with .obj
 <a href="#temporary">ii) those with temporarily fixed object ids</a><br>
 <a href="#changing">iii)  those with changing object ids</a></p>
 
-<p><em><a name="fixed">Objects with Fixed object ids:<a></em>
-<em>1) Fixnum</em>
+<p><em><a name="fixed">Objects with Fixed object ids:</a></em><br>
+<em>1) Fixnum</em><br>
 As mentioned above, integers have fixed object ids.</p>
 
-<p><em>2) Symbols</em>
+<p><em>2) Symbols</em><br>
 Once created, symbols have immutable object ids, which will remain constant, even if the values have been reassigned.</p>
 
-<p>For example:
-<img src="http://ei-lene.github.com/images/2013_02_19/symbols.png">
+<p>For example:<br>
+<img src="http://ei-lene.github.com/images/2013_02_19/symbols.png"><br>
 In all cases, the object_id of the symbol name is identical</p>
 
-<p><em><a name="temporary">Objects with temporarily fixed object ids:<a></em>
-<em>1) Variables </em>
-Once created, variables will have the same object id each time it is called, unless the variable has been reassigned, in which case, the variable object id will change. While the variable retains its assigned value, its object id is temporarily constant.
+<p><em><a name="temporary">Objects with temporarily fixed object ids:</a></em><br>
+<em>1) Variables </em><br>
+Once created, variables will have the same object id each time it is called, unless the variable has been reassigned, in which case, the variable object id will change. While the variable retains its assigned value, its object id is temporarily constant:<br>
 <img src="http://ei-lene.github.com/images/2013_02_19/variables1.png">
-If a variable is assigned to a Fixnum, the variable will take on that Fixnum’s object id. This will also apply in the case where a variable is assigned to a symbol.
-<img src="http://ei-lene.github.com/images/2013_02_19/variables2.png"></p>
+If a variable is assigned to a Fixnum, the variable will take on that Fixnum’s object id: <br>
+<img src="http://ei-lene.github.com/images/2013_02_19/variables2.png"><br>
+This will also apply in the case where a variable is assigned to a symbol:<br>
+<img src="http://ei-lene.github.com/images/2013_02_19/variables3.png"></p>
 
-<p><em>2) Arrays</em>
-Like variables, arrays have a temporarily fixed object id while the contents of the array have not changed.
+<p><em>2) Arrays</em><br>
+Like variables, arrays have a temporarily fixed object id while the contents of the array have not changed: <br>
 <img src="http://ei-lene.github.com/images/2013_02_19/arrays.png"></p>
 
-<p><em>3) Hashes</em>
-Like variables and arrays, hashes have a temporarily fixed object id while the contents of the array have not changed.
-[code block]</p>
-
-<p><em><a name="changing">Objects with changing object ids:<a></em>
-1) Floats
-Floats have new and different object ids, each time they are called:
+<p><em>3) Hashes</em><br>
+Like variables and arrays, hashes have a temporarily fixed object id while the contents of the array have not changed:<br>
 <img src="http://ei-lene.github.com/images/2013_02_19/hashes.png"></p>
 
-<p><em>2) Strings</em>
-Strings have new and different object ids, each <img src="http://ei-lene.github.com/images/2013_02_19/strings.png"></p>
+<p><em><a name="changing">Objects with changing object ids:</a></em><br>
+1) Floats<br>
+Floats have new and different object ids, each time they are called:<br>
+<img src="http://ei-lene.github.com/images/2013_02_19/floats.png"></p>
 
-<p><em>3) Instances of an object</em>
-A new object, once created, behave very much like variables – they have the same object id each time they are called, as long as they have not been modified. Each iteration of the object will result in a temporarily fixed object id.
+<p><em>2) Strings</em><br>
+Strings have new and different object ids, each time they are called: <br>
+<img src="http://ei-lene.github.com/images/2013_02_19/strings.png"></p>
+
+<p><em>3) Instances of an object</em><br>
+A new object, once created, behave very much like variables – they have the same object id each time they are called, as long as they have not been modified. Each iteration of the object will result in a temporarily fixed object id:<br>
 <img src="http://ei-lene.github.com/images/2013_02_19/objectinstances1.png"></p>
 
-<p>However, each instance of an object, including clones of another object, have their own unique object id.
+<p>However, each instance of an object, including clones of another object, have their own unique object id:<br>
 <img src="http://ei-lene.github.com/images/2013_02_19/objectinstances2.png"></p>
 
-<p><em>Implications / applications:</em>
+<p><em>Implications / applications:</em><br>
 As far as I know, the primary (most common) application of the above object id properties, are in the usage of symbols rather than strings for naming things or representing data.</p>
 
 <p>Given that symbols have an immutable object id once they are created, whereas strings have a different and individual object id each time they are called, symbols take up less space in the computer’s memory. Hence, we should use symbols instead of strings as hash keys, or attributes – because if the hash key or attribute will be called over and over again, using symbols will significantly increase the performance of the program.</p>

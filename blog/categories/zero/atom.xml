@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: zero | Coder-in-training]]></title>
+  <title><![CDATA[Category: zero | Padawan coder]]></title>
   <link href="http://ei-lene.github.com/blog/categories/zero/atom.xml" rel="self"/>
   <link href="http://ei-lene.github.com/"/>
-  <updated>2013-02-20T00:09:15-05:00</updated>
+  <updated>2013-02-20T00:25:22-05:00</updated>
   <id>http://ei-lene.github.com/</id>
   <author>
     <name><![CDATA[ei-lene]]></name>
