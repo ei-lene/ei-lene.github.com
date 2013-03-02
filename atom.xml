@@ -4,7 +4,7 @@
   <title><![CDATA[Padawan coder]]></title>
   <link href="http://ei-lene.github.com/atom.xml" rel="self"/>
   <link href="http://ei-lene.github.com/"/>
-  <updated>2013-03-01T20:01:03-05:00</updated>
+  <updated>2013-03-01T22:43:05-05:00</updated>
   <id>http://ei-lene.github.com/</id>
   <author>
     <name><![CDATA[ei-lene]]></name>
@@ -12,6 +12,15 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[test]]></title>
+    <link href="http://ei-lene.github.com/blog/2013/03/01/test/"/>
+    <updated>2013-03-01T22:40:00-05:00</updated>
+    <id>http://ei-lene.github.com/blog/2013/03/01/test</id>
+    <content type="html"><![CDATA[<p>&#8220;test posts to see if this is deployed to blog&#8221;</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Q&amp;A Quickie - about object ids]]></title>
