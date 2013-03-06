@@ -4,7 +4,7 @@
   <title><![CDATA[Padawan coder]]></title>
   <link href="http://ei-lene.github.com/atom.xml" rel="self"/>
   <link href="http://ei-lene.github.com/"/>
-  <updated>2013-03-01T22:43:51-05:00</updated>
+  <updated>2013-03-05T21:08:42-05:00</updated>
   <id>http://ei-lene.github.com/</id>
   <author>
     <name><![CDATA[ei-lene]]></name>
@@ -26,16 +26,17 @@
 <a href="#q3">3) Which objects have fixed object_ids, and what are the practical implications?</a></p>
 
 <p><strong><a name="q1">1) What is an object id?</a></strong><br>
-An object id is a unique identifier for an object, much like a fingerprint. All objects have an object id. In Ruby, the method .object_id returns an object’s unique identifier, which is presented by a number or a string of numbers.</p>
+An object id is a unique identifier for an object, much like a fingerprint. All objects have an object id. In Ruby, the method
+<code>.object_id</code> returns an object’s unique identifier, which is presented by a number or a string of numbers.</p>
 
 <p><strong><a name="q2">2) Why is true.object_id != 1?</a></strong><br>
 Given that true and false are a fundamental part of most programming languages, I expected the object id for true to be 1, and the object id for false to be 0.</p>
 
-<p>So it surprised me to find that while false.object_id == 0, true.object_id == 2, and nil.object_id == 4. Why do true and nil have such strange object ids?</p>
+<p>So it surprised me to find that while <code>false.object_id == 0</code>, <code>true.object_id == 2</code>, and <code>nil.object_id == 4</code>. Why do true and nil have such strange object ids?</p>
 
 <p>The reason for that is that the other, perhaps more obvious numbers (like 1 and 2) are taken up by integers due to the pattern for Fixnum (integer) object ids.</p>
 
-<p>As was tested in Ruby Koans’ about_object.rb, in Ruby, the object ids for integers (i) follow the pattern: i * 2 +1
+<p>As was tested in Ruby Koans’ about_object.rb, in Ruby, the object ids for integers (i) follow the pattern: <code>i * 2 +1</code>
 such that:
 <img src="http://ei-lene.github.com/images/2013_02_19/fixnum1.png"></p>
 
@@ -43,7 +44,7 @@ such that:
 <img src="http://ei-lene.github.com/images/2013_02_19/fixnum2.png"></p>
 
 <p><strong><a name="q3">3) Which objects have fixed object_ids, and what are the practical implications?</a></strong><br>
-As part of my earlier post on Ruby equalities, I tinkered around a lot with .object_id in irb, researching the application of the .equal? operator.</p>
+As part of my earlier post on Ruby equalities, I tinkered around a lot with <code>.object_id</code> in irb, researching the application of the <code>.equal?</code> operator.</p>
 
 <p>Overall, objects seem to fall into 3 categories:<br>
 <a href="fixed">i)  those with fixed object ids</a><br>
@@ -64,7 +65,7 @@ In all cases, the object_id of the symbol name is identical</p>
 <p><em><a name="temporary">Objects with temporarily fixed object ids:</a></em><br>
 <em>1) Variables </em><br>
 Once created, variables will have the same object id each time it is called, unless the variable has been reassigned, in which case, the variable object id will change. While the variable retains its assigned value, its object id is temporarily constant:<br>
-<img src="http://ei-lene.github.com/images/2013_02_19/variables1.png">
+<img src="http://ei-lene.github.com/images/2013_02_19/variables1.png"><br>
 If a variable is assigned to a Fixnum, the variable will take on that Fixnum’s object id: <br>
 <img src="http://ei-lene.github.com/images/2013_02_19/variables2.png"><br>
 This will also apply in the case where a variable is assigned to a symbol:<br>
@@ -180,8 +181,8 @@ I see where they are coming from, and I think that’s definitely a possibility.
 
 <p>I started on this trail because I&#8217;m a pedant about spelling, and got stuck on <a href="http://rubymonk.com/learning/books/1/chapters/8-control-structures/lessons/43-boolean-expressions-in-ruby">Ruby Monk&#8217;s first Boolean exercise</a>.</p>
 
-<p>Why was the following solution invalid >> name.equal?(&#8220;Bob&#8221;) <br>
-and this solution valid instead? >> name.eql?(&#8220;Bob&#8221;)</p>
+<p>Why was the following solution invalid >> <code>name.equal?("Bob")</code> <br>
+and this solution valid instead? >> <code>name.eql?("Bob")</code></p>
 
 <p>This set me off researching Ruby equality operators.<br>
 There seems to be four types of equality operators:-<br>
@@ -194,26 +195,26 @@ There seems to be four types of equality operators:-<br>
 
 <p><a name="=="><strong>==</strong></a><br>
 <strong>Simple (or Value) equality.</strong><br>
-<em>== returns true if both sides of the operator have the same value, regardless of datatype.</em></p>
+<em><code>==</code> returns true if both sides of the operator have the same value, regardless of datatype.</em></p>
 
 <p>Thus:<br>
 <img src="http://ei-lene.github.com/images/2013_02_08/ValueEquality1.png"></p>
 
-<p>However, the Ruby == operator is not quite as forgiving its Javascript counterpart. It does not convert strings to integers, nor does it recognise upper and lower case versions of the same letter as being of the same value.</p>
+<p>However, the Ruby <code>==</code> operator is not quite as forgiving its Javascript counterpart. It does not convert strings to integers, nor does it recognise upper and lower case versions of the same letter as being of the same value.</p>
 
 <p>Therefore:<br>
 <img src="http://ei-lene.github.com/images/2013_02_08/ValueEquality2.png"></p>
 
 <p><a name="eql"><strong>.eql?</strong></a><br>
 <strong>Value and Type Equality</strong><br>
-<em>.eql? has stricter equality criteria than ==. It tests for equality of value as well as data type.</em></p>
+<em><code>.eql?</code> has stricter equality criteria than <code>==</code>. It tests for equality of value as well as data type.</em></p>
 
 <p>Hence:<br>
 <img src="http://ei-lene.github.com/images/2013_02_08/ValueTypeEquality.png"></p>
 
 <p><a name="equal"><strong>.equal?</strong></a><br>
 <strong>Strict (True or Object) Equality</strong><br>
-<em>.equal? has the strictest test of equality*, and is &#8220;the most equal of them all&#8221;. It tests for equality of object ID.</em></p>
+<em><code>.equal?</code> has the strictest test of equality*, and is &#8220;the most equal of them all&#8221;. It tests for equality of object ID.</em></p>
 
 <p>As a newbie Rubyist at <a href="http://flatironschool.com/">the Flatiron School</a>, I have very recently learnt that all strings (even if identical) have their own individual object ID each time they are written (called?), whereas symbols have a unique and immutable object ID, which will remain each time the symbol is called, even if the value has been reassigned.</p>
 
@@ -227,27 +228,27 @@ There seems to be four types of equality operators:-<br>
 
 <p>Okay, so I&#8217;ve completely made up the equality names in the parenthesis for this. For that matter, all the equality names for all the other operators are also kind of &#8216;made-up&#8217; by me, but in those cases, I think they are fairly representative of what those equality operators test for.</p>
 
-<p><em>=== is generally known everywhere, including <a href="http://ruby-doc.org/core-1.9.3/Object.html#method-i-3D-3D-3D">in the Ruby documentation</a>, as &#8220;Case equality&#8221;.</em></p>
+<p><em><code>===</code> is generally known everywhere, including <a href="http://ruby-doc.org/core-1.9.3/Object.html#method-i-3D-3D-3D">in the Ruby documentation</a>, as &#8220;Case equality&#8221;.</em></p>
 
 <p>I thought that <a href="http://techbot.me/2011/05/ruby-basics-equality-operators-ruby/">Techbot</a> and <a href="http://www.tutorialspoint.com/ruby/ruby_operators.htm
-">TutorialsPoint</a> gave the best illustrations of the Case Equality usage of ===, which I will illustrate briefly below:<br>
+">TutorialsPoint</a> gave the best illustrations of the Case Equality usage of <code>===</code>, which I will illustrate briefly below:<br>
 <img src="http://ei-lene.github.com/images/2013_02_08/SubsetCaseEquality1.png"></p>
 
-<p>While I agree with the above usage (it clearly works!), I see things more simplistically. To me, the === operator seems to test if the item on right hand side of the operator is a subset of the left hand side of the operator.</p>
+<p>While I agree with the above usage (it clearly works!), I see things more simplistically. To me, the <code>===</code> operator seems to test if the item on right hand side of the operator is a subset of the left hand side of the operator.</p>
 
 <p>For example: <br>
 <img src="http://ei-lene.github.com/images/2013_02_08/SubsetCaseEquality2.png"></p>
 
-<p>The === operator doesn&#8217;t seem to test for subset in the cases of strings, arrays and hashes, but it works with Regex:<br>
+<p>The <code>===</code> operator doesn&#8217;t seem to test for subset in the cases of strings, arrays and hashes, but it works with Regex:<br>
 <img src="http://ei-lene.github.com/images/2013_02_08/SubsetCaseEquality3.png"></p>
 
-<p>Anyway, because I think === is testing if one element (object?) is a subset of another, I don&#8217;t think that it can be considered an equality test at all, hence my nickname of &#8220;False Equality&#8221; for it.</p>
+<p>Anyway, because I think <code>===</code> is testing if one element (object?) is a subset of another, I don&#8217;t think that it can be considered an equality test at all, hence my nickname of &#8220;False Equality&#8221; for it.</p>
 
-<p><a href="http://stackoverflow.com/users/23649/jtbandes">jtbandes</a> says on <a href="stackoverflow.com">StackOverflow</a> that === is incredibly useful for implementations in range, regex and proc (and people seem to compare it to the #== operator), but since all that is WAY over my head, I&#8217;ll just take his word for it, and you can <a href="http://stackoverflow.com/questions/7156955/whats-the-difference-between-equal-eql-and">check it out there</a>.</p>
+<p><a href="http://stackoverflow.com/users/23649/jtbandes">jtbandes</a> says on <a href="stackoverflow.com">StackOverflow</a> that <code>===</code> is incredibly useful for implementations in range, regex and proc (and people seem to compare it to the #== operator), but since all that is WAY over my head, I&#8217;ll just take his word for it, and you can <a href="http://stackoverflow.com/questions/7156955/whats-the-difference-between-equal-eql-and">check it out there</a>.</p>
 
-<p>After all this research, I&#8217;m kind of at peace with Ruby&#8217;s misspelling of .eql?, because I can see that it is necessary to differentiate it from .equal?</p>
+<p>After all this research, I&#8217;m kind of at peace with Ruby&#8217;s misspelling of <code>.eql?</code>, because I can see that it is necessary to differentiate it from <code>.equal?</code></p>
 
-<p>But I&#8217;m still annoyed with &#8216;elsif&#8217;… >:(</p>
+<p>But I&#8217;m still annoyed with <code>elsif</code>… >:(</p>
 
 <p style="font-size: 70%; font-weight: normal">
 Notes:<br>
