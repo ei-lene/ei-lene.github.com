@@ -15,16 +15,17 @@ And so, here’s my summary on the questions I had, and the answers that my rese
 
 
 <strong><a name="q1">1) What is an object id?</a></strong><br>
-An object id is a unique identifier for an object, much like a fingerprint. All objects have an object id. In Ruby, the method .object_id returns an object’s unique identifier, which is presented by a number or a string of numbers. 
+An object id is a unique identifier for an object, much like a fingerprint. All objects have an object id. In Ruby, the method 
+```.object_id ``` returns an object’s unique identifier, which is presented by a number or a string of numbers. 
 
 <strong><a name="q2">2) Why is true.object_id != 1?</a></strong><br>
 Given that true and false are a fundamental part of most programming languages, I expected the object id for true to be 1, and the object id for false to be 0.
 
-So it surprised me to find that while false.object_id == 0, true.object_id == 2, and nil.object_id == 4. Why do true and nil have such strange object ids?
+So it surprised me to find that while ``` false.object_id == 0```, ```true.object_id == 2```, and ```nil.object_id == 4```. Why do true and nil have such strange object ids?
 
 The reason for that is that the other, perhaps more obvious numbers (like 1 and 2) are taken up by integers due to the pattern for Fixnum (integer) object ids.
 
-As was tested in Ruby Koans’ about_object.rb, in Ruby, the object ids for integers (i) follow the pattern: i * 2 +1
+As was tested in Ruby Koans’ about_object.rb, in Ruby, the object ids for integers (i) follow the pattern: ```i * 2 +1```
 such that:
 <img src="http://ei-lene.github.com/images/2013_02_19/fixnum1.png">
 
@@ -32,7 +33,7 @@ This pattern also holds true for negative integers:
 <img src="http://ei-lene.github.com/images/2013_02_19/fixnum2.png">
 
 <strong><a name="q3">3) Which objects have fixed object_ids, and what are the practical implications?</a></strong><br>
-As part of my earlier post on Ruby equalities, I tinkered around a lot with .object_id in irb, researching the application of the .equal? operator.
+As part of my earlier post on Ruby equalities, I tinkered around a lot with ```.object_id``` in irb, researching the application of the ```.equal?``` operator.
 
 Overall, objects seem to fall into 3 categories:<br>
 <a href="fixed">i)  those with fixed object ids</a><br>
@@ -53,7 +54,7 @@ In all cases, the object_id of the symbol name is identical
 <em><a name="temporary">Objects with temporarily fixed object ids:</a></em><br>
 <em>1) Variables </em><br>
 Once created, variables will have the same object id each time it is called, unless the variable has been reassigned, in which case, the variable object id will change. While the variable retains its assigned value, its object id is temporarily constant:<br>
-<img src="http://ei-lene.github.com/images/2013_02_19/variables1.png">
+<img src="http://ei-lene.github.com/images/2013_02_19/variables1.png"><br>
 If a variable is assigned to a Fixnum, the variable will take on that Fixnum’s object id: <br>
 <img src="http://ei-lene.github.com/images/2013_02_19/variables2.png"><br>
 This will also apply in the case where a variable is assigned to a symbol:<br>
