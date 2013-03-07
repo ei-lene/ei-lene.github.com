@@ -89,7 +89,7 @@ def edit
     @list = List.find_by_permalink(params[:id])
 end
 ```
-<img src="http://ei-lene.github.com/images/2013_03_06/v3_addtask.png">
+<img src="http://ei-lene.github.com/images/2013_03_06/v3_addtasks.png">
 
 <strong><em>Making it work:</em></strong><br>
 Added functionality to allow users to delete individual tasks in a specific list, even if the ‘Delete this task’ link was very ugly and incongruous next to the compact ‘Update Task’ submit button.<br>
