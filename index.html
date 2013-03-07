@@ -144,8 +144,14 @@ With that in mind, the first major iteration of my ToDoList app was minimalistic
 When discussing the lab in class, I mentioned that I was intending to add radio buttons to the Task <code>new.html.erb</code> page so users can choose the list to add their task to.
 Avi suggested using a drop-down menu instead, and showed briefly walked through the <code>f.select</code> option in the Rails <code>form_for</code> helper</p>
 
-<p>Thus, with a short line of code:<code>&lt;%= f.select :list_id, List.all.collect { |l| [l.name, l.id]} %&gt;</code>, I significantly improved my user experience and interface:<br>
-<img src="http://ei-lene.github.com/images/2013_03_06/v2_addtasks.png"></p>
+<p>Thus, with a short line of code, I significantly improved my user experience and interface:</p>
+
+<figure class='code'><figcaption><span>new.html.erb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">&lt;%=</span> <span class="n">f</span><span class="o">.</span><span class="n">select</span> <span class="ss">:list_id</span><span class="p">,</span> <span class="no">List</span><span class="o">.</span><span class="n">all</span><span class="o">.</span><span class="n">collect</span> <span class="p">{</span> <span class="o">|</span><span class="n">l</span><span class="o">|</span> <span class="o">[</span><span class="n">l</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">l</span><span class="o">.</span><span class="n">id</span><span class="o">]</span><span class="p">}</span> <span class="o">%&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="http://ei-lene.github.com/images/2013_03_06/v2_addtasks.png"></p>
 
 <p><strong><em>Making it work:</em></strong><br>
 1) Users should be able to add tasks to a specific list when on that list page<br>
