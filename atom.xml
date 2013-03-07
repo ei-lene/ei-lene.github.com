@@ -4,7 +4,7 @@
   <title><![CDATA[Padawan coder]]></title>
   <link href="http://ei-lene.github.com/atom.xml" rel="self"/>
   <link href="http://ei-lene.github.com/"/>
-  <updated>2013-03-06T22:21:40-05:00</updated>
+  <updated>2013-03-06T23:19:31-05:00</updated>
   <id>http://ei-lene.github.com/</id>
   <author>
     <name><![CDATA[ei-lene]]></name>
@@ -14,7 +14,7 @@
 
   
   <entry>
-    <title type="html"><![CDATA[My top 4 Rails tricks]]></title>
+    <title type="html"><![CDATA[My top 4 Rails tricks in my first rails app]]></title>
     <link href="http://ei-lene.github.com/blog/2013/03/06/my-top-4-rails-tricks-in-my-first-rails-app/"/>
     <updated>2013-03-06T21:18:00-05:00</updated>
     <id>http://ei-lene.github.com/blog/2013/03/06/my-top-4-rails-tricks-in-my-first-rails-app</id>
@@ -24,6 +24,137 @@
 <p>We began learning Rails last week at the Flatiron School, with lectures and a couple of guided Rails labs / tutorials.</p>
 
 <p>In this post, I will outline the key development stages* of my first ever non-guided , albeit simple, Rails app (a ToDoList app) and my top tricks &amp; workarounds for the current version of the app.</p>
+
+<p><strong> TL;DR:</strong><br>
+Top 4 tricks: <a href="#f.select">f.select</a> ; <a href="#f.hidden_field">f.hidden_field</a>, <a href="#to_param">to_param</a>, <a href="#button_to">button_to</a></p>
+
+<p><strong><a href="http://en.wikipedia.org/wiki/The_Full_Monty">The Full Monty&#8230;</a></strong><br>
+As I’m sure most fledgling coders will sympathise with, it seems to be that the biggest hurdle when trying to programme an app (with limited or no guidance) is the ‘coder&#8217;s block’. The coder’s version of <a href="http://en.wikipedia.org/wiki/Watership_Down">going tharn</a>  at the sight of a blank text-editor. What seemed doable (not to say easy) enough in a guided tutorial, suddenly seems impossible – where do I begin? what do I do?</p>
+
+<p>After several weeks of countless panic attacks as part of my course, I am slowly beginning to learn to deal with my coder’s block, through the following mantras:<br>
+1)  breathe… <a href="http://en.wikipedia.org/wiki/Keep_Calm_and_Carry_On">Keep Calm and Carry On</a><br>
+2)  <a href="http://c2.com/cgi/wiki?MakeItWorkMakeItRightMakeItFast">Make It Work, Make It Right, Make It Fast </a></p>
+
+<p>On the second mantra, my key takeaway was that even great programmers recognise that Rome wasn’t build in a day, so for me, for now, I just need to Make It Work, <em>by any means necessary</em>. Even if I have use brute force to machete my way through, the first step is to get it working.</p>
+
+<p><strong>.v001</strong><br>
+<strong><em>Making it work:</em></strong><br>
+With that in mind, the first major iteration of my ToDoList app was minimalistic to the extreme*. My only aims were: <br>
+1)  To create lists and show them on the home page<br>
+2)  To add tasks to lists<br>
+<img src="http://ei-lene.github.com/images/2013_03_06/v1_home.png"><br>
+<img src="http://ei-lene.github.com/images/2013_03_06/v1_addtasks.png"></p>
+
+<p><strong><em>Key issues / next steps:</em></strong><br>
+1)  The unordered list was clearly a bad idea – users would have to guess and/or remember the number of the list they want to add their task to<br>
+2)  The lists should be ordered and should be displayed on the ‘Add tasks’ page<br></p>
+
+<p><strong>.v002</strong><br>
+<strong><em>Making it right:</em></strong><br>
+<a name="f.select"><em>Top Trick #1 – <code>f.select</code></em></a><br>
+When discussing the lab in class, I mentioned that I was intending to add radio buttons to the Task <code>new.html.erb</code> page so users can choose the list to add their task to.
+Avi suggested using a drop-down menu instead, and showed briefly walked through the <code>f.select</code> option in the Rails <code>form_for</code> helper</p>
+
+<p>Thus, with a short line of code:<code>&lt;%= f.select :list_id, List.all.collect { |l| [l.name, l.id]} %&gt;</code>, I significantly improved my user experience and interface:<br>
+<img src="http://ei-lene.github.com/images/2013_03_06/v2_addtasks.png"></p>
+
+<p><strong><em>Making it work:</em></strong><br>
+1) Users should be able to add tasks to a specific list when on that list page<br>
+<a name="f.hidden_field"><em>Top Trick #2 – <code>f.hidden_field</code> </em></a><br>
+My initial intention was to have an “Add task to this list” link which would redirect to a new route along the lines of <code>/lists/:id/tasks/new</code>.</p>
+
+<p>However, despite my valiant efforts at throwing all sorts of different code permutations and combinations at Rails, the standard <code>new_task_path</code> could not seem to register the fact that it had just been routed from a specific list id, and store that list id.***</p>
+
+<p>As a workaround, I decided to implement a task form on the list show page (<code>show.html.erb</code>) with <code>f.hidden_field(:list_id)</code>, a technique that I learnt in <a href="http://tutorials.jumpstartlab.com/projects/blogger.html">Jumpstart Lab’s blogger tutorial</a> that we were assigned.</p>
+
+<p>And having implemented that, I’ve realised that it works really well, and is more optimal than having to click on a link to an alternate path. Because in this case, each time the user adds a new task to a list, the list page reloads, automatically allowing the user to add another new task to the list.<br>
+<img src="http://ei-lene.github.com/images/2013_03_06/v2_addtasktospecificlist.png"></p>
+
+<p>3) Users should be able to delete and edit lists. As an initial testing step, I implemented the ability for users to:<br>
+i) delete the entire list only<br>
+ii) update list name and existing task descriptions<br>
+ <img src="http://ei-lene.github.com/images/2013_03_06/v2_editlist.png"></p>
+
+<p><strong><em>Key issues / next steps:</em></strong><br>
+1)  Change the routes of list from id (list/:id) to name (list/:name), to make the routes look more elegant<br>
+2)  Flesh out edit list functionality – users should be able to delete individual tasks in a specific list<br></p>
+
+<p><strong>.v003</strong><br>
+<strong><em>Making it right:</em></strong><br>
+1) Added list routing via <code>permalink</code> (where <code>permalink = name.downcase.gsub(“ “,”-“</code>)<br>
+<a name="to_param"><em>Top Trick #3 – <code>to_param</code></em></a><br>
+Avi mentioned in class that you could edit the url routing by editing the to_param method in the relevant model.</p>
+
+<p>I must’ve missed out the second part of his words, because I implemented that, then proceeded to struggle as Rails spat out variants of the following error as I diced and spliced my code creatively to try to get it working:<br>
+<img src="http://ei-lene.github.com/images/2013_03_06/error_message.png"></p>
+
+<p>After extensive googling, I found my solution at <a href="http://railscasts.com/episodes/63-model-name-in-url">Railscasts</a>.</p>
+
+<p>I initially used the first method,  implementing <code>"#{id}-#{permalink}"</code> in <code>to_param</code> and retaining the <code>.find(params[:id])</code> in the Controller. But the id of the lists would show up in the url which would not correspond to their position based on the number of existing lists (because deleted lists would retain their unique primary_key id), which I found particularly inelegant.</p>
+
+<p>And so I opted for the second method instead:</p>
+
+<figure class='code'><figcaption><span>list.rb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">def</span> <span class="nf">to_param</span>
+</span><span class='line'>  <span class="n">permalink</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<figure class='code'><figcaption><span>lists_controller.rb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">def</span> <span class="nf">edit</span>
+</span><span class='line'>    <span class="vi">@list</span> <span class="o">=</span> <span class="no">List</span><span class="o">.</span><span class="n">find_by_permalink</span><span class="p">(</span><span class="n">params</span><span class="o">[</span><span class="ss">:id</span><span class="o">]</span><span class="p">)</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="http://ei-lene.github.com/images/2013_03_06/v3_addtask.png"></p>
+
+<p><strong><em>Making it work:</em></strong><br>
+Added functionality to allow users to delete individual tasks in a specific list, even if the ‘Delete this task’ link was very ugly and incongruous next to the compact ‘Update Task’ submit button.<br>
+<img src="http://ei-lene.github.com/images/2013_03_06/v3_editlisttasks.png"></p>
+
+<p><strong><em>Key issues / next steps:</em></strong><br>
+1) Change the styling of ‘Delete this task’<br>
+2) Improve overall styling</p>
+
+<p><strong>.v004</strong><br>
+<strong><em>Making it right:</em></strong><br>
+1)  Overall styling improved<br>
+<img src="http://ei-lene.github.com/images/2013_03_06/current_list.png"></p>
+
+<p>2) Button generated for ‘Delete Task’ <br>
+<a name="button_to"><em>Top Trick #3 – <code>button_to</code></em></a><br>
+Before I discovered the delightful <code>button_to</code> option via googling, I thought the only way to generate buttons in rails was to create a <code>f.submit</code> within the <code>form_for</code> helper. And so I tried various ways to implement a <code>method: :delete</code> and routing to <code>task_path(t)</code> within the <code>f.submit</code>.</p>
+
+<p>Eventually, I gave up banging my head on the <code>f.submit</code> wall and tried a different tack - CSS buttons! But I found CSS buttons very unwieldy and impossible to style to match the ‘Update Task’ button.</p>
+
+<p><code>button_to</code> was a life-saver. With one line of elegant code <code>&lt;%= button_to 'Delete Task', task_path(t), method: :delete %&gt;</code>, I managed to generate a lovely Rails-format button.<br>
+<img src="http://ei-lene.github.com/images/2013_03_06/current_editlist.png"></p>
+
+<p><strong><em>Conclusion / Next steps:</em></strong><br>
+Even though my ToDoList app is still very basic for now, it has come a long way from the start, as this post has demonstrated. In fact, if I had tried to tackle even all of the basic functionality and UI in the current version of the app, I wouldn’t have dared to begin the project.</p>
+
+<p>Instead, I put on my blinkers and took one baby step at a time. As my classmate <a href="https://twitter.com/janeeats">Jane</a> so aptly puts it: <a href="http://janeeats.github.com/blog/2013/02/24/how-to-eat-an-elephant/">“How Do You Eat an Elephant? One Bite at a Time.”</a></p>
+
+<p>So far, I have only been iterating through the process of making it work and making it right, as I’m not yet at the stage where I have the skills (or the project complexity) to make it fast.</p>
+
+<p><strong><em>Next steps:</em></strong><br>
+1) Change the navigation links so that they are conditional – e.g. links to Home don’t show up when a user is already on the home page<br>
+2) Add authorisation for Users to create, edit and delete lists<br></p>
+
+<p>Note: Github’s rollback has been invaluable in the creation of this post, namely the commands: <code>git reset –-hard &lt;commit sha id&gt;</code> &amp; <code>git push -f</code></p>
+
+<p style="font-size: 70%; font-weight: normal">
+* In reality, there were a lot of mini-steps / stages. But in the interest of simplicity, and because I didn’t commit often enough to be able to rollback commits to each mini stage, I am grouping the changes into 4 stages<br>
+** With bare bones styling, because the white background and default serif fonts give me a headache<br>
+*** I spoke to Bob about this on Monday, and he told me that this would needed to be done via nested routes, a topic which will covered in future<br>
+</p>
+
 ]]></content>
   </entry>
   
