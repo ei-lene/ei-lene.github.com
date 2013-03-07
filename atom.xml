@@ -4,7 +4,7 @@
   <title><![CDATA[Padawan coder]]></title>
   <link href="http://ei-lene.github.com/atom.xml" rel="self"/>
   <link href="http://ei-lene.github.com/"/>
-  <updated>2013-03-05T21:08:42-05:00</updated>
+  <updated>2013-03-06T22:21:40-05:00</updated>
   <id>http://ei-lene.github.com/</id>
   <author>
     <name><![CDATA[ei-lene]]></name>
@@ -12,6 +12,20 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[My top 4 Rails tricks]]></title>
+    <link href="http://ei-lene.github.com/blog/2013/03/06/my-top-4-rails-tricks-in-my-first-rails-app/"/>
+    <updated>2013-03-06T21:18:00-05:00</updated>
+    <id>http://ei-lene.github.com/blog/2013/03/06/my-top-4-rails-tricks-in-my-first-rails-app</id>
+    <content type="html"><![CDATA[<h3><em>Make it work, make it right, …</em></h3>
+
+
+<p>We began learning Rails last week at the Flatiron School, with lectures and a couple of guided Rails labs / tutorials.</p>
+
+<p>In this post, I will outline the key development stages* of my first ever non-guided , albeit simple, Rails app (a ToDoList app) and my top tricks &amp; workarounds for the current version of the app.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Q&amp;A Quickie - about object ids]]></title>
