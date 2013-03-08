@@ -39,7 +39,7 @@ With that in mind, the first major iteration of my ToDoList app was minimalistic
 <strong><em>Making it right:</em></strong><br>
 <a name="f.select"><em>Top Trick #1 – ```f.select```</em></a><br>
 When discussing the lab in class, I mentioned that I was intending to add radio buttons to the Task ```new.html.erb``` page so users can choose the list to add their task to.
-Avi suggested using a drop-down menu instead, and showed briefly walked through the ```f.select``` option in the Rails ```form_for``` helper
+<a href="https://twitter.com/aviflombaum">Avi</a> suggested using a drop-down menu instead, and showed briefly walked through the ```f.select``` option in the Rails ```form_for``` helper
 
 Thus, with a short line of code, I significantly improved my user experience and interface:
 ``` ruby new.html.erb
@@ -113,7 +113,10 @@ Before I discovered the delightful ```button_to``` option via googling, I though
 
 Eventually, I gave up banging my head on the ```f.submit``` wall and tried a different tack - CSS buttons! But I found CSS buttons very unwieldy and impossible to style to match the ‘Update Task’ button. 
 
-```button_to``` was a life-saver. With one line of elegant code ```<%= button_to 'Delete Task', task_path(t), method: :delete %>```, I managed to generate a lovely Rails-format button.<br>
+```button_to``` was a life-saver. With one line of elegant code, I managed to generate a lovely Rails-format button:<br>
+``` ruby edit.html.erb
+<%= button_to 'Delete Task', task_path(t), method: :delete %>
+```
 <img src="http://ei-lene.github.com/images/2013_03_06/current_editlist.png">
 
 <strong><em>Conclusion / Next steps:</em></strong><br>

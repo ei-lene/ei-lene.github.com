@@ -6,7 +6,7 @@ comments: true
 categories: ruby
 ---
 
-I became intrigued about object ids when I was researching into the .equal? operator in <a href="http://ei-lene.github.com/blog/2013/02/08/all-equalities-are-equal/">my earlier post on Ruby equalities</a>, and also when I was wading through <a href="http://rubykoans.com/">Ruby Koans’ </a>about_object.rb.
+I became intrigued about object ids when I was researching into the ```.equal?``` operator in <a href="http://ei-lene.github.com/blog/2013/02/08/all-equalities-are-equal/">my earlier post on Ruby equalities</a>, and also when I was wading through <a href="http://rubykoans.com/">Ruby Koans’ </a>about_object.rb.
 
 And so, here’s my summary on the questions I had, and the answers that my research yielded:<br>
 <a href="#q1">1) What is an object id?</a><br>
