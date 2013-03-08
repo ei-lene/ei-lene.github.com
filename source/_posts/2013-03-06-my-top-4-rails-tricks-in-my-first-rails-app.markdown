@@ -7,7 +7,7 @@ categories: rails
 ---
 <h3><em>Make it work, make it right, …</em></h3>
 
-We began learning Rails last week at the Flatiron School, with lectures and a couple of guided Rails labs / tutorials. 
+We began learning Rails last week at the <a href="http://flatironschool.com/">Flatiron School</a>, with lectures and a couple of guided Rails labs / tutorials. 
 
 In this post, I will outline the key development stages* of my first ever non-guided , albeit simple, Rails app (a ToDoList app) and my top tricks & workarounds for the current version of the app.
 
@@ -21,11 +21,11 @@ After several weeks of countless panic attacks as part of my course, I am slowly
 1)  breathe… <a href="http://en.wikipedia.org/wiki/Keep_Calm_and_Carry_On">Keep Calm and Carry On</a><br>
 2)  <a href="http://c2.com/cgi/wiki?MakeItWorkMakeItRightMakeItFast">Make It Work, Make It Right, Make It Fast </a>
 
-On the second mantra, my key takeaway was that even great programmers recognise that Rome wasn’t build in a day, so for me, for now, I just need to Make It Work, <em>by any means necessary</em>. Even if I have use brute force to machete my way through, the first step is to get it working.
+On the second mantra, my key takeaway was that even great programmers recognise that Rome wasn’t build in a day, so for me, for now, I just need to Make It Work, <em>by any means necessary</em>. Even if I have use brute force** to machete my way through, the first step is to get it working.
 
 <strong>.v001</strong><br>
 <strong><em>Making it work:</em></strong><br>
-With that in mind, the first major iteration of my ToDoList app was minimalistic to the extreme*. My only aims were: <br>
+With that in mind, the first major iteration of my ToDoList app was minimalistic to the extreme***. My only aims were: <br>
 1)  To create lists and show them on the home page<br>
 2)  To add tasks to lists<br>
 <img src="http://ei-lene.github.com/images/2013_03_06/v1_home.png"><br>
@@ -41,7 +41,10 @@ With that in mind, the first major iteration of my ToDoList app was minimalistic
 When discussing the lab in class, I mentioned that I was intending to add radio buttons to the Task ```new.html.erb``` page so users can choose the list to add their task to.
 Avi suggested using a drop-down menu instead, and showed briefly walked through the ```f.select``` option in the Rails ```form_for``` helper
 
-Thus, with a short line of code:```<%= f.select :list_id, List.all.collect { |l| [l.name, l.id]} %>```, I significantly improved my user experience and interface:<br>
+Thus, with a short line of code, I significantly improved my user experience and interface:
+``` ruby new.html.erb
+<%= f.select :list_id, List.all.collect { |l| [l.name, l.id]} %>
+```
 <img src="http://ei-lene.github.com/images/2013_03_06/v2_addtasks.png">
 
 <strong><em>Making it work:</em></strong><br>
@@ -49,7 +52,7 @@ Thus, with a short line of code:```<%= f.select :list_id, List.all.collect { |l|
 <a name="f.hidden_field"><em>Top Trick #2 – ```f.hidden_field``` </em></a><br>
 My initial intention was to have an “Add task to this list” link which would redirect to a new route along the lines of ```/lists/:id/tasks/new```.
 
-However, despite my valiant efforts at throwing all sorts of different code permutations and combinations at Rails, the standard ```new_task_path``` could not seem to register the fact that it had just been routed from a specific list id, and store that list id.***
+However, despite my valiant efforts at throwing all sorts of different code permutations and combinations at Rails, the standard ```new_task_path``` could not seem to register the fact that it had just been routed from a specific list id, and store that list id.****
 
 As a workaround, I decided to implement a task form on the list show page (```show.html.erb```) with ```f.hidden_field(:list_id)```, a technique that I learnt in <a href="http://tutorials.jumpstartlab.com/projects/blogger.html">Jumpstart Lab’s blogger tutorial</a> that we were assigned. 
 
@@ -69,7 +72,7 @@ ii) update list name and existing task descriptions<br>
 <strong><em>Making it right:</em></strong><br>
 1) Added list routing via ```permalink``` (where ```permalink = name.downcase.gsub(“ “,”-“```)<br>
 <a name="to_param"><em>Top Trick #3 – ```to_param```</em></a><br>
-Avi mentioned in class that you could edit the url routing by editing the to_param method in the relevant model.
+<a href="https://twitter.com/aviflombaum">Avi</a> mentioned in class that you could edit the url routing by editing the to_param method in the relevant model.
 
 I must’ve missed out the second part of his words, because I implemented that, then proceeded to struggle as Rails spat out variants of the following error as I diced and spliced my code creatively to try to get it working:<br>
 <img src="http://ei-lene.github.com/images/2013_03_06/error_message.png">
@@ -128,6 +131,7 @@ Note: Github’s rollback has been invaluable in the creation of this post, name
 
 <p style="font-size: 70%; font-weight: normal">
 * In reality, there were a lot of mini-steps / stages. But in the interest of simplicity, and because I didn’t commit often enough to be able to rollback commits to each mini stage, I am grouping the changes into 4 stages<br>
-** With bare bones styling, because the white background and default serif fonts give me a headache<br>
-*** I spoke to Bob about this on Monday, and he told me that this would needed to be done via nested routes, a topic which will covered in future<br>
+** The phrase "brute force" is attributable to my classmate <a href="http://rseshan.github.com/">Rahul</a><br>
+*** With bare bones styling, because the white background and default serif fonts give me a headache<br>
+**** I spoke to <a href="https://twitter.com/withloudhands">Bob</a> about this on Monday, and he told me that this would needed to be done via nested routes, a topic which will covered in future<br>
 </p>
