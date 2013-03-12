@@ -4,7 +4,7 @@
   <title><![CDATA[Padawan coder]]></title>
   <link href="http://ei-lene.github.com/atom.xml" rel="self"/>
   <link href="http://ei-lene.github.com/"/>
-  <updated>2013-03-11T23:33:45-04:00</updated>
+  <updated>2013-03-11T23:42:28-04:00</updated>
   <id>http://ei-lene.github.com/</id>
   <author>
     <name><![CDATA[ei-lene]]></name>
@@ -27,7 +27,7 @@
 <!--more-->
 
 
-<p>In designing a simple user sign-up form (as shown above), my top 3 JQuery APIs to provide appropriate and timely user feedback are the following:<br>
+<p>In designing a simple user sign-up form (as shown at the bottom of this post), my top 3 JQuery APIs to provide appropriate and timely user feedback are the following:<br>
 <a href="#submit">.submit()</a><br>
 <a href="#blur">.blur()</a><br>
 <a href="#keyup">.keyup()</a><br></p>
