@@ -16,7 +16,7 @@ I’ve wrestled with these questions before and this post outlines my thought pr
 <a href="#literacy">global imperative – coding is the new literacy</a><br>
 <a href="#empowerment">personal imperative – empowerment rocks, impotence enrages</a><br>
 <a href="#exponential">optional – exponential learning</a>
-
+<!--more-->
 <a name="literacy">
   1)  Coding is the new literacy
 </a>

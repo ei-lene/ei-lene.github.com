@@ -22,6 +22,8 @@ There seems to be four types of equality operators:-<br>
 
 And so it would seem, to misquote George Orwell, that some equalities are more equal than others.
 
+<!--more-->
+
 <a name="=="><strong>==</strong></a><br>
 <strong>Simple (or Value) equality.</strong><br>
 <em>```==``` returns true if both sides of the operator have the same value, regardless of datatype.</em>

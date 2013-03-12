@@ -13,7 +13,7 @@ And so, here’s my summary on the questions I had, and the answers that my rese
 <a href="#q2">2) Why is true.object_id != 1?</a><br>
 <a href="#q3">3) Which objects have fixed object_ids, and what are the practical implications?</a>
 
-
+<!--more-->
 <strong><a name="q1">1) What is an object id?</a></strong><br>
 An object id is a unique identifier for an object, much like a fingerprint. All objects have an object id. In Ruby, the method 
 ```.object_id ``` returns an object’s unique identifier, which is presented by a number or a string of numbers. 

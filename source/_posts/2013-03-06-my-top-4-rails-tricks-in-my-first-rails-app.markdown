@@ -15,6 +15,7 @@ In this post, I will outline the key development stages* of my first ever non-gu
 Top 4 tricks: <a href="#f.select">f.select</a> ; <a href="#f.hidden_field">f.hidden_field</a>, <a href="#to_param">to_param</a>, <a href="#button_to">button_to</a>
 
 <strong><a href="http://en.wikipedia.org/wiki/The_Full_Monty">The Full Monty...</a></strong><br>
+<!--more-->
 As I’m sure most fledgling coders will sympathise with, it seems to be that the biggest hurdle when trying to programme an app (with limited or no guidance) is the ‘coder's block’. The coder’s version of <a href="http://en.wikipedia.org/wiki/Watership_Down">going tharn</a>  at the sight of a blank text-editor. What seemed doable (not to say easy) enough in a guided tutorial, suddenly seems impossible – where do I begin? what do I do?
 
 After several weeks of countless panic attacks as part of my course, I am slowly beginning to learn to deal with my coder’s block, through the following mantras:<br>
