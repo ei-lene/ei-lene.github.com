@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: jquery | Padawan coder]]></title>
-  <link href="http://ei-lene.github.com/blog/categories/jquery/atom.xml" rel="self"/>
+  <title><![CDATA[Category: javascript | Padawan coder]]></title>
+  <link href="http://ei-lene.github.com/blog/categories/javascript/atom.xml" rel="self"/>
   <link href="http://ei-lene.github.com/"/>
   <updated>2013-03-11T23:07:08-04:00</updated>
   <id>http://ei-lene.github.com/</id>
