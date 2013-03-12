@@ -115,9 +115,7 @@ Before I discovered the delightful ```button_to``` option via googling, I though
 Eventually, I gave up banging my head on the ```f.submit``` wall and tried a different tack - CSS buttons! But I found CSS buttons very unwieldy and impossible to style to match the ‘Update Task’ button. 
 
 ```button_to``` was a life-saver. With one line of elegant code, I managed to generate a lovely Rails-format button:<br>
-``` ruby edit.html.erb
-<%= button_to 'Delete Task', task_path(t), method: :delete %>
-```
+```<%= button_to 'Delete Task', task_path(t), method: :delete %>```
 <img src="http://ei-lene.github.com/images/2013_03_06/current_editlist.png">
 
 <strong><em>Conclusion / Next steps:</em></strong><br>
