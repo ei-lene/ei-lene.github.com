@@ -4,7 +4,7 @@
   <title><![CDATA[Padawan coder]]></title>
   <link href="http://ei-lene.github.com/atom.xml" rel="self"/>
   <link href="http://ei-lene.github.com/"/>
-  <updated>2013-03-11T23:10:05-04:00</updated>
+  <updated>2013-03-11T23:28:48-04:00</updated>
   <id>http://ei-lene.github.com/</id>
   <author>
     <name><![CDATA[ei-lene]]></name>
@@ -29,10 +29,10 @@
 
 <p>In designing a simple user sign-up form (as shown above), my top 3 JQuery APIs to provide appropriate and timely user feedback are the following:<br>
 <a href="#submit">.submit()</a><br>
-<a href="#submit">.blur()</a><br>
-<a href="#submit">.keyup()</a><br></p>
+<a href="#blur">.blur()</a><br>
+<a href="#keyup">.keyup()</a><br></p>
 
-<p><a name="submit"><code>.submit()</code></a><br>
+<p><a name="submit"><strong>.submit()</strong></a><br>
 <code>.submit()</code> provides users with feedback upon submission of the form. Be sure to use <code>&amp;</code> instead of <code>&amp;&amp;</code> so that users get all the error messages at once. – There is nothing more annoying than to get drip-fed error messages each time you click ‘submit’.</p>
 
 <figure class='code'><figcaption><span>.submit()  </span></figcaption>
@@ -57,7 +57,7 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p><a name="blur"><code>.blur()</code></a><br>
+<p><a name="blur"><strong>.blur()</strong></a><br>
 I would argue that giving users feedback upon submission is too late, because it requires the user to go back to the top and reconsider every input field again, which requires more mental effort than if feedback was given at each input field, before the brain is occupied with considering a new topic</p>
 
 <p>To this end, <code>.blur()</code> is very useful. <code>.blur()</code> is triggered when the user leaves a particular form input field, that is, as soon as it appears that a user is ‘done’ with that field.</p>
@@ -106,15 +106,15 @@ I would argue that giving users feedback upon submission is too late, because it
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>In my code, even though I added .blur() validation for each input field, I also kept my .submit() validation to prevent the form from being submitted unless all conditions were met.</p>
+<p>In my code, even though I added <code>.blur()</code> validation for each input field, I also kept my <code>.submit()</code> validation to prevent the form from being submitted unless all conditions were met.</p>
 
-<p><a name="keyup">.keyup()</a><br>
-.keyup() provides even more immediate feedback than .blur(), as the feedback can be provided ‘live’ as each key is pressed and released.
+<p><a name="keyup"><strong>.keyup()</strong></a><br>
+This provides even more immediate feedback than <code>.blur()</code>, as the feedback can be provided ‘live’ as each key is pressed and released.
 Real-time feedback may not be appropriate for every single field. For example, it might be annoying to get a live commentary as you are trying to pick a username.</p>
 
 <p>However, it can be used to great effect for specific cases. For example, it is mostly commonly used to give real-time feedback on password strength as users are choosing their password.</p>
 
-<p>In my form, I chose to use .keyup() during password choice (to indicate password strength, even though I am not requiring a ‘strong’ password), as well as for the validation of confirmation emails and passwords.</p>
+<p>In my form, I chose to use <code>.keyup()</code> during password choice (to indicate password strength, even though I am not requiring a ‘strong’ password), as well as for the validation of confirmation emails and passwords.</p>
 
 <figure class='code'><figcaption><span>.keyup()  </span></figcaption>
  <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
@@ -154,7 +154,75 @@ Real-time feedback may not be appropriate for every single field. For example, i
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>Finally, I have also used .text() and .addClass()extensively.</p>
+<p>Finally, I have also used <code>.text()</code> and <code>.addClass()</code> extensively.</p>
+
+<figure class='code'><figcaption><span>.text() & .addClass()  </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="c1">// example usage</span>
+</span><span class='line'><span class="kd">function</span> <span class="nx">validatePasswordStrength</span><span class="p">(){</span>
+</span><span class='line'>    <span class="kd">var</span> <span class="nx">lowercase</span> <span class="o">=</span> <span class="sr">/[a-z]/</span>
+</span><span class='line'>    <span class="kd">var</span> <span class="nx">uppercase</span> <span class="o">=</span> <span class="sr">/[A-Z]/</span>
+</span><span class='line'>    <span class="kd">var</span> <span class="nx">numeric</span> <span class="o">=</span> <span class="sr">/[0-9]/</span>
+</span><span class='line'>    <span class="kd">var</span> <span class="nx">passwordVal</span> <span class="o">=</span> <span class="nx">password</span><span class="p">.</span><span class="nx">val</span><span class="p">();</span>
+</span><span class='line'>    <span class="nx">passwordError</span><span class="p">.</span><span class="nx">show</span><span class="p">();</span>
+</span><span class='line'>    <span class="k">if</span><span class="p">(</span><span class="nx">lowercase</span><span class="p">.</span><span class="nx">test</span><span class="p">(</span><span class="nx">passwordVal</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="nx">uppercase</span><span class="p">.</span><span class="nx">test</span><span class="p">(</span><span class="nx">passwordVal</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="nx">numeric</span><span class="p">.</span><span class="nx">test</span><span class="p">(</span><span class="nx">passwordVal</span><span class="p">)){</span>
+</span><span class='line'>      <span class="nx">passwordError</span><span class="p">.</span><span class="nx">text</span><span class="p">(</span><span class="s2">&quot;Password strength: Strong&quot;</span><span class="p">).</span><span class="nx">removeClass</span><span class="p">().</span><span class="nx">addClass</span><span class="p">(</span><span class="s1">&#39;green&#39;</span><span class="p">);</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>    <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="nx">lowercase</span><span class="p">.</span><span class="nx">test</span><span class="p">(</span><span class="nx">passwordVal</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="nx">uppercase</span><span class="p">.</span><span class="nx">test</span><span class="p">(</span><span class="nx">passwordVal</span><span class="p">)){</span>
+</span><span class='line'>      <span class="nx">passwordError</span><span class="p">.</span><span class="nx">text</span><span class="p">(</span><span class="s2">&quot;Password strength: Medium&quot;</span><span class="p">).</span><span class="nx">removeClass</span><span class="p">().</span><span class="nx">addClass</span><span class="p">(</span><span class="s1">&#39;amber&#39;</span><span class="p">);</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>    <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="nx">numeric</span><span class="p">.</span><span class="nx">test</span><span class="p">(</span><span class="nx">passwordVal</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="nx">uppercase</span><span class="p">.</span><span class="nx">test</span><span class="p">(</span><span class="nx">passwordVal</span><span class="p">)){</span>
+</span><span class='line'>      <span class="nx">passwordError</span><span class="p">.</span><span class="nx">text</span><span class="p">(</span><span class="s2">&quot;Password strength: Medium&quot;</span><span class="p">).</span><span class="nx">removeClass</span><span class="p">().</span><span class="nx">addClass</span><span class="p">(</span><span class="s1">&#39;amber&#39;</span><span class="p">);</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>    <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="nx">numeric</span><span class="p">.</span><span class="nx">test</span><span class="p">(</span><span class="nx">passwordVal</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="nx">lowercase</span><span class="p">.</span><span class="nx">test</span><span class="p">(</span><span class="nx">passwordVal</span><span class="p">)){</span>
+</span><span class='line'>      <span class="nx">passwordError</span><span class="p">.</span><span class="nx">text</span><span class="p">(</span><span class="s2">&quot;Password strength: Medium&quot;</span><span class="p">).</span><span class="nx">removeClass</span><span class="p">().</span><span class="nx">addClass</span><span class="p">(</span><span class="s1">&#39;amber&#39;</span><span class="p">);</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>    <span class="k">else</span> <span class="p">{</span>
+</span><span class='line'>      <span class="nx">passwordError</span><span class="p">.</span><span class="nx">text</span><span class="p">(</span><span class="s2">&quot;Password strength: Weak&quot;</span><span class="p">).</span><span class="nx">addClass</span><span class="p">(</span><span class="s1">&#39;red&#39;</span><span class="p">);</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>  <span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>I used <code>.text()</code> to dynamically change the feedback message to the user, indicating whether a password is “weak”, “medium” or “strong”.</p>
+
+<p>I also used <code>.addClass()</code> to give visual feedback to users though changing the styling of feedback messages (in my case, toggling between ‘green’, ‘amber’ and ‘red’ traffic light colors).</p>
+
+<p>Resulting form with errors displayed: <br>
+<img src="http://ei-lene.github.com/images/2013_03_11/displaymessages.png"><br></p>
+
+<p style="font-size: 70%; font-weight: normal">
+Resources:<br>
+My github code: <a href="https://github.com/ei-lene/validation_app">https://github.com/ei-lene/validation_app</a><br>
+Two great resources: <br>
+<a href="http://api.jquery.com/"> api.jquery.com</a><br>
+<a href="http://oscarotero.com/jquery/">oscar otero</a><br>
+</p>
+
+
+
 ]]></content>
   </entry>
   
