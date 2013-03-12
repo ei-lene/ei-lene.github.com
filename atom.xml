@@ -4,7 +4,7 @@
   <title><![CDATA[Padawan coder]]></title>
   <link href="http://ei-lene.github.com/atom.xml" rel="self"/>
   <link href="http://ei-lene.github.com/"/>
-  <updated>2013-03-07T22:45:49-05:00</updated>
+  <updated>2013-03-08T23:17:37-05:00</updated>
   <id>http://ei-lene.github.com/</id>
   <author>
     <name><![CDATA[ei-lene]]></name>
@@ -28,8 +28,12 @@
 <p><strong> TL;DR:</strong><br>
 Top 4 tricks: <a href="#f.select">f.select</a> ; <a href="#f.hidden_field">f.hidden_field</a>, <a href="#to_param">to_param</a>, <a href="#button_to">button_to</a></p>
 
-<p><strong><a href="http://en.wikipedia.org/wiki/The_Full_Monty">The Full Monty&#8230;</a></strong><br>
-As I’m sure most fledgling coders will sympathise with, it seems to be that the biggest hurdle when trying to programme an app (with limited or no guidance) is the ‘coder&#8217;s block’. The coder’s version of <a href="http://en.wikipedia.org/wiki/Watership_Down">going tharn</a>  at the sight of a blank text-editor. What seemed doable (not to say easy) enough in a guided tutorial, suddenly seems impossible – where do I begin? what do I do?</p>
+<p><strong><a href="http://en.wikipedia.org/wiki/The_Full_Monty">The Full Monty&#8230;</a></strong><br></p>
+
+<!--more-->
+
+
+<p>As I’m sure most fledgling coders will sympathise with, it seems to be that the biggest hurdle when trying to programme an app (with limited or no guidance) is the ‘coder&#8217;s block’. The coder’s version of <a href="http://en.wikipedia.org/wiki/Watership_Down">going tharn</a>  at the sight of a blank text-editor. What seemed doable (not to say easy) enough in a guided tutorial, suddenly seems impossible – where do I begin? what do I do?</p>
 
 <p>After several weeks of countless panic attacks as part of my course, I am slowly beginning to learn to deal with my coder’s block, through the following mantras:<br>
 1)  breathe… <a href="http://en.wikipedia.org/wiki/Keep_Calm_and_Carry_On">Keep Calm and Carry On</a><br>
@@ -53,7 +57,7 @@ With that in mind, the first major iteration of my ToDoList app was minimalistic
 <strong><em>Making it right:</em></strong><br>
 <a name="f.select"><em>Top Trick #1 – <code>f.select</code></em></a><br>
 When discussing the lab in class, I mentioned that I was intending to add radio buttons to the Task <code>new.html.erb</code> page so users can choose the list to add their task to.
-Avi suggested using a drop-down menu instead, and showed briefly walked through the <code>f.select</code> option in the Rails <code>form_for</code> helper</p>
+<a href="https://twitter.com/aviflombaum">Avi</a> suggested using a drop-down menu instead, and showed briefly walked through the <code>f.select</code> option in the Rails <code>form_for</code> helper</p>
 
 <p>Thus, with a short line of code, I significantly improved my user experience and interface:</p>
 
@@ -171,12 +175,15 @@ Even though my ToDoList app is still very basic for now, it has come a long way 
     <link href="http://ei-lene.github.com/blog/2013/02/19/q-and-a-quickie-about-object-ids/"/>
     <updated>2013-02-19T23:49:00-05:00</updated>
     <id>http://ei-lene.github.com/blog/2013/02/19/q-and-a-quickie-about-object-ids</id>
-    <content type="html"><![CDATA[<p>I became intrigued about object ids when I was researching into the .equal? operator in <a href="http://ei-lene.github.com/blog/2013/02/08/all-equalities-are-equal/">my earlier post on Ruby equalities</a>, and also when I was wading through <a href="http://rubykoans.com/">Ruby Koans’ </a>about_object.rb.</p>
+    <content type="html"><![CDATA[<p>I became intrigued about object ids when I was researching into the <code>.equal?</code> operator in <a href="http://ei-lene.github.com/blog/2013/02/08/all-equalities-are-equal/">my earlier post on Ruby equalities</a>, and also when I was wading through <a href="http://rubykoans.com/">Ruby Koans’ </a>about_object.rb.</p>
 
 <p>And so, here’s my summary on the questions I had, and the answers that my research yielded:<br>
 <a href="#q1">1) What is an object id?</a><br>
 <a href="#q2">2) Why is true.object_id != 1?</a><br>
 <a href="#q3">3) Which objects have fixed object_ids, and what are the practical implications?</a></p>
+
+<!--more-->
+
 
 <p><strong><a name="q1">1) What is an object id?</a></strong><br>
 An object id is a unique identifier for an object, much like a fingerprint. All objects have an object id. In Ruby, the method
@@ -273,6 +280,9 @@ Thinking of learning to code, and wondering if it’s worth the trouble, or if y
 <a href="#empowerment">personal imperative – empowerment rocks, impotence enrages</a><br>
 <a href="#exponential">optional – exponential learning</a></p>
 
+<!--more-->
+
+
 <p><a name="literacy">
   1)  Coding is the new literacy
 </a></p>
@@ -345,6 +355,9 @@ There seems to be four types of equality operators:-<br>
 <a href="#===">&#8217;===&#8217;</a></p>
 
 <p>And so it would seem, to misquote George Orwell, that some equalities are more equal than others.</p>
+
+<!--more-->
+
 
 <p><a name="=="><strong>==</strong></a><br>
 <strong>Simple (or Value) equality.</strong><br>

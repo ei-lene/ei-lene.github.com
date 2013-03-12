@@ -4,7 +4,7 @@
   <title><![CDATA[Category: ruby | Padawan coder]]></title>
   <link href="http://ei-lene.github.com/blog/categories/ruby/atom.xml" rel="self"/>
   <link href="http://ei-lene.github.com/"/>
-  <updated>2013-03-07T23:00:47-05:00</updated>
+  <updated>2013-03-11T22:33:50-04:00</updated>
   <id>http://ei-lene.github.com/</id>
   <author>
     <name><![CDATA[ei-lene]]></name>
@@ -24,6 +24,9 @@
 <a href="#q1">1) What is an object id?</a><br>
 <a href="#q2">2) Why is true.object_id != 1?</a><br>
 <a href="#q3">3) Which objects have fixed object_ids, and what are the practical implications?</a></p>
+
+<!--more-->
+
 
 <p><strong><a name="q1">1) What is an object id?</a></strong><br>
 An object id is a unique identifier for an object, much like a fingerprint. All objects have an object id. In Ruby, the method
@@ -125,6 +128,9 @@ There seems to be four types of equality operators:-<br>
 <a href="#===">'==='</a></p>
 
 <p>And so it would seem, to misquote George Orwell, that some equalities are more equal than others.</p>
+
+<!--more-->
+
 
 <p><a name="=="><strong>==</strong></a><br>
 <strong>Simple (or Value) equality.</strong><br>

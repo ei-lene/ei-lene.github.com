@@ -117,143 +117,14 @@
 <p><strong> TL;DR:</strong><br>
 Top 4 tricks: <a href="#f.select">f.select</a> ; <a href="#f.hidden_field">f.hidden_field</a>, <a href="#to_param">to_param</a>, <a href="#button_to">button_to</a></p>
 
-<p><strong><a href="http://en.wikipedia.org/wiki/The_Full_Monty">The Full Monty&#8230;</a></strong><br>
-As I’m sure most fledgling coders will sympathise with, it seems to be that the biggest hurdle when trying to programme an app (with limited or no guidance) is the ‘coder&#8217;s block’. The coder’s version of <a href="http://en.wikipedia.org/wiki/Watership_Down">going tharn</a>  at the sight of a blank text-editor. What seemed doable (not to say easy) enough in a guided tutorial, suddenly seems impossible – where do I begin? what do I do?</p>
-
-<p>After several weeks of countless panic attacks as part of my course, I am slowly beginning to learn to deal with my coder’s block, through the following mantras:<br>
-1)  breathe… <a href="http://en.wikipedia.org/wiki/Keep_Calm_and_Carry_On">Keep Calm and Carry On</a><br>
-2)  <a href="http://c2.com/cgi/wiki?MakeItWorkMakeItRightMakeItFast">Make It Work, Make It Right, Make It Fast </a></p>
-
-<p>On the second mantra, my key takeaway was that even great programmers recognise that Rome wasn’t build in a day, so for me, for now, I just need to Make It Work, <em>by any means necessary</em>. Even if I have use brute force** to machete my way through, the first step is to get it working.</p>
-
-<p><strong>.v001</strong><br>
-<strong><em>Making it work:</em></strong><br>
-With that in mind, the first major iteration of my ToDoList app was minimalistic to the extreme***. My only aims were: <br>
-1)  To create lists and show them on the home page<br>
-2)  To add tasks to lists<br>
-<img src="http://ei-lene.github.com/images/2013_03_06/v1_home.png"><br>
-<img src="http://ei-lene.github.com/images/2013_03_06/v1_addtasks.png"></p>
-
-<p><strong><em>Key issues / next steps:</em></strong><br>
-1)  The unordered list was clearly a bad idea – users would have to guess and/or remember the number of the list they want to add their task to<br>
-2)  The lists should be ordered and should be displayed on the ‘Add tasks’ page<br></p>
-
-<p><strong>.v002</strong><br>
-<strong><em>Making it right:</em></strong><br>
-<a name="f.select"><em>Top Trick #1 – <code>f.select</code></em></a><br>
-When discussing the lab in class, I mentioned that I was intending to add radio buttons to the Task <code>new.html.erb</code> page so users can choose the list to add their task to.
-Avi suggested using a drop-down menu instead, and showed briefly walked through the <code>f.select</code> option in the Rails <code>form_for</code> helper</p>
-
-<p>Thus, with a short line of code, I significantly improved my user experience and interface:</p>
-
-<figure class='code'><figcaption><span>new.html.erb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">&lt;%=</span> <span class="n">f</span><span class="o">.</span><span class="n">select</span> <span class="ss">:list_id</span><span class="p">,</span> <span class="no">List</span><span class="o">.</span><span class="n">all</span><span class="o">.</span><span class="n">collect</span> <span class="p">{</span> <span class="o">|</span><span class="n">l</span><span class="o">|</span> <span class="o">[</span><span class="n">l</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">l</span><span class="o">.</span><span class="n">id</span><span class="o">]</span><span class="p">}</span> <span class="o">%&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><img src="http://ei-lene.github.com/images/2013_03_06/v2_addtasks.png"></p>
-
-<p><strong><em>Making it work:</em></strong><br>
-1) Users should be able to add tasks to a specific list when on that list page<br>
-<a name="f.hidden_field"><em>Top Trick #2 – <code>f.hidden_field</code> </em></a><br>
-My initial intention was to have an “Add task to this list” link which would redirect to a new route along the lines of <code>/lists/:id/tasks/new</code>.</p>
-
-<p>However, despite my valiant efforts at throwing all sorts of different code permutations and combinations at Rails, the standard <code>new_task_path</code> could not seem to register the fact that it had just been routed from a specific list id, and store that list id.****</p>
-
-<p>As a workaround, I decided to implement a task form on the list show page (<code>show.html.erb</code>) with <code>f.hidden_field(:list_id)</code>, a technique that I learnt in <a href="http://tutorials.jumpstartlab.com/projects/blogger.html">Jumpstart Lab’s blogger tutorial</a> that we were assigned.</p>
-
-<p>And having implemented that, I’ve realised that it works really well, and is more optimal than having to click on a link to an alternate path. Because in this case, each time the user adds a new task to a list, the list page reloads, automatically allowing the user to add another new task to the list.<br>
-<img src="http://ei-lene.github.com/images/2013_03_06/v2_addtasktospecificlist.png"></p>
-
-<p>3) Users should be able to delete and edit lists. As an initial testing step, I implemented the ability for users to:<br>
-i) delete the entire list only<br>
-ii) update list name and existing task descriptions<br>
- <img src="http://ei-lene.github.com/images/2013_03_06/v2_editlist.png"></p>
-
-<p><strong><em>Key issues / next steps:</em></strong><br>
-1)  Change the routes of list from id (list/:id) to name (list/:name), to make the routes look more elegant<br>
-2)  Flesh out edit list functionality – users should be able to delete individual tasks in a specific list<br></p>
-
-<p><strong>.v003</strong><br>
-<strong><em>Making it right:</em></strong><br>
-1) Added list routing via <code>permalink</code> (where <code>permalink = name.downcase.gsub(“ “,”-“</code>)<br>
-<a name="to_param"><em>Top Trick #3 – <code>to_param</code></em></a><br>
-<a href="https://twitter.com/aviflombaum">Avi</a> mentioned in class that you could edit the url routing by editing the to_param method in the relevant model.</p>
-
-<p>I must’ve missed out the second part of his words, because I implemented that, then proceeded to struggle as Rails spat out variants of the following error as I diced and spliced my code creatively to try to get it working:<br>
-<img src="http://ei-lene.github.com/images/2013_03_06/error_message.png"></p>
-
-<p>After extensive googling, I found my solution at <a href="http://railscasts.com/episodes/63-model-name-in-url">Railscasts</a>.</p>
-
-<p>I initially used the first method,  implementing <code>"#{id}-#{permalink}"</code> in <code>to_param</code> and retaining the <code>.find(params[:id])</code> in the Controller. But the id of the lists would show up in the url which would not correspond to their position based on the number of existing lists (because deleted lists would retain their unique primary_key id), which I found particularly inelegant.</p>
-
-<p>And so I opted for the second method instead:</p>
-
-<figure class='code'><figcaption><span>list.rb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">def</span> <span class="nf">to_param</span>
-</span><span class='line'>  <span class="n">permalink</span>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<figure class='code'><figcaption><span>lists_controller.rb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">def</span> <span class="nf">edit</span>
-</span><span class='line'>    <span class="vi">@list</span> <span class="o">=</span> <span class="no">List</span><span class="o">.</span><span class="n">find_by_permalink</span><span class="p">(</span><span class="n">params</span><span class="o">[</span><span class="ss">:id</span><span class="o">]</span><span class="p">)</span>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><img src="http://ei-lene.github.com/images/2013_03_06/v3_addtasks.png"></p>
-
-<p><strong><em>Making it work:</em></strong><br>
-Added functionality to allow users to delete individual tasks in a specific list, even if the ‘Delete this task’ link was very ugly and incongruous next to the compact ‘Update Task’ submit button.<br>
-<img src="http://ei-lene.github.com/images/2013_03_06/v3_editlisttasks.png"></p>
-
-<p><strong><em>Key issues / next steps:</em></strong><br>
-1) Change the styling of ‘Delete this task’<br>
-2) Improve overall styling</p>
-
-<p><strong>.v004</strong><br>
-<strong><em>Making it right:</em></strong><br>
-1)  Overall styling improved<br>
-<img src="http://ei-lene.github.com/images/2013_03_06/current_list.png"></p>
-
-<p>2) Button generated for ‘Delete Task’ <br>
-<a name="button_to"><em>Top Trick #3 – <code>button_to</code></em></a><br>
-Before I discovered the delightful <code>button_to</code> option via googling, I thought the only way to generate buttons in rails was to create a <code>f.submit</code> within the <code>form_for</code> helper. And so I tried various ways to implement a <code>method: :delete</code> and routing to <code>task_path(t)</code> within the <code>f.submit</code>.</p>
-
-<p>Eventually, I gave up banging my head on the <code>f.submit</code> wall and tried a different tack - CSS buttons! But I found CSS buttons very unwieldy and impossible to style to match the ‘Update Task’ button.</p>
-
-<p><code>button_to</code> was a life-saver. With one line of elegant code, I managed to generate a lovely Rails-format button:<br>
-<code>&lt;%= button_to 'Delete Task', task_path(t), method: :delete %&gt;</code>
-<img src="http://ei-lene.github.com/images/2013_03_06/current_editlist.png"></p>
-
-<p><strong><em>Conclusion / Next steps:</em></strong><br>
-Even though my ToDoList app is still very basic for now, it has come a long way from the start, as this post has demonstrated. In fact, if I had tried to tackle even all of the basic functionality and UI in the current version of the app, I wouldn’t have dared to begin the project.</p>
-
-<p>Instead, I put on my blinkers and took one baby step at a time. As my classmate <a href="https://twitter.com/janeeats">Jane</a> so aptly puts it: <a href="http://janeeats.github.com/blog/2013/02/24/how-to-eat-an-elephant/">“How Do You Eat an Elephant? One Bite at a Time.”</a></p>
-
-<p>So far, I have only been iterating through the process of making it work and making it right, as I’m not yet at the stage where I have the skills (or the project complexity) to make it fast.</p>
-
-<p><strong><em>Next steps:</em></strong><br>
-1) Change the navigation links so that they are conditional – e.g. links to Home don’t show up when a user is already on the home page<br>
-2) Add authorisation for Users to create, edit and delete lists<br></p>
-
-<p>Note: Github’s rollback has been invaluable in the creation of this post, namely the commands: <code>git reset –-hard &lt;commit sha id&gt;</code> &amp; <code>git push -f</code></p>
-
-<p style="font-size: 70%; font-weight: normal">
-* In reality, there were a lot of mini-steps / stages. But in the interest of simplicity, and because I didn’t commit often enough to be able to rollback commits to each mini stage, I am grouping the changes into 4 stages<br>
-** The phrase &#8220;brute force&#8221; is attributable to my classmate <a href="http://rseshan.github.com/">Rahul</a><br>
-*** With bare bones styling, because the white background and default serif fonts give me a headache<br>
-**** I spoke to <a href="https://twitter.com/withloudhands">Bob</a> about this on Monday, and he told me that this would needed to be done via nested routes, a topic which will covered in future<br>
-</p>
+<p><strong><a href="http://en.wikipedia.org/wiki/The_Full_Monty">The Full Monty&#8230;</a></strong><br></p>
 
 </div>
   
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/03/06/my-top-4-rails-tricks-in-my-first-rails-app/">Read on &rarr;</a>
+    </footer>
   
 
 
@@ -289,91 +160,19 @@ Even though my ToDoList app is still very basic for now, it has come a long way 
   </header>
 
 
-  <div class="entry-content"><p>I became intrigued about object ids when I was researching into the .equal? operator in <a href="http://ei-lene.github.com/blog/2013/02/08/all-equalities-are-equal/">my earlier post on Ruby equalities</a>, and also when I was wading through <a href="http://rubykoans.com/">Ruby Koans’ </a>about_object.rb.</p>
+  <div class="entry-content"><p>I became intrigued about object ids when I was researching into the <code>.equal?</code> operator in <a href="http://ei-lene.github.com/blog/2013/02/08/all-equalities-are-equal/">my earlier post on Ruby equalities</a>, and also when I was wading through <a href="http://rubykoans.com/">Ruby Koans’ </a>about_object.rb.</p>
 
 <p>And so, here’s my summary on the questions I had, and the answers that my research yielded:<br>
 <a href="#q1">1) What is an object id?</a><br>
 <a href="#q2">2) Why is true.object_id != 1?</a><br>
 <a href="#q3">3) Which objects have fixed object_ids, and what are the practical implications?</a></p>
 
-<p><strong><a name="q1">1) What is an object id?</a></strong><br>
-An object id is a unique identifier for an object, much like a fingerprint. All objects have an object id. In Ruby, the method
-<code>.object_id</code> returns an object’s unique identifier, which is presented by a number or a string of numbers.</p>
-
-<p><strong><a name="q2">2) Why is true.object_id != 1?</a></strong><br>
-Given that true and false are a fundamental part of most programming languages, I expected the object id for true to be 1, and the object id for false to be 0.</p>
-
-<p>So it surprised me to find that while <code>false.object_id == 0</code>, <code>true.object_id == 2</code>, and <code>nil.object_id == 4</code>. Why do true and nil have such strange object ids?</p>
-
-<p>The reason for that is that the other, perhaps more obvious numbers (like 1 and 2) are taken up by integers due to the pattern for Fixnum (integer) object ids.</p>
-
-<p>As was tested in Ruby Koans’ about_object.rb, in Ruby, the object ids for integers (i) follow the pattern: <code>i * 2 +1</code>
-such that:
-<img src="http://ei-lene.github.com/images/2013_02_19/fixnum1.png"></p>
-
-<p>This pattern also holds true for negative integers:
-<img src="http://ei-lene.github.com/images/2013_02_19/fixnum2.png"></p>
-
-<p><strong><a name="q3">3) Which objects have fixed object_ids, and what are the practical implications?</a></strong><br>
-As part of my earlier post on Ruby equalities, I tinkered around a lot with <code>.object_id</code> in irb, researching the application of the <code>.equal?</code> operator.</p>
-
-<p>Overall, objects seem to fall into 3 categories:<br>
-<a href="fixed">i)  those with fixed object ids</a><br>
-<a href="#temporary">ii) those with temporarily fixed object ids</a><br>
-<a href="#changing">iii)  those with changing object ids</a></p>
-
-<p><em><a name="fixed">Objects with Fixed object ids:</a></em><br>
-<em>1) Fixnum</em><br>
-As mentioned above, integers have fixed object ids.</p>
-
-<p><em>2) Symbols</em><br>
-Once created, symbols have immutable object ids, which will remain constant, even if the values have been reassigned.</p>
-
-<p>For example:<br>
-<img src="http://ei-lene.github.com/images/2013_02_19/symbols.png"><br>
-In all cases, the object_id of the symbol name is identical</p>
-
-<p><em><a name="temporary">Objects with temporarily fixed object ids:</a></em><br>
-<em>1) Variables </em><br>
-Once created, variables will have the same object id each time it is called, unless the variable has been reassigned, in which case, the variable object id will change. While the variable retains its assigned value, its object id is temporarily constant:<br>
-<img src="http://ei-lene.github.com/images/2013_02_19/variables1.png"><br>
-If a variable is assigned to a Fixnum, the variable will take on that Fixnum’s object id: <br>
-<img src="http://ei-lene.github.com/images/2013_02_19/variables2.png"><br>
-This will also apply in the case where a variable is assigned to a symbol:<br>
-<img src="http://ei-lene.github.com/images/2013_02_19/variables3.png"></p>
-
-<p><em>2) Arrays</em><br>
-Like variables, arrays have a temporarily fixed object id while the contents of the array have not changed: <br>
-<img src="http://ei-lene.github.com/images/2013_02_19/arrays.png"></p>
-
-<p><em>3) Hashes</em><br>
-Like variables and arrays, hashes have a temporarily fixed object id while the contents of the array have not changed:<br>
-<img src="http://ei-lene.github.com/images/2013_02_19/hashes.png"></p>
-
-<p><em><a name="changing">Objects with changing object ids:</a></em><br>
-1) Floats<br>
-Floats have new and different object ids, each time they are called:<br>
-<img src="http://ei-lene.github.com/images/2013_02_19/floats.png"></p>
-
-<p><em>2) Strings</em><br>
-Strings have new and different object ids, each time they are called: <br>
-<img src="http://ei-lene.github.com/images/2013_02_19/strings.png"></p>
-
-<p><em>3) Instances of an object</em><br>
-A new object, once created, behave very much like variables – they have the same object id each time they are called, as long as they have not been modified. Each iteration of the object will result in a temporarily fixed object id:<br>
-<img src="http://ei-lene.github.com/images/2013_02_19/objectinstances1.png"></p>
-
-<p>However, each instance of an object, including clones of another object, have their own unique object id:<br>
-<img src="http://ei-lene.github.com/images/2013_02_19/objectinstances2.png"></p>
-
-<p><em>Implications / applications:</em><br>
-As far as I know, the primary (most common) application of the above object id properties, are in the usage of symbols rather than strings for naming things or representing data.</p>
-
-<p>Given that symbols have an immutable object id once they are created, whereas strings have a different and individual object id each time they are called, symbols take up less space in the computer’s memory. Hence, we should use symbols instead of strings as hash keys, or attributes – because if the hash key or attribute will be called over and over again, using symbols will significantly increase the performance of the program.</p>
-
-<p>I found <a href="http://www.robertsosinski.com/2009/01/11/the-difference-between-ruby-symbols-and-strings/">Robert Sosinki’s tutorial on Symbols vs. Strings </a>particularly illuminating.</p>
 </div>
   
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/02/19/q-and-a-quickie-about-object-ids/">Read on &rarr;</a>
+    </footer>
   
 
 
@@ -420,56 +219,12 @@ Thinking of learning to code, and wondering if it’s worth the trouble, or if y
 <a href="#empowerment">personal imperative – empowerment rocks, impotence enrages</a><br>
 <a href="#exponential">optional – exponential learning</a></p>
 
-<p><a name="literacy">
-  1)  Coding is the new literacy
-</a></p>
-
-<p>Avi said on the first day of school that coding is the new literacy. That really resonated with me, because it’s true.</p>
-
-<p>In the not too distant past, before the days of universal education, reading and writing were considered optional luxuries. Now, no one even questions the need for literacy.</p>
-
-<p>When personal computers first came out, they were considered novel gadgets for a small slice of society – the geeks and bandwagoners with spare cash. – Why would a regular person need to use a computer?</p>
-
-<p>Now, everyone uses some form of a personal computer, all the time, whether it be a computer, laptop, tablets, or smartphones. For many young children today, iPad are often more familiar than books.</p>
-
-<p>Technology and software already underpin most if today’s operations, and will only become more ubiquitous, not less so. And so, knowing how to code – to interact with software with more control instead of being a powerless end-user – will soon be imperative.</p>
-
-<p>I’m educating myself for the future. Do you want to be left behind?</p>
-
-<p><a name="empowerment">
-  2)  Empowerment vs. impotence
-</a></p>
-
-<p>Coding is empowering.</p>
-
-<p>The Boy and I had an idea for a potential start-up several years ago, but neither of us code. More than two years, multiple developers / programming language changes and a large chunk of our savings later, the prototype is mostly built, but still not to our envisioned specifications.</p>
-
-<p>We felt impotent, because we had no control of our project - timeline, deliverables, destiny. And that has been a frustrating and enraging experience.</p>
-
-<p>I wanted to regain control of my life and my destiny, and the first step is to learn how to create.</p>
-
-<p>That was what really pushed me to learn code seriously instead of doing it part time, on weekends – I wanted to be empowered, and coding is empowering.</p>
-
-<p><a name="exponential">
-  3)  Exponential learning
-</a></p>
-
-<p>When I first told my friends that I was hopping on a plane from London to New York to learn how to code, most of my friends were like: “Why do you need to go to New York? Why can’t you learn to code at home? It’s really easy to learn from a book or the web. The best way to do it is just to code, and you can do that at home, and it’s free.”
-I see where they are coming from, and I think that’s definitely a possibility. A lot of really great programmers have learned their craft by themselves. It requires a lot of time, commitment, discipline, and probably a certain type of personality.</p>
-
-<p>Personally, I’ve tried that, and I’ve realized that it doesn’t really work for me. I’m just not disciplined enough – often get distracted by surfing the web, or doing errands and chores.</p>
-
-<p>Even if you prefer working through your problems alone, rather than working in teams, going to a school can still be a great option, because it can really supercharge your learning.</p>
-
-<p>Having passionate instructors who  imbue you with enthusiasm, and guide you through programming pitfalls for beginners, and instilling best practices, really make a difference.</p>
-
-<p>Although I’m not a natural ‘group’ person because I learn best by doing, and often like to figure things out on my own – I’ve really enjoyed group learning in my first week at Flatiron School.</p>
-
-<p>Getting different perspectives or solutions to problems from classmates has been enlightening. When I’m stuck on something, instead of spending hours on it, I can ask an instructor or a fellow classmate for help. When I get tired or discouraged, there’s always someone else to buoy me up and debug my code with me. – It’s a very different experience from sitting alone at my desk and banging my head on the wall.</p>
-
-<p>So if you feel like you’re going nowhere fast with learning on your own, try pairing up, or learning in a group, or signing up to a school.</p>
 </div>
   
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/02/12/thinking-of-learning-to-code/">Read on &rarr;</a>
+    </footer>
   
 
 
@@ -522,79 +277,12 @@ There seems to be four types of equality operators:-<br>
 
 <p>And so it would seem, to misquote George Orwell, that some equalities are more equal than others.</p>
 
-<p><a name="=="><strong>==</strong></a><br>
-<strong>Simple (or Value) equality.</strong><br>
-<em><code>==</code> returns true if both sides of the operator have the same value, regardless of datatype.</em></p>
-
-<p>Thus:<br>
-<img src="http://ei-lene.github.com/images/2013_02_08/ValueEquality1.png"></p>
-
-<p>However, the Ruby <code>==</code> operator is not quite as forgiving its Javascript counterpart. It does not convert strings to integers, nor does it recognise upper and lower case versions of the same letter as being of the same value.</p>
-
-<p>Therefore:<br>
-<img src="http://ei-lene.github.com/images/2013_02_08/ValueEquality2.png"></p>
-
-<p><a name="eql"><strong>.eql?</strong></a><br>
-<strong>Value and Type Equality</strong><br>
-<em><code>.eql?</code> has stricter equality criteria than <code>==</code>. It tests for equality of value as well as data type.</em></p>
-
-<p>Hence:<br>
-<img src="http://ei-lene.github.com/images/2013_02_08/ValueTypeEquality.png"></p>
-
-<p><a name="equal"><strong>.equal?</strong></a><br>
-<strong>Strict (True or Object) Equality</strong><br>
-<em><code>.equal?</code> has the strictest test of equality*, and is &#8220;the most equal of them all&#8221;. It tests for equality of object ID.</em></p>
-
-<p>As a newbie Rubyist at <a href="http://flatironschool.com/">the Flatiron School</a>, I have very recently learnt that all strings (even if identical) have their own individual object ID each time they are written (called?), whereas symbols have a unique and immutable object ID, which will remain each time the symbol is called, even if the value has been reassigned.</p>
-
-<p>The moral of the story was that we should only use symbols (and never strings) as keys in hashes, since they are &#8216;cheaper&#8217; than strings in terms of memory and performance (in fact, in researching this, I have discovered that object IDs would be another interesting post for another day, but I digress&#8230;)</p>
-
-<p><a href="http://french.about.com/od/vocabulary/a/revenonsanosmoutons.htm">Revenons à nos moutons</a>** - it would seem that this equality test would be passed in fairly limited cases - primarily when symbols or integers are tested against themselves***:<br>
-<img src="http://ei-lene.github.com/images/2013_02_08/ObjectEquality.png"></p>
-
-<p><a name="==="><strong>===</strong></a><br>
-<strong>Case Equality (or &#8220;Subset equality&#8221; or &#8220;False Equality&#8221;)</strong></p>
-
-<p>Okay, so I&#8217;ve completely made up the equality names in the parenthesis for this. For that matter, all the equality names for all the other operators are also kind of &#8216;made-up&#8217; by me, but in those cases, I think they are fairly representative of what those equality operators test for.</p>
-
-<p><em><code>===</code> is generally known everywhere, including <a href="http://ruby-doc.org/core-1.9.3/Object.html#method-i-3D-3D-3D">in the Ruby documentation</a>, as &#8220;Case equality&#8221;.</em></p>
-
-<p>I thought that <a href="http://techbot.me/2011/05/ruby-basics-equality-operators-ruby/">Techbot</a> and <a href="http://www.tutorialspoint.com/ruby/ruby_operators.htm
-">TutorialsPoint</a> gave the best illustrations of the Case Equality usage of <code>===</code>, which I will illustrate briefly below:<br>
-<img src="http://ei-lene.github.com/images/2013_02_08/SubsetCaseEquality1.png"></p>
-
-<p>While I agree with the above usage (it clearly works!), I see things more simplistically. To me, the <code>===</code> operator seems to test if the item on right hand side of the operator is a subset of the left hand side of the operator.</p>
-
-<p>For example: <br>
-<img src="http://ei-lene.github.com/images/2013_02_08/SubsetCaseEquality2.png"></p>
-
-<p>The <code>===</code> operator doesn&#8217;t seem to test for subset in the cases of strings, arrays and hashes, but it works with Regex:<br>
-<img src="http://ei-lene.github.com/images/2013_02_08/SubsetCaseEquality3.png"></p>
-
-<p>Anyway, because I think <code>===</code> is testing if one element (object?) is a subset of another, I don&#8217;t think that it can be considered an equality test at all, hence my nickname of &#8220;False Equality&#8221; for it.</p>
-
-<p><a href="http://stackoverflow.com/users/23649/jtbandes">jtbandes</a> says on <a href="stackoverflow.com">StackOverflow</a> that <code>===</code> is incredibly useful for implementations in range, regex and proc (and people seem to compare it to the #== operator), but since all that is WAY over my head, I&#8217;ll just take his word for it, and you can <a href="http://stackoverflow.com/questions/7156955/whats-the-difference-between-equal-eql-and">check it out there</a>.</p>
-
-<p>After all this research, I&#8217;m kind of at peace with Ruby&#8217;s misspelling of <code>.eql?</code>, because I can see that it is necessary to differentiate it from <code>.equal?</code></p>
-
-<p>But I&#8217;m still annoyed with <code>elsif</code>… >:(</p>
-
-<p style="font-size: 70%; font-weight: normal">
-Notes:<br>
-* In my rather-uninformed opinion (as I&#8217;m an absolute newbie), I am more than happy to be enlightened if I&#8217;ve made any mistakes in my blog post.<br>
-** A French expression for - to get back to the subject. <a href="http://french.about.com/od/vocabulary/a/revenonsanosmoutons.htm">Check out Laura Lawless&#8217;s guide to French expressions</a>.<br>
-*** I&#8217;m finding Object IDs pretty fascinating as I&#8217;ve called .object_id on multiple permutations of data types as part of the research for this blog post. I might write about this piece of geekery fascination another day. Also happy to be enlightened/ corrected if I&#8217;ve made any mistakes.
-
-<p style="font-size: 70%; font-weight: normal">
-Resources:<br>
-<a href="http://truffles.me.uk/rubys-equality-operator">http://truffles.me.uk/rubys-equality-operator</a><br>
-<a href="http://techbot.me/2011/05/ruby-basics-equality-operators-ruby/">http://techbot.me/2011/05/ruby-basics-equality-operators-ruby/</a><br>
-<a href="http://www.tutorialspoint.com/ruby/ruby_operators.htm">http://www.tutorialspoint.com/ruby/ruby_operators.htm</a><br>
-<a href="http://ruby-doc.org/core-1.9.3/Object.html"> http://ruby-doc.org/core-1.9.3/Object.html</a><br>
-<a href="http://stackoverflow.com/questions/7156955/whats-the-difference-between-equal-eql-and"> http://stackoverflow.com/questions/7156955/whats-the-difference-between-equal-eql-and</a>
-
 </div>
   
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/02/08/all-equalities-are-equal/">Read on &rarr;</a>
+    </footer>
   
 
 

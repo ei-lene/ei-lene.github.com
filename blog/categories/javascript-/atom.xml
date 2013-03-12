@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: javascript, | Padawan coder]]></title>
+  <link href="http://ei-lene.github.com/blog/categories/javascript-/atom.xml" rel="self"/>
+  <link href="http://ei-lene.github.com/"/>
+  <updated>2013-03-11T22:33:50-04:00</updated>
+  <id>http://ei-lene.github.com/</id>
+  <author>
+    <name><![CDATA[ei-lene]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Front-end form validation - my top 3 JQuery APIs]]></title>
+    <link href="http://ei-lene.github.com/blog/2013/03/11/front-end-form-validation-my-top-3-jquery-apis/"/>
+    <updated>2013-03-11T22:15:00-04:00</updated>
+    <id>http://ei-lene.github.com/blog/2013/03/11/front-end-form-validation-my-top-3-jquery-apis</id>
+    <content type="html"><![CDATA[<p>Last week, we had <a href="http://jonathangrover.com/">Jonathan Grover</a> guest lecture us for a week on Javascript and JQuery.</p>
+
+<p>It was a really interesting week during which we learnt how useful Javascript is in improving the user interface and experience, how JQuery resolves issues around Javascript cross-browser compatibility, and applied Javascript and JQuery in many contexts, including interacting with Twitter, Flickr and Google Maps APIs.</p>
+
+<p>One of the practical applications of Javascript / JQuery was in form validations, which we combined with back-end Rails validation. While back-end validation is used to ensure data integrity, front-end validation is used to provide end-users with timely feedback to create a more positive user-experience.</p>
+
+<p><img src="http://ei-lene.github.com/images/2013_03_11/blankuserform.png" align="left">
+In designing a simple user sign-up form (as shown above), my top 3 JQuery APIs to provide appropriate and timely user feedback are the following:
+<a href="#submit">.submit()</a>
+<a href="#submit">.blur()</a>
+<a href="#submit">.keyup()</a></p>
+
+<p><a name="submit"><code>.submit()</code></a>
+<code>.submit()</code> provides users with feedback upon submission of the form. Be sure to use <code>&amp;</code> instead of <code>&amp;&amp;</code> so that users get all the error messages at once. – There is nothing more annoying than to get drip-fed error messages each time you click ‘submit’</p>
+
+<ul>
+<li>[show code block for .submit]</li>
+</ul>
+
+
+<p>``` javascript .submit()
+// other code truncated (including definition of functions)
+  newUserForm.submit(function(){</p>
+
+<pre><code>if(validateUsername() &amp; validateFirstname() &amp; validateLastname() &amp; validateEmail() &amp; validatePassword()) {
+  return true;
+} 
+else {
+  return false;
+}
+</code></pre>
+
+<p>  });
+```</p>
+
+<p><a name="blur"><code>.blur()</code></a>
+I would argue that giving users feedback upon submission is too late, because it requires the user to go back to the top and reconsider every input field again, which requires more mental effort than if feedback was given at each input field, before the brain is occupied with considering a new topic</p>
+
+<p>To this end, <code>.blur()</code> is very useful. <code>.blur()</code> is triggered when the user leaves a particular form input field, that is, as soon as it appears that a user is ‘done’ with that field.</p>
+
+<ul>
+<li>[show code block for .blur()</li>
+</ul>
+
+
+<p>``` javascript .blur()
+// other code truncated (including definition of functions)
+  userName.blur(function(){</p>
+
+<pre><code>validateUsername(); 
+</code></pre>
+
+<p>  });</p>
+
+<p>  firstName.blur(function(){</p>
+
+<pre><code>validateFirstname(); 
+</code></pre>
+
+<p>  });</p>
+
+<p>  lastName.blur(function(){</p>
+
+<pre><code>validateLastname(); 
+</code></pre>
+
+<p>  });</p>
+
+<p>  email.blur(function(){</p>
+
+<pre><code>validateEmail(); 
+</code></pre>
+
+<p>  });</p>
+
+<p>  password.blur(function(){</p>
+
+<pre><code>validatePassword(); 
+</code></pre>
+
+<p>  });
+```</p>
+
+<p>In my code, even though I added <code>.blur()</code> validation for each input field, I also kept my <code>.submit()</code> validation to prevent the form from being submitted unless all conditions were met.</p>
+
+<p><a name="keyup">.keyup()</a>
+<code>.keyup()</code> provides even more immediate feedback than <code>.blur()</code>, as the feedback can be provided ‘live’ as each key is pressed and released.
+Real-time feedback may not be appropriate for every single field. For example, it might be annoying to get a live commentary as you are trying to pick a username.</p>
+
+<p>However, it can be used to great effect for specific cases. For example, it is mostly commonly used to give real-time feedback on password strength as users are choosing their password.</p>
+
+<p>In my form, I chose to use <code>.keyup()</code> during password choice (to indicate password strength, even though I am not requiring a ‘strong’ password), as well as for the validation of confirmation emails and passwords.
+- [show code block for .keyup]</p>
+
+<p>``` javascript .submit()
+// other code truncated (including definition of functions)
+  emailInputs.keyup(function(){</p>
+
+<pre><code>emailConfVal = emailConfirmation.val();
+emailVal = email.val();
+emailConfError.show(); 
+if(emailVal===''||emailConfVal==='') {
+    emailConfError.hide();
+}
+else if(emailVal === emailConfVal){
+  emailConfError.text("Email entries match").addClass('green');
+}
+else {
+  emailConfError.hide();
+  emailConfError.text("Confirmation email does not match email").addClass('red');
+  emailConfError.show();
+}
+</code></pre>
+
+<p>  });
+```</p>
+
+<p>Finally, I have also used .text and .addClass extensively.</p>
+
+<p>``` javascript .text() &amp; .addClass()
+  function validatePasswordStrength(){</p>
+
+<pre><code>var lowercase = /[a-z]/
+var uppercase = /[A-Z]/
+var numeric = /[0-9]/
+var passwordVal = password.val();
+passwordError.show(); 
+if(lowercase.test(passwordVal) &amp;&amp; uppercase.test(passwordVal) &amp;&amp; numeric.test(passwordVal)){
+
+  passwordError.text("Password strength: Strong").removeClass().addClass('green');
+}
+else if(lowercase.test(passwordVal) &amp;&amp; uppercase.test(passwordVal)){
+  passwordError.text("Password strength: Medium").removeClass().addClass('amber');
+}
+else if(numeric.test(passwordVal) &amp;&amp; uppercase.test(passwordVal)){
+  passwordError.text("Password strength: Medium").removeClass().addClass('amber');
+}
+else if(numeric.test(passwordVal) &amp;&amp; lowercase.test(passwordVal)){
+  passwordError.text("Password strength: Medium").removeClass().addClass('amber');
+}
+else {
+  passwordError.text("Password strength: Weak").addClass('red');
+}
+</code></pre>
+
+<p>  }
+ <code>
+I used</code>.text()``` to dynamically change the feedback message to the user, indicating whether a password is “weak”, “medium” or “strong”.</p>
+
+<p><code>.addClass()</code> can be effective in giving visual feedback to users though changing the styling of feedback messages (in my case, toggling between ‘green’, ‘amber’ and ‘red’ traffic light colors).</p>
+
+<p>Resulting form with errors displayed: <br>
+<img src="http://ei-lene.github.com/images/2013_03_11/displaymessages.png"><br></p>
+
+<p>My github code: <a href="https://github.com/ei-lene/validation_app">https://github.com/ei-lene/validation_app</a><br>
+Two great resources: <br>
+<a href="http://api.jquery.com/"> api.jquery.com</a><br>
+<a href="http://oscarotero.com/jquery/">oscar otero</a><br></p>
+]]></content>
+  </entry>
+  
+</feed>

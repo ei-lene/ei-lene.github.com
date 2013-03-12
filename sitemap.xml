@@ -2,33 +2,39 @@
 <urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
     <url>
         <loc>http://ei-lene.github.com/blog/2013/02/05/hello-world/</loc>
-        <lastmod>2013-02-13T17:18:44-05:00</lastmod>
+        <lastmod>2013-03-08T23:15:54-05:00</lastmod>
     </url>
     <url>
         <loc>http://ei-lene.github.com/blog/2013/02/08/all-equalities-are-equal/</loc>
-        <lastmod>2013-03-05T20:57:51-05:00</lastmod>
+        <lastmod>2013-03-08T23:15:53-05:00</lastmod>
     </url>
     <url>
         <loc>http://ei-lene.github.com/blog/2013/02/12/thinking-of-learning-to-code/</loc>
-        <lastmod>2013-02-18T23:13:01-05:00</lastmod>
+        <lastmod>2013-03-08T23:15:52-05:00</lastmod>
     </url>
     <url>
         <loc>http://ei-lene.github.com/blog/2013/02/19/q-and-a-quickie-about-object-ids/</loc>
-        <lastmod>2013-03-07T22:59:32-05:00</lastmod>
+        <lastmod>2013-03-08T23:15:52-05:00</lastmod>
     </url>
     <url>
         <loc>
             http://ei-lene.github.com/blog/2013/03/06/my-top-4-rails-tricks-in-my-first-rails-app/
         </loc>
-        <lastmod>2013-03-07T22:57:56-05:00</lastmod>
+        <lastmod>2013-03-08T23:17:58-05:00</lastmod>
+    </url>
+    <url>
+        <loc>
+            http://ei-lene.github.com/blog/2013/03/11/front-end-form-validation-my-top-3-jquery-apis/
+        </loc>
+        <lastmod>2013-03-11T22:33:00-04:00</lastmod>
     </url>
     <url>
         <loc>http://ei-lene.github.com/blog/archives/</loc>
-        <lastmod>2013-03-07T22:59:32-05:00</lastmod>
+        <lastmod>2013-03-11T22:33:00-04:00</lastmod>
     </url>
     <url>
         <loc>http://ei-lene.github.com/</loc>
-        <lastmod>2013-03-07T22:59:32-05:00</lastmod>
+        <lastmod>2013-03-11T22:33:00-04:00</lastmod>
     </url>
     <url>
         <loc>http://ei-lene.github.com/robots.txt</loc>

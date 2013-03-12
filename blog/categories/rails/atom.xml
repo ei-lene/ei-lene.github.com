@@ -4,7 +4,7 @@
   <title><![CDATA[Category: rails | Padawan coder]]></title>
   <link href="http://ei-lene.github.com/blog/categories/rails/atom.xml" rel="self"/>
   <link href="http://ei-lene.github.com/"/>
-  <updated>2013-03-07T23:00:47-05:00</updated>
+  <updated>2013-03-11T22:33:50-04:00</updated>
   <id>http://ei-lene.github.com/</id>
   <author>
     <name><![CDATA[ei-lene]]></name>
@@ -28,8 +28,12 @@
 <p><strong> TL;DR:</strong><br>
 Top 4 tricks: <a href="#f.select">f.select</a> ; <a href="#f.hidden_field">f.hidden_field</a>, <a href="#to_param">to_param</a>, <a href="#button_to">button_to</a></p>
 
-<p><strong><a href="http://en.wikipedia.org/wiki/The_Full_Monty">The Full Monty...</a></strong><br>
-As I’m sure most fledgling coders will sympathise with, it seems to be that the biggest hurdle when trying to programme an app (with limited or no guidance) is the ‘coder's block’. The coder’s version of <a href="http://en.wikipedia.org/wiki/Watership_Down">going tharn</a>  at the sight of a blank text-editor. What seemed doable (not to say easy) enough in a guided tutorial, suddenly seems impossible – where do I begin? what do I do?</p>
+<p><strong><a href="http://en.wikipedia.org/wiki/The_Full_Monty">The Full Monty...</a></strong><br></p>
+
+<!--more-->
+
+
+<p>As I’m sure most fledgling coders will sympathise with, it seems to be that the biggest hurdle when trying to programme an app (with limited or no guidance) is the ‘coder's block’. The coder’s version of <a href="http://en.wikipedia.org/wiki/Watership_Down">going tharn</a>  at the sight of a blank text-editor. What seemed doable (not to say easy) enough in a guided tutorial, suddenly seems impossible – where do I begin? what do I do?</p>
 
 <p>After several weeks of countless panic attacks as part of my course, I am slowly beginning to learn to deal with my coder’s block, through the following mantras:<br>
 1)  breathe… <a href="http://en.wikipedia.org/wiki/Keep_Calm_and_Carry_On">Keep Calm and Carry On</a><br>
