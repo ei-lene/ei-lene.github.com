@@ -4,7 +4,7 @@
   <title><![CDATA[Padawan coder]]></title>
   <link href="http://ei-lene.github.com/atom.xml" rel="self"/>
   <link href="http://ei-lene.github.com/"/>
-  <updated>2013-03-11T23:03:07-04:00</updated>
+  <updated>2013-03-11T23:10:05-04:00</updated>
   <id>http://ei-lene.github.com/</id>
   <author>
     <name><![CDATA[ei-lene]]></name>
@@ -105,6 +105,56 @@ I would argue that giving users feedback upon submission is too late, because it
 </span><span class='line'>  <span class="p">});</span>
 </span></code></pre></td></tr></table></div></figure>
 
+
+<p>In my code, even though I added .blur() validation for each input field, I also kept my .submit() validation to prevent the form from being submitted unless all conditions were met.</p>
+
+<p><a name="keyup">.keyup()</a><br>
+.keyup() provides even more immediate feedback than .blur(), as the feedback can be provided ‘live’ as each key is pressed and released.
+Real-time feedback may not be appropriate for every single field. For example, it might be annoying to get a live commentary as you are trying to pick a username.</p>
+
+<p>However, it can be used to great effect for specific cases. For example, it is mostly commonly used to give real-time feedback on password strength as users are choosing their password.</p>
+
+<p>In my form, I chose to use .keyup() during password choice (to indicate password strength, even though I am not requiring a ‘strong’ password), as well as for the validation of confirmation emails and passwords.</p>
+
+<figure class='code'><figcaption><span>.keyup()  </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="c1">// other code truncated (including definition of functions)</span>
+</span><span class='line'>  <span class="nx">emailInputs</span><span class="p">.</span><span class="nx">keyup</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+</span><span class='line'>    <span class="nx">emailConfVal</span> <span class="o">=</span> <span class="nx">emailConfirmation</span><span class="p">.</span><span class="nx">val</span><span class="p">();</span>
+</span><span class='line'>    <span class="nx">emailVal</span> <span class="o">=</span> <span class="nx">email</span><span class="p">.</span><span class="nx">val</span><span class="p">();</span>
+</span><span class='line'>    <span class="nx">emailConfError</span><span class="p">.</span><span class="nx">show</span><span class="p">();</span>
+</span><span class='line'>    <span class="k">if</span><span class="p">(</span><span class="nx">emailVal</span><span class="o">===</span><span class="s1">&#39;&#39;</span><span class="o">||</span><span class="nx">emailConfVal</span><span class="o">===</span><span class="s1">&#39;&#39;</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="nx">emailConfError</span><span class="p">.</span><span class="nx">hide</span><span class="p">();</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>    <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="nx">emailVal</span> <span class="o">===</span> <span class="nx">emailConfVal</span><span class="p">){</span>
+</span><span class='line'>      <span class="nx">emailConfError</span><span class="p">.</span><span class="nx">text</span><span class="p">(</span><span class="s2">&quot;Email entries match&quot;</span><span class="p">).</span><span class="nx">addClass</span><span class="p">(</span><span class="s1">&#39;green&#39;</span><span class="p">);</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>    <span class="k">else</span> <span class="p">{</span>
+</span><span class='line'>      <span class="nx">emailConfError</span><span class="p">.</span><span class="nx">hide</span><span class="p">();</span>
+</span><span class='line'>      <span class="nx">emailConfError</span><span class="p">.</span><span class="nx">text</span><span class="p">(</span><span class="s2">&quot;Confirmation email does not match email&quot;</span><span class="p">).</span><span class="nx">addClass</span><span class="p">(</span><span class="s1">&#39;red&#39;</span><span class="p">);</span>
+</span><span class='line'>      <span class="nx">emailConfError</span><span class="p">.</span><span class="nx">show</span><span class="p">();</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>  <span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Finally, I have also used .text() and .addClass()extensively.</p>
 ]]></content>
   </entry>
   
