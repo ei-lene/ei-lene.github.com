@@ -2,39 +2,43 @@
 <urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
     <url>
         <loc>http://ei-lene.github.com/blog/2013/02/05/hello-world/</loc>
-        <lastmod>2013-03-08T23:15:54-05:00</lastmod>
+        <lastmod>2013-03-23T21:48:03-04:00</lastmod>
     </url>
     <url>
         <loc>http://ei-lene.github.com/blog/2013/02/08/all-equalities-are-equal/</loc>
-        <lastmod>2013-03-08T23:15:53-05:00</lastmod>
+        <lastmod>2013-03-23T21:48:40-04:00</lastmod>
     </url>
     <url>
         <loc>http://ei-lene.github.com/blog/2013/02/12/thinking-of-learning-to-code/</loc>
-        <lastmod>2013-03-08T23:15:52-05:00</lastmod>
+        <lastmod>2013-03-23T18:12:41-04:00</lastmod>
     </url>
     <url>
         <loc>http://ei-lene.github.com/blog/2013/02/19/q-and-a-quickie-about-object-ids/</loc>
-        <lastmod>2013-03-08T23:15:52-05:00</lastmod>
+        <lastmod>2013-03-23T21:47:44-04:00</lastmod>
     </url>
     <url>
         <loc>
             http://ei-lene.github.com/blog/2013/03/06/my-top-4-rails-tricks-in-my-first-rails-app/
         </loc>
-        <lastmod>2013-03-11T22:45:21-04:00</lastmod>
+        <lastmod>2013-03-23T21:47:39-04:00</lastmod>
     </url>
     <url>
         <loc>
             http://ei-lene.github.com/blog/2013/03/11/front-end-form-validation-my-top-3-jquery-apis/
         </loc>
-        <lastmod>2013-03-11T23:42:20-04:00</lastmod>
+        <lastmod>2013-03-23T21:47:14-04:00</lastmod>
+    </url>
+    <url>
+        <loc>http://ei-lene.github.com/blog/2013/03/23/rails-3-authentication-for-n00bs/</loc>
+        <lastmod>2013-03-23T22:03:32-04:00</lastmod>
     </url>
     <url>
         <loc>http://ei-lene.github.com/blog/archives/</loc>
-        <lastmod>2013-03-11T23:42:20-04:00</lastmod>
+        <lastmod>2013-03-23T22:03:32-04:00</lastmod>
     </url>
     <url>
         <loc>http://ei-lene.github.com/</loc>
-        <lastmod>2013-03-11T23:42:20-04:00</lastmod>
+        <lastmod>2013-03-23T22:03:32-04:00</lastmod>
     </url>
     <url>
         <loc>http://ei-lene.github.com/robots.txt</loc>

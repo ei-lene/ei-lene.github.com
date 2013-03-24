@@ -4,7 +4,7 @@
   <title><![CDATA[Padawan coder]]></title>
   <link href="http://ei-lene.github.com/atom.xml" rel="self"/>
   <link href="http://ei-lene.github.com/"/>
-  <updated>2013-03-11T23:42:28-04:00</updated>
+  <updated>2013-03-23T22:04:09-04:00</updated>
   <id>http://ei-lene.github.com/</id>
   <author>
     <name><![CDATA[ei-lene]]></name>
@@ -12,6 +12,266 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Rails 3 authentication for n00bs]]></title>
+    <link href="http://ei-lene.github.com/blog/2013/03/23/rails-3-authentication-for-n00bs/"/>
+    <updated>2013-03-23T18:01:00-04:00</updated>
+    <id>http://ei-lene.github.com/blog/2013/03/23/rails-3-authentication-for-n00bs</id>
+    <content type="html"><![CDATA[<h3><em>Progressing my ToDoList app - making it work, making it right</em></h3>
+
+
+<p><img src="http://ei-lene.github.com/images/2013_03_23/password_authentication.png">
+Since I have a sieve-like memory, I really need to take detailed notes and practice practice in order to remember how to do things. Hence, I am trying to apply what we’ve learned through lectures in my ToDoList ‘practice’ app, especially on areas that I haven’t had a chance to personally code in our current group ‘Hand Raise’ project.</p>
+
+<p>At the end of my <a href="http://ei-lene.github.com/blog/2013/03/06/my-top-4-rails-tricks-in-my-first-rails-app/">previous blog post on my ToDoList app</a>, my next steps were to:<br>
+1)   Change the navigation links so they are conditional<br>
+2)   Add authorization for Users to create, edit and delete tasks</p>
+
+<p>But before authorizing users, we first need to authenticate users, and this will be the main body of my post (<a href="#work">making it work</a>). The remainder of my post (<a href="#right">making it right</a>) is about refactoring and other bits and bobs.</p>
+
+<!--more-->
+
+
+<p><strong><a name="work">Making it work - Rails 3 Authentication in 4 parts: </a></strong><br>
+<strong><em>1) Leveraging Rails 3 functionality</em></strong><br>
+Rails 3 includes a <a href="http://api.rubyonrails.org/classes/ActiveModel/SecurePassword/ClassMethods.html - method-i-has_secure_password">has_secure_password class method</a> which simplifies authentication for the beginner and/or the gem-shy.<br>
+i) Generate a User model which includes a <strong>password_digest</strong> string field, which is required to leverage the <strong>has_secure_password </strong> functionality<br>
+ii)Add <strong>has_secure_password </strong> in the User model<br>
+iii) Include (or uncomment) the <strong>bcrypt-ruby </strong> gem in the Gemfile</p>
+
+<p><strong><em>2) Creating logins and sessions</em></strong><br>
+The act of logging in is the start of a new user session, which is a virtual model, which means (per my interpretation), that there are specific rules that govern each session, but that there is no need for an actual model, because nothing is persisted into the database.<br>
+i) Generate a sessions controller: <code>rails g controller new</code><br>
+ii) Create a login form in view. Note that you should use the <strong>form_tag</strong> helper instead of the form_for helper because there is no sessions model<br>
+iii)In the <em>Sessions controller</em>, write a <strong>create</strong> method, which says:
+if a <em>user exists</em> and the <em>password can be authenticated</em> (note that <code>.authenticate</code> is a method given by <code>has_secure_password</code>), then <em>set the user’s id</em> as <em> the user_id of the session</em>.</p>
+
+<figure class='code'><figcaption><span>SessionsController  </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">def</span> <span class="nf">create</span>
+</span><span class='line'>  <span class="n">user</span> <span class="o">=</span> <span class="no">User</span><span class="o">.</span><span class="n">find_by_email</span><span class="p">(</span><span class="n">params</span><span class="o">[</span><span class="ss">:email</span><span class="o">]</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">if</span> <span class="n">user</span> <span class="o">&amp;&amp;</span> <span class="n">user</span><span class="o">.</span><span class="n">authenticate</span><span class="p">(</span><span class="n">params</span><span class="o">[</span><span class="ss">:password</span><span class="o">]</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">session</span><span class="o">[</span><span class="ss">:user_id</span><span class="o">]</span> <span class="o">=</span> <span class="n">user</span><span class="o">.</span><span class="n">id</span>
+</span><span class='line'>    <span class="n">redirect_to</span> <span class="n">root_url</span><span class="p">,</span> <span class="ss">notice</span><span class="p">:</span><span class="s2">&quot;Logged in!&quot;</span>
+</span><span class='line'>  <span class="k">else</span>
+</span><span class='line'>    <span class="n">flash</span><span class="o">.</span><span class="n">now</span><span class="o">.</span><span class="n">alert</span> <span class="o">=</span> <span class="s2">&quot;Email or password is invalid&quot;</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>iv) Logging out would simply entail setting the session’s user_id to nil: <code>session[:user_id] = nil</code><br>
+v) Logging out in views is a bit tricky:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">&lt;%=</span> <span class="n">link_to</span> <span class="s2">&quot;Log out&quot;</span><span class="p">,</span> <span class="n">session_path</span><span class="p">(</span><span class="err">“</span><span class="n">current</span> <span class="n">user</span><span class="err">”</span><span class="p">),</span> <span class="nb">method</span><span class="p">:</span> <span class="s2">&quot;delete&quot;</span> <span class="o">%&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>&#8211;> even though the session <code>destroy</code> method does not accept any arguments, the <code>session_path</code> expects an argument, so just put any argument in<br>
+&#8211;> need to include <strong>method: “delete”</strong> (note that <code>method: :destroy</code> doesn’t work)</p>
+
+<p><strong><em>3) Allowing the application remember that a user logged in</em></strong><br>
+Create an instance variable to allow the app to remember who the current user is.<br>
+i) In <em>Application Controller</em> (so it is set app-wide), create a <em>private method</em> to <em>store the session’s user_id</em> as the <em>current_user</em>, if session user_id exists.</p>
+
+<figure class='code'><figcaption><span>ApplicationController  </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">def</span> <span class="nf">current_user</span>
+</span><span class='line'>  <span class="vi">@current_user</span> <span class="o">||=</span> <span class="no">User</span><span class="o">.</span><span class="n">find_by_id</span><span class="p">(</span><span class="n">session</span><span class="o">[</span><span class="ss">:user_id</span><span class="o">]</span><span class="p">)</span> <span class="k">if</span> <span class="n">session</span><span class="o">[</span><span class="ss">:user_id</span><span class="o">]</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'><span class="n">helper_method</span> <span class="ss">:current_user</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>&#8211;> add a <code>helper_method</code> to allow the method to be accessible to all the Views</p>
+
+<p><strong><em>4) Allowing the application to test if a user is logged in</em></strong><br>
+i) In <em>ApplicationController</em>, create a <em>private method</em> <strong>logged_in?</strong> or <strong>authorize</strong> (or anything that is sensibly-named) that tests if a user is logged in.<br>
+Either:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="kp">true</span> <span class="k">if</span> <span class="n">current_user</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Or:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">redirect_to</span> <span class="n">new_session_path</span> <span class="k">if</span> <span class="n">current_user</span><span class="o">.</span><span class="n">nil?</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>ii) In each <em>relevant controller</em> (in this case, Lists, Tasks, Users), create a <strong>before_filter</strong> which runs on specific actions with options, e.g.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">before_filter</span> <span class="n">logged_in?</span><span class="p">,</span> <span class="ss">only</span><span class="p">:</span> <span class="o">[</span><span class="ss">:edit</span><span class="p">,</span> <span class="ss">:destroy</span><span class="o">]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>or:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">before_filter</span> <span class="n">logged_in?</span><span class="p">,</span> <span class="ss">except</span><span class="p">:</span> <span class="o">[</span><span class="ss">:show</span><span class="p">,</span> <span class="ss">:index</span><span class="o">]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong><a name="right">Making it right - refactoring authentication, conditionally displaying links, validation pitfalls</a></strong><br>
+<strong><em>1) Refactoring authentication</em></strong><br>
+i) Prettifying routes<br>
+To change routes from users/new, sessions/new etc. to signup and login, we need to change the routes and then update the views.<br>
+Adding the following routes to the routes file&#8230;</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">get</span> <span class="s1">&#39;signup&#39;</span><span class="o">=&gt;</span> <span class="s1">&#39;users#new&#39;</span>
+</span><span class='line'><span class="n">get</span> <span class="s1">&#39;login&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;sessions#new&#39;</span>
+</span><span class='line'><span class="n">post</span> <span class="s1">&#39;login&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;sessions#create&#39;</span>
+</span><span class='line'><span class="n">get</span> <span class="s1">&#39;logout&#39;</span><span class="o">=&gt;</span> <span class="s1">&#39;sessions#destroy&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>&#8230;enables us to refactor our code in Views from&#8230;</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">&lt;</span><span class="sx">%= link_to &quot;Sign up&quot;, new_user_path %&gt;</span>
+</span><span class='line'><span class="sx">&lt;%=</span> <span class="n">link_to</span> <span class="s2">&quot;Log in&quot;</span><span class="p">,</span> <span class="n">new_session_path</span> <span class="sx">%&gt;</span>
+</span><span class='line'><span class="sx">&lt;%= link_to &quot;Log out&quot;, session_path(current_user), method: &quot;delete&quot; %&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>to&#8230;</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">&lt;</span><span class="sx">%= link_to &quot;Sign up&quot;, signup_path %&gt;</span>
+</span><span class='line'><span class="sx">&lt;%=</span> <span class="n">link_to</span> <span class="s2">&quot;Log in&quot;</span><span class="p">,</span> <span class="n">login_path</span> <span class="sx">%&gt;</span>
+</span><span class='line'><span class="sx">&lt;%= link_to &quot;Log in&quot;, logout_path %&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p></p>
+
+<p>ii) Further abstracting methods<br>
+We can encapsulate the logic of setting session user_ids in private methods in the ApplicationController:</p>
+
+<figure class='code'><figcaption><span>ApplicationController  </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">def</span> <span class="nf">login</span><span class="p">(</span><span class="n">user</span><span class="p">)</span>
+</span><span class='line'>  <span class="n">session</span><span class="o">[</span><span class="ss">:user_id</span><span class="o">]</span> <span class="o">=</span> <span class="n">user</span><span class="o">.</span><span class="n">id</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">def</span> <span class="nf">logout</span>
+</span><span class='line'>  <span class="n">session</span><span class="o">[</span><span class="ss">:user_id</span><span class="o">]</span> <span class="o">=</span> <span class="kp">nil</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>We can then refactor the SessionsController to use these methods.</p>
+
+<p><strong><em>2) Conditionally displaying links</em></strong><br>
+I wanted to hide the navigation links for a page if a user is already on that page. The <a href="http://api.rubyonrails.org/classes/ActionView/Helpers/UrlHelper.html">Rails UrlHelper</a> from the ActionView::Helpers were very useful in this regard.</p>
+
+<p>Methods such as <code>link_to_if</code>, <code>link_to_unless</code> and <code>link_to_unless_current</code> provide a lot of options for toggling links on and off.</p>
+
+<p>But to completely hide a link, when a user is on a specific page, I used the <code>current_page?</code> method as follows:</p>
+
+<figure class='code'><figcaption><span>ApplicationController  </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">&lt;</span><span class="sx">% unless </span><span class="n">current_page?</span><span class="p">(</span><span class="n">root_path</span><span class="p">)</span> <span class="sx">%&gt;</span>
+</span><span class='line'><span class="sx">  &lt;li&gt;</span><span class="o">&lt;%=</span> <span class="n">link_to</span> <span class="s2">&quot;Home&quot;</span><span class="p">,</span> <span class="n">root_path</span><span class="sx">%&gt;&lt;/li&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="sx">% end </span><span class="o">%&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong><em>3) Validation pitfalls</em></strong><br>
+In this set of iterations, I have also incorporated additional <a href="http://ei-lene.github.com/blog/2013/03/11/front-end-form-validation-my-top-3-jquery-apis">front-end</a> and back-end validations that we learned a couple of weeks ago.</p>
+
+<p>One problem I encountered was with password validation, where I initially applied</p>
+
+<figure class='code'><figcaption><span>user.rb  </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">validates</span> <span class="ss">:password</span><span class="p">,</span> <span class="ss">:length</span> <span class="o">=&gt;</span> <span class="p">{</span><span class="ss">:minimum</span> <span class="o">=&gt;</span> <span class="mi">6</span> <span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This broke my ability to assign a user to a task when creating and adding a task to a list. And that took my AGES to debug. Finally, I realized that the user wasn’t saving because the password validation was failing.  I got around it by only validating the password on creation:</p>
+
+<figure class='code'><figcaption><span>user.rb  </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">validates</span> <span class="ss">:password</span><span class="p">,</span> <span class="ss">:length</span> <span class="o">=&gt;</span> <span class="p">{</span><span class="ss">:minimum</span> <span class="o">=&gt;</span> <span class="mi">6</span> <span class="p">},</span> <span class="ss">:on</span> <span class="o">=&gt;</span> <span class="ss">:create</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Another issue I grappled with was the case-sensitivity of emails. I came across <code>:case_sensitive =&gt; false</code>, but <a href="http://pivotallabs.com/standup-5-21-2010-validates-uniqueness-of-and-case-sensitivity/">some</a> (admittedly dated) <a href="http://techblog.floorplanner.com/post/20528527222/case-insensitive-validates-uniqueness-of-slowness">blogs</a> have suggested that it slows down applications, so I have downcased the emails when creating a user, and also downcased the email input when creating a session.</p>
+
+<figure class='code'><figcaption><span>UsersController  </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">def</span> <span class="nf">create</span>
+</span><span class='line'>  <span class="vi">@user</span> <span class="o">=</span> <span class="no">User</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">params</span><span class="o">[</span><span class="ss">:user</span><span class="o">]</span><span class="p">)</span>
+</span><span class='line'>  <span class="vi">@user</span><span class="o">.</span><span class="n">email</span> <span class="o">=</span> <span class="vi">@user</span><span class="o">.</span><span class="n">email</span><span class="o">.</span><span class="n">downcase</span>
+</span><span class='line'>  <span class="vi">@user</span><span class="o">.</span><span class="n">save</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span>SessionsController  </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">def</span> <span class="nf">create</span>
+</span><span class='line'>  <span class="n">user</span> <span class="o">=</span> <span class="no">User</span><span class="o">.</span><span class="n">find_by_email</span><span class="p">(</span><span class="n">params</span><span class="o">[</span><span class="ss">:email</span><span class="o">].</span><span class="n">downcase</span><span class="p">)</span>
+</span><span class='line'>  <span class="c1"># other code omitted</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<p style="font-size: 70%; font-weight: normal">
+* source of picture: <a href="http://euroscientist.com/2012/03/picking-a-perfect-password/">On picking a perfect password by Euroscientist</a>
+Resources:<br>
+1) <a href="http://api.rubyonrails.org/classes/ActiveModel/SecurePassword/ClassMethods.html - method-i-has_secure_password">ActiveModel at http://api.rubyonrails.org/</a>
+<br>
+2) Authentication from scratch prior to Rails 3: <a href="http://railscasts.com/episodes/250-authentication-from-scratch">RailsCasts</a> / <a href="http://asciicasts.com/episodes/250-authentication-from-scratch">ASCIIcasts</a><br>
+3) <a href="http://api.rubyonrails.org/classes/ActionView/Helpers/UrlHelper.html">ActionView at http://api.rubyonrails.org/</a>
+
+</p>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Front-end form validation - my top 3 JQuery APIs]]></title>
@@ -505,9 +765,9 @@ Thinking of learning to code, and wondering if it’s worth the trouble, or if y
 
 <p>When personal computers first came out, they were considered novel gadgets for a small slice of society – the geeks and bandwagoners with spare cash. – Why would a regular person need to use a computer?</p>
 
-<p>Now, everyone uses some form of a personal computer, all the time, whether it be a computer, laptop, tablets, or smartphones. For many young children today, iPad are often more familiar than books.</p>
+<p>Now, everyone uses some form of a personal computer, all the time, whether it be a computer, laptop, tablets, or smartphones. For many young children today, iPads are often more familiar than books.</p>
 
-<p>Technology and software already underpin most if today’s operations, and will only become more ubiquitous, not less so. And so, knowing how to code – to interact with software with more control instead of being a powerless end-user – will soon be imperative.</p>
+<p>Technology and software already underpin most of today’s operations, and will only become more ubiquitous, not less so. And so, knowing how to code – to interact with software with more control instead of being a powerless end-user – will soon be imperative.</p>
 
 <p>I’m educating myself for the future. Do you want to be left behind?</p>
 
