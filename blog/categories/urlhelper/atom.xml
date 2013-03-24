@@ -4,7 +4,7 @@
   <title><![CDATA[Category: urlhelper | Padawan coder]]></title>
   <link href="http://ei-lene.github.com/blog/categories/urlhelper/atom.xml" rel="self"/>
   <link href="http://ei-lene.github.com/"/>
-  <updated>2013-03-23T22:05:58-04:00</updated>
+  <updated>2013-03-23T22:09:46-04:00</updated>
   <id>http://ei-lene.github.com/</id>
   <author>
     <name><![CDATA[ei-lene]]></name>
@@ -32,7 +32,7 @@
 1)   Change the navigation links so they are conditional<br>
 2)   Add authorization for Users to create, edit and delete tasks</p>
 
-<p>But before authorizing users, we first need to authenticate users, and this will be the main body of my post (<a href="#work">making it work</a>). The remainder of my post (<a href="#right">making it right</a>) is about refactoring, conditionally displaying links and my validation pitfalls.</p>
+<p>But before authorizing users, we first need to authenticate users, and this will be the main body of my post (<a href="#work">making it work</a>). The remainder of my post (<a href="#right">making it right</a>) is about refactoring, conditionally displaying links and some validation pitfalls that tripped me up.</p>
 
 <!--more-->
 
@@ -223,7 +223,7 @@ In this set of iterations, I have also incorporated additional <a href="http://e
 </span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
 <p style="font-size: 70%; font-weight: normal">
-* source of picture: <a href="http://euroscientist.com/2012/03/picking-a-perfect-password/">On picking a perfect password by Euroscientist</a>
+* source of picture: <a href="http://euroscientist.com/2012/03/picking-a-perfect-password/">On picking a perfect password by Euroscientist</a><br>
 Resources:<br>
 1) <a href="http://api.rubyonrails.org/classes/ActiveModel/SecurePassword/ClassMethods.html - method-i-has_secure_password">ActiveModel at http://api.rubyonrails.org/</a>
 <br>
