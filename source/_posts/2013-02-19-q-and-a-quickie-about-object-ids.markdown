@@ -3,7 +3,7 @@ layout: post
 title: "Q&amp;A Quickie - about object ids"
 date: 2013-02-19 23:49
 comments: true
-categories: ruby
+categories: ruby, object_ids
 ---
 
 I became intrigued about object ids when I was researching into the ```.equal?``` operator in <a href="http://ei-lene.github.com/blog/2013/02/08/all-equalities-are-equal/">my earlier post on Ruby equalities</a>, and also when I was wading through <a href="http://rubykoans.com/">Ruby Koans’ </a>about_object.rb.

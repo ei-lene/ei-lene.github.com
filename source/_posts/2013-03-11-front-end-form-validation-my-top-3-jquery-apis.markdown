@@ -3,7 +3,7 @@ layout: post
 title: "Front-end form validation - my top 3 JQuery APIs"
 date: 2013-03-11 22:15
 comments: true
-categories: javascript jquery
+categories: javascript jquery validation .submit .blur .keyup
 ---
 Last week, we had <a href="http://jonathangrover.com/">Jonathan Grover</a> guest lecture us for a week on Javascript and JQuery.
 
@@ -13,7 +13,7 @@ One of the practical applications of Javascript / JQuery was in form validations
 
 <!--more-->
 
-In designing a simple user sign-up form (as shown above), my top 3 JQuery APIs to provide appropriate and timely user feedback are the following:<br>
+In designing a simple user sign-up form (as shown at the bottom of this post), my top 3 JQuery APIs to provide appropriate and timely user feedback are the following:<br>
 <a href="#submit">.submit()</a><br>
 <a href="#blur">.blur()</a><br>
 <a href="#keyup">.keyup()</a><br>
@@ -127,8 +127,7 @@ Resulting form with errors displayed: <br>
 <img src="http://ei-lene.github.com/images/2013_03_11/displaymessages.png"><br>
 
 <p style="font-size: 70%; font-weight: normal">
-Resources:<br>
-My github code: <a href="https://github.com/ei-lene/validation_app">https://github.com/ei-lene/validation_app</a><br>
+My github code for this form: <a href="https://github.com/ei-lene/validation_app">https://github.com/ei-lene/validation_app</a><br>
 Two great resources: <br>
 <a href="http://api.jquery.com/"> api.jquery.com</a><br>
 <a href="http://oscarotero.com/jquery/">oscar otero</a><br>

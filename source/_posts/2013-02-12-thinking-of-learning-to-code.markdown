@@ -27,9 +27,9 @@ In the not too distant past, before the days of universal education, reading and
 
 When personal computers first came out, they were considered novel gadgets for a small slice of society – the geeks and bandwagoners with spare cash. – Why would a regular person need to use a computer? 
 
-Now, everyone uses some form of a personal computer, all the time, whether it be a computer, laptop, tablets, or smartphones. For many young children today, iPad are often more familiar than books.
+Now, everyone uses some form of a personal computer, all the time, whether it be a computer, laptop, tablets, or smartphones. For many young children today, iPads are often more familiar than books.
 
-Technology and software already underpin most if today’s operations, and will only become more ubiquitous, not less so. And so, knowing how to code – to interact with software with more control instead of being a powerless end-user – will soon be imperative.
+Technology and software already underpin most of today’s operations, and will only become more ubiquitous, not less so. And so, knowing how to code – to interact with software with more control instead of being a powerless end-user – will soon be imperative.
 
 I’m educating myself for the future. Do you want to be left behind?
 

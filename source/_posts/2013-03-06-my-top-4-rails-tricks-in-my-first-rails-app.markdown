@@ -3,7 +3,7 @@ layout: post
 title: "My top 4 Rails tricks in my first rails app"
 date: 2013-03-06 21:18
 comments: true
-categories: rails
+categories: rails form_for urlhelper to_param
 ---
 <h3><em>Make it work, make it right, …</em></h3>
 

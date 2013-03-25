@@ -3,7 +3,7 @@ layout: post
 title: "Hello world"
 date: 2013-02-05 17:59
 comments: true
-categories: [zero]
+categories: zero
 ---
 Starting from zero.
 
