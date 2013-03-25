@@ -132,7 +132,7 @@ iii) Include (or uncomment) the <strong>bcrypt-ruby </strong> gem in the Gemfile
 
 <p><strong><em>2) Creating logins and sessions</em></strong><br>
 The act of logging in is the start of a new user session, which is a virtual model, which means (per my interpretation), that there are specific rules that govern each session, but that there is no need for an actual model, because nothing is persisted into the database.<br>
-i) Generate a sessions controller: <code>rails g controller new</code><br>
+i) Generate a sessions controller: <code>rails g controller sessions</code><br>
 ii) Create a login form in view. Note that you should use the <strong>form_tag</strong> helper instead of the form_for helper because there is no sessions model<br>
 iii)In the <em>Sessions controller</em>, write a <strong>create</strong> method, which says:
 if a <em>user exists</em> and the <em>password can be authenticated</em> (note that <code>.authenticate</code> is a method given by <code>has_secure_password</code>), then <em>set the user’s id</em> as <em> the user_id of the session</em>.</p>
@@ -253,7 +253,7 @@ Adding the following routes to the routes file&#8230;</p>
 <span class='line-number'>3</span>
 </pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">&lt;</span><span class="sx">%= link_to &quot;Sign up&quot;, signup_path %&gt;</span>
 </span><span class='line'><span class="sx">&lt;%=</span> <span class="n">link_to</span> <span class="s2">&quot;Log in&quot;</span><span class="p">,</span> <span class="n">login_path</span> <span class="sx">%&gt;</span>
-</span><span class='line'><span class="sx">&lt;%= link_to &quot;Log in&quot;, logout_path %&gt;</span>
+</span><span class='line'><span class="sx">&lt;%= link_to &quot;Log out&quot;, logout_path %&gt;</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
@@ -294,7 +294,7 @@ I wanted to hide the navigation links for a page if a user is already on that pa
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 </pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">&lt;</span><span class="sx">% unless </span><span class="n">current_page?</span><span class="p">(</span><span class="n">root_path</span><span class="p">)</span> <span class="sx">%&gt;</span>
-</span><span class='line'><span class="sx">  &lt;li&gt;</span><span class="o">&lt;%=</span> <span class="n">link_to</span> <span class="s2">&quot;Home&quot;</span><span class="p">,</span> <span class="n">root_path</span><span class="sx">%&gt;&lt;/li&gt;</span>
+</span><span class='line'><span class="sx">  &lt;li&gt;</span><span class="o">&lt;%=</span> <span class="n">link_to</span> <span class="s2">&quot;Home&quot;</span><span class="p">,</span> <span class="n">root_path</span> <span class="sx">%&gt;&lt;/li&gt;</span>
 </span><span class='line'><span class="o">&lt;</span><span class="sx">% end </span><span class="o">%&gt;</span>
 </span></code></pre></td></tr></table></div></figure>
 
