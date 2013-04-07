@@ -4,7 +4,7 @@
   <title><![CDATA[Category: exception_notification | Padawan coder]]></title>
   <link href="http://ei-lene.github.com/blog/categories/exception-notification/atom.xml" rel="self"/>
   <link href="http://ei-lene.github.com/"/>
-  <updated>2013-04-07T18:29:48-04:00</updated>
+  <updated>2013-04-07T18:31:57-04:00</updated>
   <id>http://ei-lene.github.com/</id>
   <author>
     <name><![CDATA[ei-lene]]></name>
@@ -48,7 +48,7 @@ This repo had much clearer instructions.</p>
 Exception notification's instructions assumes that you are using <a href="https://github.com/smartinez87/exception_notification">sendmail</a>. We decided to go with <a href="http://mailgun.com/">mailgun</a>.</p>
 
 <p>You can put the following code in the <code>config/environments/production.rb</code> and/or <code>development.rb</code> files depending on whether you want notifications to be sent out only in production or also in development:<br>
-{% lang:ruby %}
+{% codeblock lang:ruby %}
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {</p>
 
@@ -70,7 +70,7 @@ Exception notification's instructions assumes that you are using <a href="https:
 To protect the security of your passwords etc., you can either use <a href="https://github.com/laserlemon/figaro">the Figaro gem</a>, or do it yourself:<br>
 i) Create a <code>.yml</code> file in the <code>config</code> folder, e.g. <code>application.yml</code><br>
 ii) Create global variables in the file, but using a colon (:) instead of an equal sign (=), e.g.:
-{% lang:ruby %}
+{% codeblock lang:ruby %}
 MAILGUN_LOGIN    : postmaster@handraise.mailgun.org
 MAILGUN_PASSWORD : [password]
 {% endcodeblock %}
