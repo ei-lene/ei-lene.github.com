@@ -4,7 +4,7 @@
   <title><![CDATA[Padawan coder]]></title>
   <link href="http://ei-lene.github.com/atom.xml" rel="self"/>
   <link href="http://ei-lene.github.com/"/>
-  <updated>2013-03-25T14:06:39-04:00</updated>
+  <updated>2013-04-07T18:33:13-04:00</updated>
   <id>http://ei-lene.github.com/</id>
   <author>
     <name><![CDATA[ei-lene]]></name>
@@ -12,6 +12,112 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Exception notifications in production]]></title>
+    <link href="http://ei-lene.github.com/blog/2013/04/07/exception-notifications-in-production/"/>
+    <updated>2013-04-07T11:46:00-04:00</updated>
+    <id>http://ei-lene.github.com/blog/2013/04/07/exception-notifications-in-production</id>
+    <content type="html"><![CDATA[<p><img src="http://ei-lene.github.com/images/2013_04_07/error_comic.png"></p>
+
+<p style="font-size: 70%; font-weight: normal">
+Source: <a href="http://xkcd.com/1024/">XKCD</a>
+</p>
+
+
+<p>In our process of deploying our group&#8217;s app <a href="http://handrai.se/">Handrai.se</a>, we&#8217;ve come to realise that what works perfectly in development, doesn&#8217;t always work quite so smoothly in production.</p>
+
+<p>And unlike in development, in production, Rails errors are completely cryptic and uninformative:<br>
+<img src="http://ei-lene.github.com/images/2013_04_07/production_error.png"></p>
+
+<p>To get a more informative error message, you would need to log into the server, and into the &#8216;current&#8217; folder and type in: <code>tail -f log/production.log</code></p>
+
+<p>But what if you don&#8217;t personally encounter the error?</p>
+
+<p><a href="https://twitter.com/aviflombaum">Avi</a> suggested using an &#8216;Exception Notifier&#8217; gem to get automatically notified each time an error is triggered in production.</p>
+
+<p><strong>Exception Notification 123s:</strong>
+<strong><em>1) Read the updated documentation at <a href="https://github.com/smartinez87/exception_notification">https://github.com/smartinez87/exception_notification</a>:</em></strong><br>
+Initially, I was really struggling to work with the Exception Notification gem, because I was reading the old, but SEO-optimised documentation at <a href="https://github.com/rails/exception_notification">https://github.com/rails/exception_notification</a>. I really should have realised that such a popular gem (#2 on <a href="https://www.ruby-toolbox.com/categories/exception_notification#exception_notification">Ruby-Toolbox</a> with with > 470k downloads) couldn&#8217;t really have its last commit dated 3 years ago.</p>
+
+<p>It was Blake, who pointed out that there was a newer, and much more active, repo:<br>
+<img src="http://ei-lene.github.com/images/2013_04_07/ruby_toolbox.png">
+This repo had much clearer instructions.</p>
+
+<p><strong><em>2) Configuring ActionMailer:</em></strong><br>
+Exception notification&#8217;s instructions assumes that you are using <a href="https://github.com/smartinez87/exception_notification">sendmail</a>. We decided to go with <a href="http://mailgun.com/">mailgun</a>.</p>
+
+<p>You can put the following code in the <code>config/environments/production.rb</code> and/or <code>development.rb</code> files depending on whether you want notifications to be sent out only in production or also in development:<br></p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'>  <span class="n">config</span><span class="o">.</span><span class="n">action_mailer</span><span class="o">.</span><span class="n">delivery_method</span> <span class="o">=</span> <span class="ss">:smtp</span>
+</span><span class='line'>  <span class="n">config</span><span class="o">.</span><span class="n">action_mailer</span><span class="o">.</span><span class="n">smtp_settings</span> <span class="o">=</span> <span class="p">{</span>
+</span><span class='line'>    <span class="ss">:authentication</span> <span class="o">=&gt;</span> <span class="ss">:plain</span><span class="p">,</span>
+</span><span class='line'>    <span class="ss">:address</span> <span class="o">=&gt;</span> <span class="s2">&quot;smtp.mailgun.org&quot;</span><span class="p">,</span>
+</span><span class='line'>    <span class="ss">:port</span> <span class="o">=&gt;</span> <span class="mi">587</span><span class="p">,</span>
+</span><span class='line'>    <span class="ss">:domain</span> <span class="o">=&gt;</span> <span class="s2">&quot;handraise.mailgun.org&quot;</span><span class="p">,</span>
+</span><span class='line'>    <span class="ss">:user_name</span> <span class="o">=&gt;</span> <span class="no">ENV</span><span class="o">[</span><span class="s1">&#39;MAILGUN_LOGIN&#39;</span><span class="o">]</span><span class="p">,</span>
+</span><span class='line'>    <span class="ss">:password</span> <span class="o">=&gt;</span> <span class="no">ENV</span><span class="o">[</span><span class="s1">&#39;MAILGUN_PASSWORD&#39;</span><span class="o">]</span><span class="p">,</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">config</span><span class="o">.</span><span class="n">action_mailer</span><span class="o">.</span><span class="n">perform_deliveries</span> <span class="o">=</span> <span class="kp">true</span>
+</span><span class='line'>  <span class="n">config</span><span class="o">.</span><span class="n">action_mailer</span><span class="o">.</span><span class="n">raise_delivery_errors</span> <span class="o">=</span> <span class="kp">true</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong><em>3) Protecting your API keys, settings and passwords: </em></strong><br>
+To protect the security of your passwords etc., you can either use <a href="https://github.com/laserlemon/figaro">the Figaro gem</a>, or do it yourself:<br>
+i) Create a <code>.yml</code> file in the <code>config</code> folder, e.g. <code>application.yml</code><br>
+ii) Create global variables in the file, but using a colon (:) instead of an equal sign (=), e.g.:</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="no">MAILGUN_LOGIN</span>    <span class="p">:</span> <span class="n">postmaster</span><span class="vi">@handraise</span><span class="o">.</span><span class="n">mailgun</span><span class="o">.</span><span class="n">org</span>
+</span><span class='line'><span class="no">MAILGUN_PASSWORD</span> <span class="p">:</span> <span class="o">[</span><span class="n">password</span><span class="o">]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>iii) Call these variables using <code>ENV['']</code><br>
+iv) Put the <code>.yml</code> file in your <code>.gitignore</code> file:</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># Ignore application configuration</span>
+</span><span class='line'><span class="sr">/config/</span><span class="n">application</span><span class="o">.</span><span class="n">yml</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong><em>Debugging with Exception Notifier</em></strong><br>
+Most of Exception Notifier&#8217;s error messages were detailed and informative. But one in particular (and our first error in fact!) stumped us:<br>
+<img src="http://ei-lene.github.com/images/2013_04_07/exception_notification.png">
+What isn&#8217;t precompiled? This is as cryptic an error message as &#8220;We&#8217;re sorry but something went wrong&#8221;. We initially thought it was an asset precompilation issue, but that wasn&#8217;t the case.</p>
+
+<p><a href="https://twitter.com/withloudhands">Bob</a> understood the error immediately. It was &#8220;nil isn&#8217;t precompiled&#8221;, and he knew this because &#8220;isn&#8217;t precompiled&#8221; was slightly further indented than the rest of the message, which indicated a blank space, and hence, &#8220;nil&#8221;. Riiiiggght.
+<img src="http://ei-lene.github.com/images/2013_04_07/indented_error_message.png"></p>
+
+<p>Apparently, this error arose because we forgot to include a conditionality in our views, to not render a user photo if a user didn&#8217;t have a photo. So this was quite easily fixed once we realised what the error was.`</p>
+
+<p style="font-size: 70%; font-weight: normal">
+Resources:<br>
+1) <a href="http://smartinez87.github.io/exception_notification/">Exception Notification by Sebastian Martinez</a><br>
+2) SMTP configuration at my classmate <a href="http://vicfriedman.github.io/blog/2013/03/24/action-mailer-configurations/"> Victoria&#8217;s blog </a>
+</p>
+
+
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Rails 3 authentication for n00bs]]></title>
@@ -23,7 +129,9 @@
 
 <p><img src="http://ei-lene.github.com/images/2013_03_23/password_authentication.png"></p>
 
-<br>
+<p style="font-size: 70%; font-weight: normal">
+* source of picture: <a href="http://euroscientist.com/2012/03/picking-a-perfect-password/">On picking a perfect password by Euroscientist</a>
+</p>
 
 
 <p>Since I have a sieve-like memory, I really need to take detailed notes and practice practice in order to remember how to do things. Hence, I am trying to apply what we’ve learned through lectures in my ToDoList ‘practice’ app, especially on areas that I haven’t had a chance to personally code in our current group ‘Hand Raise’ project.</p>
@@ -265,7 +373,6 @@ In this set of iterations, I have also incorporated additional <a href="http://e
 
 
 <p style="font-size: 70%; font-weight: normal">
-* source of picture: <a href="http://euroscientist.com/2012/03/picking-a-perfect-password/">On picking a perfect password by Euroscientist</a><br>
 Resources:<br>
 1) <a href="http://api.rubyonrails.org/classes/ActiveModel/SecurePassword/ClassMethods.html - method-i-has_secure_password">ActiveModel at http://api.rubyonrails.org/</a>
 <br>

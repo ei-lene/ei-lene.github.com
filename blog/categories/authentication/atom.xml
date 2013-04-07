@@ -4,7 +4,7 @@
   <title><![CDATA[Category: authentication | Padawan coder]]></title>
   <link href="http://ei-lene.github.com/blog/categories/authentication/atom.xml" rel="self"/>
   <link href="http://ei-lene.github.com/"/>
-  <updated>2013-04-07T18:31:57-04:00</updated>
+  <updated>2013-04-07T18:33:13-04:00</updated>
   <id>http://ei-lene.github.com/</id>
   <author>
     <name><![CDATA[ei-lene]]></name>
@@ -52,23 +52,38 @@ i) Generate a sessions controller: <code>rails g controller sessions</code><br>
 ii) Create a login form in view. Note that you should use the <strong>form_tag</strong> helper instead of the form_for helper because there is no sessions model<br>
 iii)In the <em>Sessions controller</em>, write a <strong>create</strong> method, which says:
 if a <em>user exists</em> and the <em>password can be authenticated</em> (note that <code>.authenticate</code> is a method given by <code>has_secure_password</code>), then <em>set the user’s id</em> as <em> the user_id of the session</em>.
-{% codeblock SessionsController lang:ruby %}
-def create
-  user = User.find_by_email(params[:email])
-  if user &amp;&amp; user.authenticate(params[:password])</p>
-
-<pre><code>session[:user_id] = user.id 
-redirect_to root_url, notice:"Logged in!"
-</code></pre>
-
-<p>  else</p>
-
-<pre><code>flash.now.alert = "Email or password is invalid"
-</code></pre>
-
-<p>  end
-end
-{% endcodeblock %}
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>SessionsController  </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">def</span> <span class="nf">create</span>
+</span><span class='line'>  <span class="n">user</span> <span class="o">=</span> <span class="no">User</span><span class="o">.</span><span class="n">find_by_email</span><span class="p">(</span><span class="n">params</span><span class="o">[</span><span class="ss">:email</span><span class="o">]</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">if</span> <span class="n">user</span> <span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span><span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span> <span class="n">user</span><span class="o">.</span><span class="n">authenticate</span><span class="p">(</span><span class="n">params</span><span class="o">[</span><span class="ss">:password</span><span class="o">]</span><span class="p">)</span><span class="o">&lt;</span><span class="sr">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="sr">&lt;pre&gt;&lt;code&gt;session[:user_id] = user.id </span>
+</span><span class='line'><span class="sr">redirect_to root_url, notice:&quot;Logged in!&quot;</span>
+</span><span class='line'><span class="sr">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;</span><span class="sr">/pre&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="sr">&lt;p&gt;  else&lt;/</span><span class="nb">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="n">flash</span><span class="o">.</span><span class="n">now</span><span class="o">.</span><span class="n">alert</span> <span class="o">=</span> <span class="s2">&quot;Email or password is invalid&quot;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="sr">/code&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nb">p</span><span class="o">&gt;</span>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 iv) Logging out would simply entail setting the session’s user_id to nil: <code>session[:user_id] = nil</code><br>
 v) Logging out in views is a bit tricky:
 <code>ruby
@@ -80,12 +95,16 @@ v) Logging out in views is a bit tricky:
 <p><strong><em>3) Allowing the application remember that a user logged in</em></strong><br>
 Create an instance variable to allow the app to remember who the current user is.<br>
 i) In <em>Application Controller</em> (so it is set app-wide), create a <em>private method</em> to <em>store the session’s user_id</em> as the <em>current_user</em>, if session user_id exists.
-{% codeblock ApplicationController lang:ruby %}
-def current_user
-  @current_user ||= User.find_by_id(session[:user_id]) if session[:user_id]
-end
-helper_method :current_user
-{% endcodeblock %}</p>
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>ApplicationController  </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">def</span> <span class="nf">current_user</span>
+</span><span class='line'>  <span class="vi">@current_user</span> <span class="o">||=</span> <span class="no">User</span><span class="o">.</span><span class="n">find_by_id</span><span class="p">(</span><span class="n">session</span><span class="o">[</span><span class="ss">:user_id</span><span class="o">]</span><span class="p">)</span> <span class="k">if</span> <span class="n">session</span><span class="o">[</span><span class="ss">:user_id</span><span class="o">]</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'><span class="n">helper_method</span> <span class="ss">:current_user</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
 <p>--> add a <code>helper_method</code> to allow the method to be accessible to all the Views</p>
 
@@ -133,15 +152,22 @@ to...
 
 <p>ii) Further abstracting methods<br>
 We can encapsulate the logic of setting session user_ids in private methods in the ApplicationController:
-{% codeblock ApplicationController lang:ruby %}
-def login(user)
-  session[:user_id] = user.id
-end</p>
-
-<p>def logout
-  session[:user_id] = nil
-end
-{% endcodeblock %}
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>ApplicationController  </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">def</span> <span class="nf">login</span><span class="p">(</span><span class="n">user</span><span class="p">)</span>
+</span><span class='line'>  <span class="n">session</span><span class="o">[</span><span class="ss">:user_id</span><span class="o">]</span> <span class="o">=</span> <span class="n">user</span><span class="o">.</span><span class="n">id</span>
+</span><span class='line'><span class="k">end</span><span class="o">&lt;</span><span class="sr">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="sr">&lt;p&gt;def logout</span>
+</span><span class='line'><span class="sr">  session[:user_id] = nil</span>
+</span><span class='line'><span class="sr">end</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 We can then refactor the SessionsController to use these methods.</p>
 
 <p><strong><em>2) Conditionally displaying links</em></strong><br>
@@ -150,39 +176,53 @@ I wanted to hide the navigation links for a page if a user is already on that pa
 <p>Methods such as <code>link_to_if</code>, <code>link_to_unless</code> and <code>link_to_unless_current</code> provide a lot of options for toggling links on and off.</p>
 
 <p>But to completely hide a link, when a user is on a specific page, I used the <code>current_page?</code> method as follows:
-{% codeblock ApplicationController lang:ruby %}
-&lt;% unless current_page?(root_path) %>
-  <li>&lt;%= link_to "Home", root_path %></li>
-&lt;% end %>
-{% endcodeblock %}</p>
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>ApplicationController  </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="o">%</span> <span class="k">unless</span> <span class="n">current_page?</span><span class="p">(</span><span class="n">root_path</span><span class="p">)</span> <span class="sx">%&gt;</span>
+</span><span class='line'><span class="sx">  &lt;li&gt;</span><span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="o">%=</span> <span class="n">link_to</span> <span class="s2">&quot;Home&quot;</span><span class="p">,</span> <span class="n">root_path</span> <span class="sx">%&gt;&lt;/li&gt;</span>
+</span><span class='line'><span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="o">%</span> <span class="k">end</span> <span class="o">%&gt;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
 <p><strong><em>3) Validation pitfalls</em></strong><br>
 In this set of iterations, I have also incorporated additional <a href="http://ei-lene.github.com/blog/2013/03/11/front-end-form-validation-my-top-3-jquery-apis">front-end</a> and back-end validations that we learned a couple of weeks ago.</p>
 
 <p>One problem I encountered was with password validation, where I initially applied
-{% codeblock user.rb lang:ruby %}
-validates :password, :length => {:minimum => 6 }
-{% endcodeblock %}</p>
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>user.rb  </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">validates</span> <span class="ss">:password</span><span class="p">,</span> <span class="ss">:length</span> <span class="o">=&gt;</span> <span class="p">{</span><span class="ss">:minimum</span> <span class="o">=&gt;</span> <span class="mi">6</span> <span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
 <p>This broke my ability to assign a user to a task when creating and adding a task to a list. And that took my AGES to debug. Finally, I realized that the user wasn’t saving because the password validation was failing.  I got around it by only validating the password on creation:
-{% codeblock user.rb lang:ruby %}
-validates :password, :length => {:minimum => 6 }, :on => :create
-{% endcodeblock %}</p>
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>user.rb  </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">validates</span> <span class="ss">:password</span><span class="p">,</span> <span class="ss">:length</span> <span class="o">=&gt;</span> <span class="p">{</span><span class="ss">:minimum</span> <span class="o">=&gt;</span> <span class="mi">6</span> <span class="p">},</span> <span class="ss">:on</span> <span class="o">=&gt;</span> <span class="ss">:create</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
 <p>Another issue I grappled with was the case-sensitivity of emails. I came across <code>:case_sensitive =&gt; false</code>, but <a href="http://pivotallabs.com/standup-5-21-2010-validates-uniqueness-of-and-case-sensitivity/">some</a> (admittedly dated) <a href="http://techblog.floorplanner.com/post/20528527222/case-insensitive-validates-uniqueness-of-slowness">blogs</a> have suggested that it slows down applications, so I have downcased the emails when creating a user, and also downcased the email input when creating a session.
-{% codeblock UsersController lang:ruby %}
-def create
-  @user = User.new(params[:user])
-  @user.email = @user.email.downcase
-  @user.save
-end
-{% endcodeblock %}
-{% codeblock SessionsController lang:ruby %}
-def create
-  user = User.find_by_email(params[:email].downcase)
-  # other code omitted
-end
-{% endcodeblock %}</p>
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>UsersController  </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">def</span> <span class="nf">create</span>
+</span><span class='line'>  <span class="vi">@user</span> <span class="o">=</span> <span class="no">User</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">params</span><span class="o">[</span><span class="ss">:user</span><span class="o">]</span><span class="p">)</span>
+</span><span class='line'>  <span class="vi">@user</span><span class="o">.</span><span class="n">email</span> <span class="o">=</span> <span class="vi">@user</span><span class="o">.</span><span class="n">email</span><span class="o">.</span><span class="n">downcase</span>
+</span><span class='line'>  <span class="vi">@user</span><span class="o">.</span><span class="n">save</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>SessionsController  </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">def</span> <span class="nf">create</span>
+</span><span class='line'>  <span class="n">user</span> <span class="o">=</span> <span class="no">User</span><span class="o">.</span><span class="n">find_by_email</span><span class="p">(</span><span class="n">params</span><span class="o">[</span><span class="ss">:email</span><span class="o">].</span><span class="n">downcase</span><span class="p">)</span>
+</span><span class='line'>  <span class="c1"># other code omitted</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
 <p style="font-size: 70%; font-weight: normal">
 Resources:<br>
