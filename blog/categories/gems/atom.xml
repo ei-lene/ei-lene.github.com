@@ -4,7 +4,7 @@
   <title><![CDATA[Category: gems | Padawan coder]]></title>
   <link href="http://ei-lene.github.com/blog/categories/gems/atom.xml" rel="self"/>
   <link href="http://ei-lene.github.com/"/>
-  <updated>2013-04-07T18:33:13-04:00</updated>
+  <updated>2013-04-07T18:37:26-04:00</updated>
   <id>http://ei-lene.github.com/</id>
   <author>
     <name><![CDATA[ei-lene]]></name>
@@ -36,9 +36,13 @@ Source: <a href="http://xkcd.com/1024/">XKCD</a>
 
 <p><a href="https://twitter.com/aviflombaum">Avi</a> suggested using an 'Exception Notifier' gem to get automatically notified each time an error is triggered in production.</p>
 
-<p><strong>Exception Notification 123s:</strong>
-<strong><em>1) Read the updated documentation at <a href="https://github.com/smartinez87/exception_notification">https://github.com/smartinez87/exception_notification</a>:</em></strong><br>
-Initially, I was really struggling to work with the Exception Notification gem, because I was reading the old, but SEO-optimised documentation at <a href="https://github.com/rails/exception_notification">https://github.com/rails/exception_notification</a>. I really should have realised that such a popular gem (#2 on <a href="https://www.ruby-toolbox.com/categories/exception_notification#exception_notification">Ruby-Toolbox</a> with with > 470k downloads) couldn't really have its last commit dated 3 years ago.</p>
+<h4>Exception Notification 123s:</h4>
+
+
+<p><strong><em>1) Read the updated documentation at <a href="https://github.com/smartinez87/exception_notification">https://github.com/smartinez87/exception_notification</a>:</em></strong><br>
+Initially, I was really struggling to work with the Exception Notification gem, because I was reading the old, but SEO-optimised documentation at <a href="https://github.com/rails/exception_notification">https://github.com/rails/exception_notification</a>.</p>
+
+<p>I really should have realised that such a popular gem (#2 on <a href="https://www.ruby-toolbox.com/categories/exception_notification#exception_notification">Ruby-Toolbox</a> with with > 470k downloads) couldn't really have its last commit dated 3 years ago.</p>
 
 <p>It was Blake, who pointed out that there was a newer, and much more active, repo:<br>
 <img src="http://ei-lene.github.com/images/2013_04_07/ruby_toolbox.png">
@@ -89,7 +93,7 @@ ii) Create global variables in the file, but using a colon (:) instead of an equ
 </pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="no">MAILGUN_LOGIN</span>    <span class="p">:</span> <span class="n">postmaster</span><span class="vi">@handraise</span><span class="o">.</span><span class="n">mailgun</span><span class="o">.</span><span class="n">org</span>
 </span><span class='line'><span class="no">MAILGUN_PASSWORD</span> <span class="p">:</span> <span class="o">[</span><span class="n">password</span><span class="o">]</span>
 </span></code></pre></td></tr></table></div></figure></notextile></div>
-iii) Call these variables using <code>ENV['']</code><br>
+iii) Call these variables using <code>ENV['']</code>, as in the codeblock in step #2 above<br>
 iv) Put the <code>.yml</code> file in your <code>.gitignore</code> file:
 <div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -105,13 +109,13 @@ iv) Put the <code>.yml</code> file in your <code>.gitignore</code> file:
 
 <p><strong><em>Debugging with Exception Notifier</em></strong><br>
 Most of Exception Notifier's error messages were detailed and informative. But one in particular (and our first error in fact!) stumped us:<br>
-<img src="http://ei-lene.github.com/images/2013_04_07/exception_notification.png">
+<img src="http://ei-lene.github.com/images/2013_04_07/exception_notification.png"><br>
 What isn't precompiled? This is as cryptic an error message as "We're sorry but something went wrong". We initially thought it was an asset precompilation issue, but that wasn't the case.</p>
 
 <p><a href="https://twitter.com/withloudhands">Bob</a> understood the error immediately. It was "nil isn't precompiled", and he knew this because "isn't precompiled" was slightly further indented than the rest of the message, which indicated a blank space, and hence, "nil". Riiiiggght.
 <img src="http://ei-lene.github.com/images/2013_04_07/indented_error_message.png"></p>
 
-<p>Apparently, this error arose because we forgot to include a conditionality in our views, to not render a user photo if a user didn't have a photo. So this was quite easily fixed once we realised what the error was.`</p>
+<p>Apparently, this error arose because we forgot to include a conditionality in our views, to not render a user photo if a user didn't have a photo. So this was quite easily fixed once we realised what the error was.</p>
 
 <p style="font-size: 70%; font-weight: normal">
 Resources:<br>

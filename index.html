@@ -125,9 +125,13 @@ Source: <a href="http://xkcd.com/1024/">XKCD</a>
 
 <p><a href="https://twitter.com/aviflombaum">Avi</a> suggested using an &#8216;Exception Notifier&#8217; gem to get automatically notified each time an error is triggered in production.</p>
 
-<p><strong>Exception Notification 123s:</strong>
-<strong><em>1) Read the updated documentation at <a href="https://github.com/smartinez87/exception_notification">https://github.com/smartinez87/exception_notification</a>:</em></strong><br>
-Initially, I was really struggling to work with the Exception Notification gem, because I was reading the old, but SEO-optimised documentation at <a href="https://github.com/rails/exception_notification">https://github.com/rails/exception_notification</a>. I really should have realised that such a popular gem (#2 on <a href="https://www.ruby-toolbox.com/categories/exception_notification#exception_notification">Ruby-Toolbox</a> with with > 470k downloads) couldn&#8217;t really have its last commit dated 3 years ago.</p>
+<h4>Exception Notification 123s:</h4>
+
+
+<p><strong><em>1) Read the updated documentation at <a href="https://github.com/smartinez87/exception_notification">https://github.com/smartinez87/exception_notification</a>:</em></strong><br>
+Initially, I was really struggling to work with the Exception Notification gem, because I was reading the old, but SEO-optimised documentation at <a href="https://github.com/rails/exception_notification">https://github.com/rails/exception_notification</a>.</p>
+
+<p>I really should have realised that such a popular gem (#2 on <a href="https://www.ruby-toolbox.com/categories/exception_notification#exception_notification">Ruby-Toolbox</a> with with > 470k downloads) couldn&#8217;t really have its last commit dated 3 years ago.</p>
 
 <p>It was Blake, who pointed out that there was a newer, and much more active, repo:<br>
 <img src="http://ei-lene.github.com/images/2013_04_07/ruby_toolbox.png">
@@ -177,7 +181,7 @@ ii) Create global variables in the file, but using a colon (:) instead of an equ
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>iii) Call these variables using <code>ENV['']</code><br>
+<p>iii) Call these variables using <code>ENV['']</code>, as in the codeblock in step #2 above<br>
 iv) Put the <code>.yml</code> file in your <code>.gitignore</code> file:</p>
 
 <figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
@@ -189,13 +193,13 @@ iv) Put the <code>.yml</code> file in your <code>.gitignore</code> file:</p>
 
 <p><strong><em>Debugging with Exception Notifier</em></strong><br>
 Most of Exception Notifier&#8217;s error messages were detailed and informative. But one in particular (and our first error in fact!) stumped us:<br>
-<img src="http://ei-lene.github.com/images/2013_04_07/exception_notification.png">
+<img src="http://ei-lene.github.com/images/2013_04_07/exception_notification.png"><br>
 What isn&#8217;t precompiled? This is as cryptic an error message as &#8220;We&#8217;re sorry but something went wrong&#8221;. We initially thought it was an asset precompilation issue, but that wasn&#8217;t the case.</p>
 
 <p><a href="https://twitter.com/withloudhands">Bob</a> understood the error immediately. It was &#8220;nil isn&#8217;t precompiled&#8221;, and he knew this because &#8220;isn&#8217;t precompiled&#8221; was slightly further indented than the rest of the message, which indicated a blank space, and hence, &#8220;nil&#8221;. Riiiiggght.
 <img src="http://ei-lene.github.com/images/2013_04_07/indented_error_message.png"></p>
 
-<p>Apparently, this error arose because we forgot to include a conditionality in our views, to not render a user photo if a user didn&#8217;t have a photo. So this was quite easily fixed once we realised what the error was.`</p>
+<p>Apparently, this error arose because we forgot to include a conditionality in our views, to not render a user photo if a user didn&#8217;t have a photo. So this was quite easily fixed once we realised what the error was.</p>
 
 <p style="font-size: 70%; font-weight: normal">
 Resources:<br>
@@ -248,7 +252,7 @@ Resources:<br>
 <p><img src="http://ei-lene.github.com/images/2013_03_23/password_authentication.png"></p>
 
 <p style="font-size: 70%; font-weight: normal">
-* source of picture: <a href="http://euroscientist.com/2012/03/picking-a-perfect-password/">On picking a perfect password by Euroscientist</a>
+Source: <a href="http://euroscientist.com/2012/03/picking-a-perfect-password/">On picking a perfect password by Euroscientist</a>
 </p>
 
 
