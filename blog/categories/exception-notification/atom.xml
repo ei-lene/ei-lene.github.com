@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: exception_notification | Padawan coder]]></title>
+  <link href="http://ei-lene.github.com/blog/categories/exception-notification/atom.xml" rel="self"/>
+  <link href="http://ei-lene.github.com/"/>
+  <updated>2013-04-07T18:29:48-04:00</updated>
+  <id>http://ei-lene.github.com/</id>
+  <author>
+    <name><![CDATA[ei-lene]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Exception notifications in production]]></title>
+    <link href="http://ei-lene.github.com/blog/2013/04/07/exception-notifications-in-production/"/>
+    <updated>2013-04-07T11:46:00-04:00</updated>
+    <id>http://ei-lene.github.com/blog/2013/04/07/exception-notifications-in-production</id>
+    <content type="html"><![CDATA[<p><img src="http://ei-lene.github.com/images/2013_04_07/error_comic.png"></p>
+
+<p style="font-size: 70%; font-weight: normal">
+Source: <a href="http://xkcd.com/1024/">XKCD</a>
+</p>
+
+
+<p>In our process of deploying our group's app <a href="http://handrai.se/">Handrai.se</a>, we've come to realise that what works perfectly in development, doesn't always work quite so smoothly in production.</p>
+
+<p>And unlike in development, in production, Rails errors are completely cryptic and uninformative:<br>
+<img src="http://ei-lene.github.com/images/2013_04_07/production_error.png"></p>
+
+<p>To get a more informative error message, you would need to log into the server, and into the 'current' folder and type in: <code>tail -f log/production.log</code></p>
+
+<p>But what if you don't personally encounter the error?</p>
+
+<p><a href="https://twitter.com/aviflombaum">Avi</a> suggested using an 'Exception Notifier' gem to get automatically notified each time an error is triggered in production.</p>
+
+<p><strong>Exception Notification 123s:</strong>
+<strong><em>1) Read the updated documentation at <a href="https://github.com/smartinez87/exception_notification">https://github.com/smartinez87/exception_notification</a>:</em></strong><br>
+Initially, I was really struggling to work with the Exception Notification gem, because I was reading the old, but SEO-optimised documentation at <a href="https://github.com/rails/exception_notification">https://github.com/rails/exception_notification</a>. I really should have realised that such a popular gem (#2 on <a href="https://www.ruby-toolbox.com/categories/exception_notification#exception_notification">Ruby-Toolbox</a> with with > 470k downloads) couldn't really have its last commit dated 3 years ago.</p>
+
+<p>It was Blake, who pointed out that there was a newer, and much more active, repo:<br>
+<img src="http://ei-lene.github.com/images/2013_04_07/ruby_toolbox.png">
+This repo had much clearer instructions.</p>
+
+<p><strong><em>2) Configuring ActionMailer:</em></strong><br>
+Exception notification's instructions assumes that you are using <a href="https://github.com/smartinez87/exception_notification">sendmail</a>. We decided to go with <a href="http://mailgun.com/">mailgun</a>.</p>
+
+<p>You can put the following code in the <code>config/environments/production.rb</code> and/or <code>development.rb</code> files depending on whether you want notifications to be sent out only in production or also in development:<br>
+{% lang:ruby %}
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {</p>
+
+<pre><code>:authentication =&gt; :plain,
+:address =&gt; "smtp.mailgun.org",
+:port =&gt; 587,
+:domain =&gt; "handraise.mailgun.org",
+:user_name =&gt; ENV['MAILGUN_LOGIN'],
+:password =&gt; ENV['MAILGUN_PASSWORD'],
+</code></pre>
+
+<p>  }</p>
+
+<p>  config.action_mailer.perform_deliveries = true
+  config.action_mailer.raise_delivery_errors = true
+{% endcodeblock %}</p>
+
+<p><strong><em>3) Protecting your API keys, settings and passwords: </em></strong><br>
+To protect the security of your passwords etc., you can either use <a href="https://github.com/laserlemon/figaro">the Figaro gem</a>, or do it yourself:<br>
+i) Create a <code>.yml</code> file in the <code>config</code> folder, e.g. <code>application.yml</code><br>
+ii) Create global variables in the file, but using a colon (:) instead of an equal sign (=), e.g.:
+{% lang:ruby %}
+MAILGUN_LOGIN    : postmaster@handraise.mailgun.org
+MAILGUN_PASSWORD : [password]
+{% endcodeblock %}
+iii) Call these variables using <code>ENV['']</code><br>
+iv) Put the <code>.yml</code> file in your <code>.gitignore</code> file:
+{% lang:ruby %}</p>
+
+<h1>Ignore application configuration</h1>
+
+<p>/config/application.yml
+{% endcodeblock %}</p>
+
+<p><strong><em>Debugging with Exception Notifier</em></strong><br>
+Most of Exception Notifier's error messages were detailed and informative. But one in particular (and our first error in fact!) stumped us:<br>
+<img src="http://ei-lene.github.com/images/2013_04_07/exception_notification.png">
+What isn't precompiled? This is as cryptic an error message as "We're sorry but something went wrong". We initially thought it was an asset precompilation issue, but that wasn't the case.</p>
+
+<p><a href="https://twitter.com/withloudhands">Bob</a> understood the error immediately. It was "nil isn't precompiled", and he knew this because "isn't precompiled" was slightly further indented than the rest of the message, which indicated a blank space, and hence, "nil". Riiiiggght.
+<img src="http://ei-lene.github.com/images/2013_04_07/indented_error_message.png"></p>
+
+<p>Apparently, this error arose because we forgot to include a conditionality in our views, to not render a user photo if a user didn't have a photo. So this was quite easily fixed once we realised what the error was.`</p>
+
+<p style="font-size: 70%; font-weight: normal">
+Resources:<br>
+1) <a href="http://smartinez87.github.io/exception_notification/">Exception Notification by Sebastian Martinez</a><br>
+2) SMTP configuration at my classmate <a href="http://vicfriedman.github.io/blog/2013/03/24/action-mailer-configurations/"> Victoria's blog </a>
+</p>
+
+
+
+]]></content>
+  </entry>
+  
+</feed>
