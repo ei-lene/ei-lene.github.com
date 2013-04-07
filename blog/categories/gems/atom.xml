@@ -4,7 +4,7 @@
   <title><![CDATA[Category: gems | Padawan coder]]></title>
   <link href="http://ei-lene.github.com/blog/categories/gems/atom.xml" rel="self"/>
   <link href="http://ei-lene.github.com/"/>
-  <updated>2013-04-07T18:37:52-04:00</updated>
+  <updated>2013-04-07T18:38:50-04:00</updated>
   <id>http://ei-lene.github.com/</id>
   <author>
     <name><![CDATA[ei-lene]]></name>
@@ -123,7 +123,7 @@ What isn't precompiled? This is as cryptic an error message as "We're sorry but 
 <p style="font-size: 70%; font-weight: normal">
 Resources:<br>
 1) <a href="http://smartinez87.github.io/exception_notification/">Exception Notification by Sebastian Martinez</a><br>
-2) SMTP configuration at my classmate <a href="http://vicfriedman.github.io/blog/2013/03/24/action-mailer-configurations/"> Victoria's blog </a>
+2) SMTP configuration at my classmate Victoria's <a href="http://vicfriedman.github.io/blog/2013/03/24/action-mailer-configurations/">blog </a>
 </p>
 
 
