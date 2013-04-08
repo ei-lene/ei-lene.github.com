@@ -4,7 +4,7 @@
   <title><![CDATA[Category: _javascript_ | Padawan coder]]></title>
   <link href="http://ei-lene.github.com/blog/categories/-javascript-/atom.xml" rel="self"/>
   <link href="http://ei-lene.github.com/"/>
-  <updated>2013-04-07T18:38:50-04:00</updated>
+  <updated>2013-04-07T20:53:18-04:00</updated>
   <id>http://ei-lene.github.com/</id>
   <author>
     <name><![CDATA[ei-lene]]></name>
@@ -35,110 +35,63 @@
 <p><a name="submit"><strong>.submit()</strong></a><br>
 <code>.submit()</code> provides users with feedback upon submission of the form. Be sure to use <code>&amp;</code> instead of <code>&amp;&amp;</code> so that users get all the error messages at once. – There is nothing more annoying than to get drip-fed error messages each time you click ‘submit’.</p>
 
-<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>.submit()  </span></figcaption>
- <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="c1">// other code truncated (including definition of functions)</span>
-</span><span class='line'>  <span class="nx">newUserForm</span><span class="p">.</span><span class="nx">submit</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="nx">pre</span><span class="o">&gt;&lt;</span><span class="nx">code</span><span class="o">&gt;</span><span class="k">if</span><span class="p">(</span><span class="nx">validateUsername</span><span class="p">()</span> <span class="o">&amp;</span><span class="nx">amp</span><span class="p">;</span> <span class="nx">validateFirstname</span><span class="p">()</span> <span class="o">&amp;</span><span class="nx">amp</span><span class="p">;</span> <span class="nx">validateLastname</span><span class="p">()</span> <span class="o">&amp;</span><span class="nx">amp</span><span class="p">;</span> <span class="nx">validateEmail</span><span class="p">()</span> <span class="o">&amp;</span><span class="nx">amp</span><span class="p">;</span> <span class="nx">validatePassword</span><span class="p">())</span> <span class="p">{</span>
-</span><span class='line'>  <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'><span class="k">else</span> <span class="p">{</span>
-</span><span class='line'>  <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'><span class="o">&lt;</span><span class="err">/code&gt;&lt;/pre&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span>  <span class="p">});</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+<p>{% codeblock .submit() lang:js %}
+// other code truncated (including definition of functions)
+  newUserForm.submit(function(){</p>
+
+<pre><code>if(validateUsername() &amp; validateFirstname() &amp; validateLastname() &amp; validateEmail() &amp; validatePassword()) {
+  return true;
+} 
+else {
+  return false;
+}
+</code></pre>
+
+<p>  });
+{% endcodeblock %}</p>
 
 <p><a name="blur"><strong>.blur()</strong></a><br>
 I would argue that giving users feedback upon submission is too late, because it requires the user to go back to the top and reconsider every input field again, which requires more mental effort than if feedback was given at each input field, before the brain is occupied with considering a new topic</p>
 
 <p>To this end, <code>.blur()</code> is very useful. <code>.blur()</code> is triggered when the user leaves a particular form input field, that is, as soon as it appears that a user is ‘done’ with that field.</p>
 
-<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>.blur()  </span></figcaption>
- <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="c1">// other code truncated (including definition of functions)</span>
-</span><span class='line'>  <span class="nx">userName</span><span class="p">.</span><span class="nx">blur</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="nx">pre</span><span class="o">&gt;&lt;</span><span class="nx">code</span><span class="o">&gt;</span><span class="nx">validateUsername</span><span class="p">();</span>
-</span><span class='line'><span class="o">&lt;</span><span class="err">/code&gt;&lt;/pre&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span>  <span class="p">});</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span>  <span class="nx">firstName</span><span class="p">.</span><span class="nx">blur</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="nx">pre</span><span class="o">&gt;&lt;</span><span class="nx">code</span><span class="o">&gt;</span><span class="nx">validateFirstname</span><span class="p">();</span>
-</span><span class='line'><span class="o">&lt;</span><span class="err">/code&gt;&lt;/pre&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span>  <span class="p">});</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span>  <span class="nx">lastName</span><span class="p">.</span><span class="nx">blur</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="nx">pre</span><span class="o">&gt;&lt;</span><span class="nx">code</span><span class="o">&gt;</span><span class="nx">validateLastname</span><span class="p">();</span>
-</span><span class='line'><span class="o">&lt;</span><span class="err">/code&gt;&lt;/pre&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span>  <span class="p">});</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span>  <span class="nx">email</span><span class="p">.</span><span class="nx">blur</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="nx">pre</span><span class="o">&gt;&lt;</span><span class="nx">code</span><span class="o">&gt;</span><span class="nx">validateEmail</span><span class="p">();</span>
-</span><span class='line'><span class="o">&lt;</span><span class="err">/code&gt;&lt;/pre&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span>  <span class="p">});</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span>  <span class="nx">password</span><span class="p">.</span><span class="nx">blur</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="nx">pre</span><span class="o">&gt;&lt;</span><span class="nx">code</span><span class="o">&gt;</span><span class="nx">validatePassword</span><span class="p">();</span>
-</span><span class='line'><span class="o">&lt;</span><span class="err">/code&gt;&lt;/pre&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span>  <span class="p">});</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+<p>{% codeblock .blur() lang:js %}
+// other code truncated (including definition of functions)
+  userName.blur(function(){</p>
+
+<pre><code>validateUsername(); 
+</code></pre>
+
+<p>  });</p>
+
+<p>  firstName.blur(function(){</p>
+
+<pre><code>validateFirstname(); 
+</code></pre>
+
+<p>  });</p>
+
+<p>  lastName.blur(function(){</p>
+
+<pre><code>validateLastname(); 
+</code></pre>
+
+<p>  });</p>
+
+<p>  email.blur(function(){</p>
+
+<pre><code>validateEmail(); 
+</code></pre>
+
+<p>  });</p>
+
+<p>  password.blur(function(){</p>
+
+<pre><code>validatePassword(); 
+</code></pre>
+
+<p>  });
+{% endcodeblock %}</p>
 
 <p>In my code, even though I added <code>.blur()</code> validation for each input field, I also kept my <code>.submit()</code> validation to prevent the form from being submitted unless all conditions were met.</p>
 
@@ -150,105 +103,59 @@ Real-time feedback may not be appropriate for every single field. For example, i
 
 <p>In my form, I chose to use <code>.keyup()</code> during password choice (to indicate password strength, even though I am not requiring a ‘strong’ password), as well as for the validation of confirmation emails and passwords.</p>
 
-<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>.keyup()  </span></figcaption>
- <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="c1">// other code truncated (including definition of functions)</span>
-</span><span class='line'>  <span class="nx">emailInputs</span><span class="p">.</span><span class="nx">keyup</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="nx">pre</span><span class="o">&gt;&lt;</span><span class="nx">code</span><span class="o">&gt;</span><span class="nx">emailConfVal</span> <span class="o">=</span> <span class="nx">emailConfirmation</span><span class="p">.</span><span class="nx">val</span><span class="p">();</span>
-</span><span class='line'><span class="nx">emailVal</span> <span class="o">=</span> <span class="nx">email</span><span class="p">.</span><span class="nx">val</span><span class="p">();</span>
-</span><span class='line'><span class="nx">emailConfError</span><span class="p">.</span><span class="nx">show</span><span class="p">();</span>
-</span><span class='line'><span class="k">if</span><span class="p">(</span><span class="nx">emailVal</span><span class="o">===</span><span class="s1">&#39;&#39;</span><span class="o">||</span><span class="nx">emailConfVal</span><span class="o">===</span><span class="s1">&#39;&#39;</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>    <span class="nx">emailConfError</span><span class="p">.</span><span class="nx">hide</span><span class="p">();</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'><span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="nx">emailVal</span> <span class="o">===</span> <span class="nx">emailConfVal</span><span class="p">){</span>
-</span><span class='line'>  <span class="nx">emailConfError</span><span class="p">.</span><span class="nx">text</span><span class="p">(</span><span class="s2">&quot;Email entries match&quot;</span><span class="p">).</span><span class="nx">addClass</span><span class="p">(</span><span class="s1">&#39;green&#39;</span><span class="p">);</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'><span class="k">else</span> <span class="p">{</span>
-</span><span class='line'>  <span class="nx">emailConfError</span><span class="p">.</span><span class="nx">hide</span><span class="p">();</span>
-</span><span class='line'>  <span class="nx">emailConfError</span><span class="p">.</span><span class="nx">text</span><span class="p">(</span><span class="s2">&quot;Confirmation email does not match email&quot;</span><span class="p">).</span><span class="nx">addClass</span><span class="p">(</span><span class="s1">&#39;red&#39;</span><span class="p">);</span>
-</span><span class='line'>  <span class="nx">emailConfError</span><span class="p">.</span><span class="nx">show</span><span class="p">();</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'><span class="o">&lt;</span><span class="err">/code&gt;&lt;/pre&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span>  <span class="p">});</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+<p>{% codeblock .keyup() lang:js %}
+// other code truncated (including definition of functions)
+  emailInputs.keyup(function(){</p>
+
+<pre><code>emailConfVal = emailConfirmation.val();
+emailVal = email.val();
+emailConfError.show(); 
+if(emailVal===''||emailConfVal==='') {
+    emailConfError.hide();
+}
+else if(emailVal === emailConfVal){
+  emailConfError.text("Email entries match").addClass('green');
+}
+else {
+  emailConfError.hide();
+  emailConfError.text("Confirmation email does not match email").addClass('red');
+  emailConfError.show();
+}
+</code></pre>
+
+<p>  });
+{% endcodeblock %}</p>
 
 <p>Finally, I have also used <code>.text()</code> and <code>.addClass()</code> extensively.</p>
 
-<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>.text() &amp; .addClass()  </span></figcaption>
- <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="c1">// example usage</span>
-</span><span class='line'><span class="kd">function</span> <span class="nx">validatePasswordStrength</span><span class="p">(){</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="nx">pre</span><span class="o">&gt;&lt;</span><span class="nx">code</span><span class="o">&gt;</span><span class="kd">var</span> <span class="nx">lowercase</span> <span class="o">=</span> <span class="sr">/[a-z]/</span>
-</span><span class='line'><span class="kd">var</span> <span class="nx">uppercase</span> <span class="o">=</span> <span class="sr">/[A-Z]/</span>
-</span><span class='line'><span class="kd">var</span> <span class="nx">numeric</span> <span class="o">=</span> <span class="sr">/[0-9]/</span>
-</span><span class='line'><span class="kd">var</span> <span class="nx">passwordVal</span> <span class="o">=</span> <span class="nx">password</span><span class="p">.</span><span class="nx">val</span><span class="p">();</span>
-</span><span class='line'><span class="nx">passwordError</span><span class="p">.</span><span class="nx">show</span><span class="p">();</span>
-</span><span class='line'><span class="k">if</span><span class="p">(</span><span class="nx">lowercase</span><span class="p">.</span><span class="nx">test</span><span class="p">(</span><span class="nx">passwordVal</span><span class="p">)</span> <span class="o">&amp;</span><span class="nx">amp</span><span class="p">;</span><span class="o">&amp;</span><span class="nx">amp</span><span class="p">;</span> <span class="nx">uppercase</span><span class="p">.</span><span class="nx">test</span><span class="p">(</span><span class="nx">passwordVal</span><span class="p">)</span> <span class="o">&amp;</span><span class="nx">amp</span><span class="p">;</span><span class="o">&amp;</span><span class="nx">amp</span><span class="p">;</span> <span class="nx">numeric</span><span class="p">.</span><span class="nx">test</span><span class="p">(</span><span class="nx">passwordVal</span><span class="p">)){</span>
-</span><span class='line'>  <span class="nx">passwordError</span><span class="p">.</span><span class="nx">text</span><span class="p">(</span><span class="s2">&quot;Password strength: Strong&quot;</span><span class="p">).</span><span class="nx">removeClass</span><span class="p">().</span><span class="nx">addClass</span><span class="p">(</span><span class="s1">&#39;green&#39;</span><span class="p">);</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'><span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="nx">lowercase</span><span class="p">.</span><span class="nx">test</span><span class="p">(</span><span class="nx">passwordVal</span><span class="p">)</span> <span class="o">&amp;</span><span class="nx">amp</span><span class="p">;</span><span class="o">&amp;</span><span class="nx">amp</span><span class="p">;</span> <span class="nx">uppercase</span><span class="p">.</span><span class="nx">test</span><span class="p">(</span><span class="nx">passwordVal</span><span class="p">)){</span>
-</span><span class='line'>  <span class="nx">passwordError</span><span class="p">.</span><span class="nx">text</span><span class="p">(</span><span class="s2">&quot;Password strength: Medium&quot;</span><span class="p">).</span><span class="nx">removeClass</span><span class="p">().</span><span class="nx">addClass</span><span class="p">(</span><span class="s1">&#39;amber&#39;</span><span class="p">);</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'><span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="nx">numeric</span><span class="p">.</span><span class="nx">test</span><span class="p">(</span><span class="nx">passwordVal</span><span class="p">)</span> <span class="o">&amp;</span><span class="nx">amp</span><span class="p">;</span><span class="o">&amp;</span><span class="nx">amp</span><span class="p">;</span> <span class="nx">uppercase</span><span class="p">.</span><span class="nx">test</span><span class="p">(</span><span class="nx">passwordVal</span><span class="p">)){</span>
-</span><span class='line'>  <span class="nx">passwordError</span><span class="p">.</span><span class="nx">text</span><span class="p">(</span><span class="s2">&quot;Password strength: Medium&quot;</span><span class="p">).</span><span class="nx">removeClass</span><span class="p">().</span><span class="nx">addClass</span><span class="p">(</span><span class="s1">&#39;amber&#39;</span><span class="p">);</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'><span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="nx">numeric</span><span class="p">.</span><span class="nx">test</span><span class="p">(</span><span class="nx">passwordVal</span><span class="p">)</span> <span class="o">&amp;</span><span class="nx">amp</span><span class="p">;</span><span class="o">&amp;</span><span class="nx">amp</span><span class="p">;</span> <span class="nx">lowercase</span><span class="p">.</span><span class="nx">test</span><span class="p">(</span><span class="nx">passwordVal</span><span class="p">)){</span>
-</span><span class='line'>  <span class="nx">passwordError</span><span class="p">.</span><span class="nx">text</span><span class="p">(</span><span class="s2">&quot;Password strength: Medium&quot;</span><span class="p">).</span><span class="nx">removeClass</span><span class="p">().</span><span class="nx">addClass</span><span class="p">(</span><span class="s1">&#39;amber&#39;</span><span class="p">);</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'><span class="k">else</span> <span class="p">{</span>
-</span><span class='line'>  <span class="nx">passwordError</span><span class="p">.</span><span class="nx">text</span><span class="p">(</span><span class="s2">&quot;Password strength: Weak&quot;</span><span class="p">).</span><span class="nx">addClass</span><span class="p">(</span><span class="s1">&#39;red&#39;</span><span class="p">);</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'><span class="o">&lt;</span><span class="err">/code&gt;&lt;/pre&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span>  <span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+<p>{% codeblock .text() &amp; .addClass() lang:js %}
+// example usage
+function validatePasswordStrength(){</p>
+
+<pre><code>var lowercase = /[a-z]/
+var uppercase = /[A-Z]/
+var numeric = /[0-9]/
+var passwordVal = password.val();
+passwordError.show(); 
+if(lowercase.test(passwordVal) &amp;&amp; uppercase.test(passwordVal) &amp;&amp; numeric.test(passwordVal)){
+  passwordError.text("Password strength: Strong").removeClass().addClass('green');
+}
+else if(lowercase.test(passwordVal) &amp;&amp; uppercase.test(passwordVal)){
+  passwordError.text("Password strength: Medium").removeClass().addClass('amber');
+}
+else if(numeric.test(passwordVal) &amp;&amp; uppercase.test(passwordVal)){
+  passwordError.text("Password strength: Medium").removeClass().addClass('amber');
+}
+else if(numeric.test(passwordVal) &amp;&amp; lowercase.test(passwordVal)){
+  passwordError.text("Password strength: Medium").removeClass().addClass('amber');
+}
+else {
+  passwordError.text("Password strength: Weak").addClass('red');
+}
+</code></pre>
+
+<p>  }
+{% endcodeblock %}</p>
 
 <p>I used <code>.text()</code> to dynamically change the feedback message to the user, indicating whether a password is “weak”, “medium” or “strong”.</p>
 
