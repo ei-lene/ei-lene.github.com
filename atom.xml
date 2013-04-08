@@ -4,7 +4,7 @@
   <title><![CDATA[Padawan coder]]></title>
   <link href="http://ei-lene.github.com/atom.xml" rel="self"/>
   <link href="http://ei-lene.github.com/"/>
-  <updated>2013-04-07T18:38:50-04:00</updated>
+  <updated>2013-04-07T20:54:49-04:00</updated>
   <id>http://ei-lene.github.com/</id>
   <author>
     <name><![CDATA[ei-lene]]></name>
@@ -25,7 +25,7 @@ Source: <a href="http://xkcd.com/1024/">XKCD</a>
 </p>
 
 
-<p>In our process of deploying our group&#8217;s app <a href="http://handrai.se/">Handrai.se</a>, we&#8217;ve come to realise that what works perfectly in development, doesn&#8217;t always work quite so smoothly in production.</p>
+<p>The last couple of weeks at Flatiron School, we have been split into groups to work on group projects. I&#8217;m working with <a href="http://anthonywijnen.com/">Anthony</a>, <a href="http://eewang.github.io">Eugene</a> and <a href="http://janeeats.github.io/">Jane</a> on a <a href="http://handrai.se/">Handrai.se</a>, an in-class question-workflow-management app. In our process of deploying our group&#8217;s app, we&#8217;ve come to realise that what works perfectly in development, doesn&#8217;t always work quite so smoothly in production, because real-life users don&#8217;t behave in the perfect way, as we assume in our seed file.</p>
 
 <p>And unlike in development, in production, Rails errors are completely cryptic and uninformative:<br>
 <img src="http://ei-lene.github.com/images/2013_04_07/production_error.png"></p>

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: exception_notification | Padawan coder]]></title>
   <link href="http://ei-lene.github.com/blog/categories/exception-notification/atom.xml" rel="self"/>
   <link href="http://ei-lene.github.com/"/>
-  <updated>2013-04-07T20:53:18-04:00</updated>
+  <updated>2013-04-07T20:54:49-04:00</updated>
   <id>http://ei-lene.github.com/</id>
   <author>
     <name><![CDATA[ei-lene]]></name>
@@ -25,7 +25,7 @@ Source: <a href="http://xkcd.com/1024/">XKCD</a>
 </p>
 
 
-<p>The last couple of weeks at Flatiron School, we have been split into groups to work on group projects. I'm working with Anthony, Eugene and Jane on a <a href="http://handrai.se/">Handrai.se</a>, an in-class question-workflow-management app. In our process of deploying our group's app, we've come to realise that what works perfectly in development, doesn't always work quite so smoothly in production, because real-life users don't behave in the perfect way, as we assume in our seed file.</p>
+<p>The last couple of weeks at Flatiron School, we have been split into groups to work on group projects. I'm working with <a href="http://anthonywijnen.com/">Anthony</a>, <a href="http://eewang.github.io">Eugene</a> and <a href="http://janeeats.github.io/">Jane</a> on a <a href="http://handrai.se/">Handrai.se</a>, an in-class question-workflow-management app. In our process of deploying our group's app, we've come to realise that what works perfectly in development, doesn't always work quite so smoothly in production, because real-life users don't behave in the perfect way, as we assume in our seed file.</p>
 
 <p>And unlike in development, in production, Rails errors are completely cryptic and uninformative:<br>
 <img src="http://ei-lene.github.com/images/2013_04_07/production_error.png"></p>
@@ -55,40 +55,60 @@ This repo had much clearer instructions.</p>
 Exception notification's instructions assumes that you are using <a href="https://github.com/smartinez87/exception_notification">sendmail</a>. We decided to go with <a href="http://mailgun.com/">mailgun</a>.</p>
 
 <p>You can put the following code in the <code>config/environments/production.rb</code> and/or <code>development.rb</code> files depending on whether you want notifications to be sent out only in production or also in development:<br>
-{% codeblock lang:ruby %}
-  config.action_mailer.delivery_method = :smtp
-  config.action_mailer.smtp_settings = {</p>
-
-<pre><code>:authentication =&gt; :plain,
-:address =&gt; "smtp.mailgun.org",
-:port =&gt; 587,
-:domain =&gt; "handraise.mailgun.org",
-:user_name =&gt; ENV['MAILGUN_LOGIN'],
-:password =&gt; ENV['MAILGUN_PASSWORD'],
-</code></pre>
-
-<p>  }</p>
-
-<p>  config.action_mailer.perform_deliveries = true
-  config.action_mailer.raise_delivery_errors = true
-{% endcodeblock %}</p>
+<div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'>  <span class="n">config</span><span class="o">.</span><span class="n">action_mailer</span><span class="o">.</span><span class="n">delivery_method</span> <span class="o">=</span> <span class="ss">:smtp</span>
+</span><span class='line'>  <span class="n">config</span><span class="o">.</span><span class="n">action_mailer</span><span class="o">.</span><span class="n">smtp_settings</span> <span class="o">=</span> <span class="p">{</span><span class="o">&lt;</span><span class="sr">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="sr">&lt;pre&gt;&lt;code&gt;:authentication =&amp;gt; :plain,</span>
+</span><span class='line'><span class="sr">:address =&amp;gt; &quot;smtp.mailgun.org&quot;,</span>
+</span><span class='line'><span class="sr">:port =&amp;gt; 587,</span>
+</span><span class='line'><span class="sr">:domain =&amp;gt; &quot;handraise.mailgun.org&quot;,</span>
+</span><span class='line'><span class="sr">:user_name =&amp;gt; ENV[&#39;MAILGUN_LOGIN&#39;],</span>
+</span><span class='line'><span class="sr">:password =&amp;gt; ENV[&#39;MAILGUN_PASSWORD&#39;],</span>
+</span><span class='line'><span class="sr">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;</span><span class="sr">/pre&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="sr">&lt;p&gt;  }&lt;/</span><span class="nb">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nb">p</span><span class="o">&gt;</span>  <span class="n">config</span><span class="o">.</span><span class="n">action_mailer</span><span class="o">.</span><span class="n">perform_deliveries</span> <span class="o">=</span> <span class="kp">true</span>
+</span><span class='line'>  <span class="n">config</span><span class="o">.</span><span class="n">action_mailer</span><span class="o">.</span><span class="n">raise_delivery_errors</span> <span class="o">=</span> <span class="kp">true</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
 <p><strong><em>3) Protecting your API keys, settings and passwords: </em></strong><br>
 To protect the security of your passwords etc., you can either use <a href="https://github.com/laserlemon/figaro">the Figaro gem</a>, or do it yourself:<br>
 i) Create a <code>.yml</code> file in the <code>config</code> folder, e.g. <code>application.yml</code><br>
 ii) Create global variables in the file, but using a colon (:) instead of an equal sign (=), e.g.:
-{% codeblock lang:ruby %}
-MAILGUN_LOGIN    : postmaster@handraise.mailgun.org
-MAILGUN_PASSWORD : [password]
-{% endcodeblock %}
+<div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="no">MAILGUN_LOGIN</span>    <span class="p">:</span> <span class="n">postmaster</span><span class="vi">@handraise</span><span class="o">.</span><span class="n">mailgun</span><span class="o">.</span><span class="n">org</span>
+</span><span class='line'><span class="no">MAILGUN_PASSWORD</span> <span class="p">:</span> <span class="o">[</span><span class="n">password</span><span class="o">]</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 iii) Call these variables using <code>ENV['']</code>, as in the codeblock in step #2 above<br>
 iv) Put the <code>.yml</code> file in your <code>.gitignore</code> file:
-{% codeblock lang:ruby %}</p>
-
-<h1>Ignore application configuration</h1>
-
-<p>/config/application.yml
-{% endcodeblock %}</p>
+<div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">&lt;</span><span class="sr">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="sr">&lt;h1&gt;Ignore application configuration&lt;/</span><span class="n">h1</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nb">p</span><span class="o">&gt;</span><span class="sr">/config/</span><span class="n">application</span><span class="o">.</span><span class="n">yml</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
 <p><strong><em>Debugging with Exception Notifier</em></strong><br>
 Most of Exception Notifier's error messages were detailed and informative. But one in particular (and our first error in fact!) stumped us:<br>
