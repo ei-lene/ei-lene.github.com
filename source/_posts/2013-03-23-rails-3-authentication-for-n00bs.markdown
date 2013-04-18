@@ -3,11 +3,14 @@ layout: post
 title: "Rails 3 authentication for n00bs"
 date: 2013-03-23 18:01
 comments: true
-categories: rails authentication refactoring urlhelper validation
+categories: _rails_ authentication refactoring urlhelper validation
 ---
 <h3><em>Progressing my ToDoList app - making it work, making it right</em></h3>
 <img src="http://ei-lene.github.com/images/2013_03_23/password_authentication.png">
-<br>
+<p style="font-size: 70%; font-weight: normal">
+Source: <a href="http://euroscientist.com/2012/03/picking-a-perfect-password/">On picking a perfect password by Euroscientist</a>
+</p>
+
 Since I have a sieve-like memory, I really need to take detailed notes and practice practice in order to remember how to do things. Hence, I am trying to apply what we’ve learned through lectures in my ToDoList ‘practice’ app, especially on areas that I haven’t had a chance to personally code in our current group ‘Hand Raise’ project. 
 
 At the end of my <a href="http://ei-lene.github.com/blog/2013/03/06/my-top-4-rails-tricks-in-my-first-rails-app/">previous blog post on my ToDoList app</a>, my next steps were to:<br>
@@ -157,7 +160,6 @@ def create
 end
 {% endcodeblock %}
 <p style="font-size: 70%; font-weight: normal">
-* source of picture: <a href="http://euroscientist.com/2012/03/picking-a-perfect-password/">On picking a perfect password by Euroscientist</a><br>
 Resources:<br>
 1) <a href="http://api.rubyonrails.org/classes/ActiveModel/SecurePassword/ClassMethods.html - method-i-has_secure_password">ActiveModel at http://api.rubyonrails.org/</a>
 <br>

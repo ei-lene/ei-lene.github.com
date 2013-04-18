@@ -3,7 +3,7 @@ layout: post
 title: "Front-end form validation - my top 3 JQuery APIs"
 date: 2013-03-11 22:15
 comments: true
-categories: javascript jquery validation .submit .blur .keyup
+categories: _javascript_ _jquery_ validation .submit .blur .keyup
 ---
 Last week, we had <a href="http://jonathangrover.com/">Jonathan Grover</a> guest lecture us for a week on Javascript and JQuery.
 
