@@ -4,7 +4,7 @@
   <title><![CDATA[Category: _rails_, | Padawan coder]]></title>
   <link href="http://ei-lene.github.com/blog/categories/-rails-/atom.xml" rel="self"/>
   <link href="http://ei-lene.github.com/"/>
-  <updated>2013-04-17T22:57:45-04:00</updated>
+  <updated>2013-04-21T10:41:19-04:00</updated>
   <id>http://ei-lene.github.com/</id>
   <author>
     <name><![CDATA[ei-lene]]></name>
@@ -61,8 +61,8 @@
 
 <p style="font-size: 70%; font-weight: normal">
 Resources: <br>
-http://pat.github.io/thinking-sphinx/<br>
-https://github.com/pat/thinking-sphinx
+<a href="http://pat.github.io/thinking-sphinx/">http://pat.github.io/thinking-sphinx/</a><br>
+<a href="https://github.com/pat/thinking-sphinx"> https://github.com/pat/thinking-sphinx</a>
 </p>
 
 ]]></content>
