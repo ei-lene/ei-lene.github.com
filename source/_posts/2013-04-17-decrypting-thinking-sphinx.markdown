@@ -25,7 +25,7 @@ Our initial steps to install Thinking Sphinx for Rails 3.1 and above were to do 
 
 Initially Sphinx threw its toys out of the pram because it couldn’t find the correct version of MySQL because brew had automatically installed the latest version of MySQL (5.6.10)
 
-We downloaded 5.5.30 from <a href="http://dev.mysql.com/downloads/mysql/5.5.html - downloads">dev.mysql.com</a>, which ushered in the next set of fairly obscure errors.
+We downloaded 5.5.30 from <a href="http://dev.mysql.com/downloads/mysql/5.5.html - downloads">dev.mysql.com</a>. Or alternatively, you can follow <a href="https://gist.github.com/gcatlin/1847248">the instructions on this gist<a> to install older versions of mysql using Homebrew. This ushered in the next set of fairly obscure errors.
 
 <strong><em>2)  When using Thinking Sphinx with a Postgres database</em></strong> (which we are doing for our project)<strong><em>, install Sphinx with both the mysql and postgres flags</em></strong>
 
@@ -34,7 +34,7 @@ The next set of errors from our attempt to debug and install TS, were mostly var
 
 Although <a href="http://pat.github.io/thinking-sphinx/installing_sphinx/mac.html">the docs</a> say that Sphinx will automatically detect whether you have MySQL of PostgresSQL, that wasn’t the case for us.
 
-And the only combination that worked was ```brew install sphinx –mysql –pgsql``` (we had tried all the other permutations before this one finally worked, sort of).
+And the only combination that worked was ```brew install sphinx -–mysql -–pgsql``` (we had tried all the other permutations before this one finally worked, sort of).
 
 <strong><em>3)  Follow the gem version to the letter</em></strong>
 
@@ -50,6 +50,6 @@ But Thinking Sphinx was pernickety enough to require the exact version '0.3.12b5
   
 <p style="font-size: 70%; font-weight: normal">
 Resources: <br>
-http://pat.github.io/thinking-sphinx/<br>
-https://github.com/pat/thinking-sphinx
+<a href="http://pat.github.io/thinking-sphinx/">http://pat.github.io/thinking-sphinx/</a><br>
+<a href="https://github.com/pat/thinking-sphinx"> https://github.com/pat/thinking-sphinx</a>
 </p>
