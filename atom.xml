@@ -4,7 +4,7 @@
   <title><![CDATA[Padawan coder]]></title>
   <link href="http://ei-lene.github.com/atom.xml" rel="self"/>
   <link href="http://ei-lene.github.com/"/>
-  <updated>2013-04-21T10:41:19-04:00</updated>
+  <updated>2013-04-22T15:25:32-04:00</updated>
   <id>http://ei-lene.github.com/</id>
   <author>
     <name><![CDATA[ei-lene]]></name>
@@ -40,7 +40,7 @@
 
 <p>Initially Sphinx threw its toys out of the pram because it couldn’t find the correct version of MySQL because brew had automatically installed the latest version of MySQL (5.6.10)</p>
 
-<p>We downloaded 5.5.30 from <a href="http://dev.mysql.com/downloads/mysql/5.5.html - downloads">dev.mysql.com</a>, which ushered in the next set of fairly obscure errors.</p>
+<p>We downloaded 5.5.30 from <a href="http://dev.mysql.com/downloads/mysql/5.5.html - downloads">dev.mysql.com</a>. Or alternatively, you can follow <a href="https://gist.github.com/gcatlin/1847248">the instructions on this gist<a> to install older versions of mysql using Homebrew. This ushered in the next set of fairly obscure errors.</p>
 
 <p><strong><em>2)  When using Thinking Sphinx with a Postgres database</em></strong> (which we are doing for our project)<strong><em>, install Sphinx with both the mysql and postgres flags</em></strong></p>
 
@@ -48,7 +48,7 @@
 
 <p>Although <a href="http://pat.github.io/thinking-sphinx/installing_sphinx/mac.html">the docs</a> say that Sphinx will automatically detect whether you have MySQL of PostgresSQL, that wasn’t the case for us.</p>
 
-<p>And the only combination that worked was <code>brew install sphinx –mysql –pgsql</code> (we had tried all the other permutations before this one finally worked, sort of).</p>
+<p>And the only combination that worked was <code>brew install sphinx -–mysql -–pgsql</code> (we had tried all the other permutations before this one finally worked, sort of).</p>
 
 <p><strong><em>3)  Follow the gem version to the letter</em></strong></p>
 
