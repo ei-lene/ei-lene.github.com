@@ -4,7 +4,7 @@
   <title><![CDATA[Padawan coder]]></title>
   <link href="http://ei-lene.github.com/atom.xml" rel="self"/>
   <link href="http://ei-lene.github.com/"/>
-  <updated>2013-04-22T15:25:32-04:00</updated>
+  <updated>2013-04-23T13:34:34-04:00</updated>
   <id>http://ei-lene.github.com/</id>
   <author>
     <name><![CDATA[ei-lene]]></name>
@@ -40,7 +40,7 @@
 
 <p>Initially Sphinx threw its toys out of the pram because it couldn’t find the correct version of MySQL because brew had automatically installed the latest version of MySQL (5.6.10)</p>
 
-<p>We downloaded 5.5.30 from <a href="http://dev.mysql.com/downloads/mysql/5.5.html - downloads">dev.mysql.com</a>. Or alternatively, you can follow <a href="https://gist.github.com/gcatlin/1847248">the instructions on this gist<a> to install older versions of mysql using Homebrew. This ushered in the next set of fairly obscure errors.</p>
+<p>We downloaded 5.5.30 from <a href="http://dev.mysql.com/downloads/mysql/5.5.html - downloads">dev.mysql.com</a>. Or alternatively, you can follow <a href="https://gist.github.com/gcatlin/1847248">the instructions on this gist</a> to install older versions of mysql using Homebrew. This ushered in the next set of fairly obscure errors.</p>
 
 <p><strong><em>2)  When using Thinking Sphinx with a Postgres database</em></strong> (which we are doing for our project)<strong><em>, install Sphinx with both the mysql and postgres flags</em></strong></p>
 
