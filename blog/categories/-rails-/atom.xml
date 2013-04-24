@@ -4,7 +4,7 @@
   <title><![CDATA[Category: _rails_, | Padawan coder]]></title>
   <link href="http://ei-lene.github.com/blog/categories/-rails-/atom.xml" rel="self"/>
   <link href="http://ei-lene.github.com/"/>
-  <updated>2013-04-23T13:34:34-04:00</updated>
+  <updated>2013-04-24T00:51:57-04:00</updated>
   <id>http://ei-lene.github.com/</id>
   <author>
     <name><![CDATA[ei-lene]]></name>
@@ -27,7 +27,7 @@
 
 <p>The steps seem simple enough on the <a href="http://pat.github.io/thinking-sphinx/">Thinking Sphinx documentation website</a>, but many errors and hours later, I can attest that it is full of pitfalls for the unwary, or the plain unlucky.</p>
 
-<p>Our initial steps to install Thinking Sphinx for Rails 3.1 and above were to do the following:<br>
+<p>Our initial steps to install Thinking Sphinx for Rails 3.1 and above - <strong>which threw a bunch of errors </strong>- were to do the following:<br>
 1)  brew install sphinx<br>
 2)  brew install mysql<br>
 3)  added the following to the Gemfile<br>
